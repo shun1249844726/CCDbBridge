@@ -1,6 +1,16 @@
 package com.lexinsmart.utils;
 
+/**
+ * 一些数据库下拉菜单中解析成明码
+ * @author xushun
+ *
+ */
 public class DropDownTools {
+	/**
+	 * 限载吨位
+	 * @param messyTon
+	 * @return
+	 */
 	public static Float stringToTon(String messyTon) {
 		Float xzdw = 0.0f;
 		if (messyTon != null) {
@@ -8,7 +18,7 @@ public class DropDownTools {
 			case "40285a8d57fea8b501581e8cc3445457":
 				xzdw = 18f;
 				break;
-			case "40285a8d57fea8b501581e8cc3445458	":
+			case "40285a8d57fea8b501581e8cc3445458":
 				xzdw = 25f;
 				break;
 			case "40285a8d57fea8b501581e8cc3445459":
