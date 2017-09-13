@@ -11,7 +11,9 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp2.BasicDataSourceFactory;
+import org.apache.commons.dbcp.BasicDataSourceFactory;
+
+//import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 
 public class DBCP {
@@ -29,8 +31,9 @@ public class DBCP {
 	static {
 		prop = new Properties();
 		String commConfigFilePath = "./conf/dbcp.properties";
+	//	String commConfigFilePath = DBCP.class.getResource("/").getFile() +"dbcp.properties";
 		InputStream in = null;
-		try {
+		try {			
 			in = new BufferedInputStream(new FileInputStream(commConfigFilePath));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
