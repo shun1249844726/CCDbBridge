@@ -19,6 +19,11 @@ import com.lexinsmart.utils.DropDownTools;
 import com.lexinsmart.utils.TypeChange;
 
 public class InoutfreightService {
+	
+	public InoutfreightService() {
+		
+	}
+	
 	/**
 	 * 将出入场货运人员登记表信息写入各个数据库；
 	 * 

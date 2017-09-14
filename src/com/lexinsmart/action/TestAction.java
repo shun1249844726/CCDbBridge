@@ -218,12 +218,10 @@ public class TestAction {
 		inoutfreight.setOutdate(outdate);
 		inoutfreight.setOuttime(outtime);
 
-		
 		InoutfreightService inoutfreightService = new InoutfreightService();
 		try {
 			inoutfreightService.setInoutfreight(inoutfreight);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
