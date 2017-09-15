@@ -9,34 +9,44 @@ import com.lexinsmart.model.Singlenumber;
 import com.lexinsmart.utils.DBCP;
 
 public class SingleNumberDao {
+	Connection connection = null;
+	PreparedStatement ptmt = null;
+	DBCP dbcp = DBCP.getInstance();
+
+
 	public void addSingleNumber(Singlenumber singlenumber) {
 		try {
-			Connection connection = DBCP.getConnection();
-			String sql = " insert into single_number " + " (cid,carno,xzdw,carheight,handplanno,singleno,scantimes) "
-					+ " values(?,?,?,?,?,?,0) ";
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, singlenumber.getCid());
-			stmt.setString(2, singlenumber.getCarno());
-			stmt.setFloat(3, singlenumber.getXzdw());
-			stmt.setFloat(4, singlenumber.getCarheight());
-			stmt.setString(5, singlenumber.getHandplanno());
-			stmt.setString(6, singlenumber.getSingleno());
-			stmt.execute();
+			connection = dbcp.getConnection();
+			String sql = " insert into single_number "
+					+ " (carno,carheight,ttype,handplanno,singleno,depart,scantimes) " + " values(?,?,?,?,?,?,0) ";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, singlenumber.getCarno());
+			ptmt.setFloat(2, singlenumber.getCarheight());
+			ptmt.setString(3, singlenumber.getTtype());
+			ptmt.setString(4, singlenumber.getHandplanno());
+			ptmt.setString(5, singlenumber.getSingleno());
+			ptmt.setString(6, singlenumber.getDepart());
+
+			ptmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			dbcp.closeStatement(ptmt);
+			dbcp.releaseConnection(connection);
 		}
 	}
 
 	public boolean checkIsExist(String singleno) {
+		ResultSet rs = null;
 		boolean isExist = false;
 		try {
-			Connection connection = DBCP.getConnection();
+			connection = dbcp.getConnection();
 			String sql = "select singleno from single_number where singleno=? ";
-			PreparedStatement ptmt = connection.prepareStatement(sql);
+			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, singleno);
 
-			ResultSet rs = ptmt.executeQuery();
+			rs = ptmt.executeQuery();
 			rs.last();
 			if (rs.getRow() > 0) {
 				isExist = true;
@@ -46,6 +56,9 @@ public class SingleNumberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			dbcp.closeStatement(ptmt, rs);
+			dbcp.releaseConnection(connection);
 		}
 		return isExist;
 	}

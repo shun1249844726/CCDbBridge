@@ -18,46 +18,46 @@ public class TestAction {
 	public static void main(String[] args) {
 		Inoutfreight inoutfreight = new Inoutfreight();
 		String id = "2";
-		String requestid= "102";
+		String requestid = "103";
 		String nodeid = null;
 		String rowindex = null;
-		String handplanno = "FZT201707005185";//装卸计划号
-		String depotname = null;
+		String handplanno = "ZT201604004227";// 装卸计划号
+		String depotname = "LBE原料非保税库";//主仓库名称
 		String printime = null;
-		String factype = "4028804d2083a7ed012083ebb988005b"; //	厂区别	常熟厂 
-		String singleno = "1010T000242313";//提入单号 
-		String carno = "苏EK3217";//车牌号码
-		String idcard1 = null;//证件号(一) 
-		String idcard2 = null;//证件号(二)
-		String idcard3 = null;//证件号(三)
-		String idcard4 = null;//证件号(四) 
+		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
+		String singleno = "1020T000063115,1020T000063113,1020T000063114";// 提入单号
+		String carno = "苏JJ5895";// 车牌号码
+		String idcard1 = "320923197912034511";// 证件号(一)
+		String idcard2 = null;// 证件号(二)
+		String idcard3 = null;// 证件号(三)
+		String idcard4 = null;// 证件号(四)
 		String inregistime = null;//
 		String outregistime = null;//
 		String registerman = null;//
 		String modifyman = null;//
 		String company = null;//
 		String comtype = null;//
-		String licensenum = "410329196606077000";//证件号(司机) 
+		String licensenum = "320924198111130870";// 证件号(司机)
 		String createtime = null;//
 		String parmcarno = null;//
 		String parmno = null;//
-		String driver = "李来生";//司机
-		String attendant1 = null;//随车人员(一)
+		String driver = "史明聪";// 司机
+		String attendant1 = "周立通";// 随车人员(一)
 		String attendant2 = null;//
 		String attendant3 = null;//
 		String attendant4 = null;//
-		Integer infactorynum = null;//进厂人数
-		Integer atfactorynum = null;//	在厂人数
-		Integer outfactorynum = null;//离厂人数
+		Integer infactorynum = null;// 进厂人数
+		Integer atfactorynum = null;// 在厂人数
+		Integer outfactorynum = null;// 离厂人数
 		String driverstate = null;//
 		String state1 = null;//
 		String state2 = null;//
 		String state3 = null;//
 		String state4 = null;//
 		String sinstate = null;//
-		String xzdw = "40285a8d57fea8b501581e8cc344545f";//限载吨位
+		String xzdw = "40285a8d57fea8b501581e8cc344545f";// 限载吨位
 		String bloodvalue = null;//
-		String carheight = null;//车货高度
+		String carheight = null;// 车货高度
 		String alcoholtest = null;//
 		Integer bloodvalue1 = null;//
 		Integer bloodvalue2 = null;//
@@ -67,56 +67,57 @@ public class TestAction {
 		String alcoholtest2 = null;//
 		String alcoholtest3 = null;//
 		String alcoholtest4 = null;//
-		String age = null;//年龄(司机)
-		String age1 = null;//年龄(一) 
+		String age = null;// 年龄(司机)
+		String age1 = null;// 年龄(一)
 		String age2 = null;//
 		String age3 = null;//
 		String age4 = null;//
-		String sex = null;//性别(司机)
+		String sex = null;// 性别(司机)
 		String sex1 = null;//
 		String sex2 = null;//
 		String sex3 = null;//
 		String sex4 = null;//
-		String birthplace = null;//籍贯(司机)                        
-		String birthplace1 = null;//籍贯(一) 
+		String birthplace = null;// 籍贯(司机)
+		String birthplace1 = null;// 籍贯(一)
 		String birthplace2 = null;//
 		String birthplace3 = null;//
 		String birthplace4 = null;//
-		String hygs = null;//所属公司(司机)
+		String hygs = null;// 所属公司(司机)
 		String hygs1 = null;//
 		String hygs2 = null;//
 		String hygs3 = null;//
 		String hygs4 = null;//
-		String homeaddr = null;//家庭住址(司机)
+		String homeaddr = null;// 家庭住址(司机)
 		String homeaddr1 = null;//
 		String homeaddr2 = null;//
 		String homeaddr3 = null;//
 		String homeaddr4 = null;//
-		String phone = null;//联系电话(司机) 
+		String phone = null;// 联系电话(司机)
 		String phone1 = null;//
 		String phone2 = null;//
 		String phone3 = null;//
 		String phone4 = null;//
-		String relative = null;//主要亲属(司机)
+		String relative = null;// 主要亲属(司机)
 		String relative1 = null;//
 		String relative2 = null;//
 		String relative3 = null;//
 		String relative4 = null;//
-		String relationship = null;//亲属关系(司机) 
+		String relationship = null;// 亲属关系(司机)
 		String relationship1 = null;//
 		String relationship2 = null;//
 		String relationship3 = null;//
 		String relationship4 = null;//
-		String relativetel = null;//亲属联系电话(司机)
+		String relativetel = null;// 亲属联系电话(司机)
 		String relativetel1 = null;//
 		String relativetel2 = null;//
 		String relativetel3 = null;//
 		String relativetel4 = null;//
-		String intime = null;//车辆实际进厂时间
-		String indate = null;//车辆实际进厂日期
-		String outdate = null;//车辆实际出厂日期
-		String outtime = null;//车辆实际出厂时间
-
+		String intime = null;// 车辆实际进厂时间
+		String indate = null;// 车辆实际进厂日期
+		String outdate = null;// 车辆实际出厂日期
+		String outtime = null;// 车辆实际出厂时间
+		String cartype = "402864d1491d17c001491d2b922c0013";// 车辆类型 必填
+		String carcate = null;// 车型归类
 		inoutfreight.setId(id);
 		inoutfreight.setRequestid(requestid);
 		inoutfreight.setNodeid(nodeid);
@@ -217,14 +218,16 @@ public class TestAction {
 		inoutfreight.setIndate(indate);
 		inoutfreight.setOutdate(outdate);
 		inoutfreight.setOuttime(outtime);
+		inoutfreight.setCartype(cartype);
+		inoutfreight.setCarcate(carcate);
 
-		InoutfreightService inoutfreightService = new InoutfreightService();
+		InoutfreightService inoutfreightService = new InoutfreightService(inoutfreight);
 		try {
-			inoutfreightService.setInoutfreight(inoutfreight);
+			inoutfreightService.setInoutfreight();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		// //测试数据；
 		// inoutfreight.set
 		//
@@ -257,27 +260,26 @@ public class TestAction {
 		// StaffDao staffDao = new StaffDao();
 		// staffDao.addStaff(staff);
 
-		 //测试在厂时间
-//		 Plantime plantime = new Plantime();
-//		 plantime.setCid(TypeChange.stringToInt(inoutfreight.getId()));
-//		 plantime.setChanger(inoutfreight.getDriver());
-//		 plantime.setTelephone(inoutfreight.getPhone());
-//		
-//		 PlantimeDao plantimeDao = new PlantimeDao();
-//		 plantimeDao.addPlanTime(plantime);
+		// 测试在厂时间
+		// Plantime plantime = new Plantime();
+		// plantime.setCid(TypeChange.stringToInt(inoutfreight.getId()));
+		// plantime.setChanger(inoutfreight.getDriver());
+		// plantime.setTelephone(inoutfreight.getPhone());
+		//
+		// PlantimeDao plantimeDao = new PlantimeDao();
+		// plantimeDao.addPlanTime(plantime);
 
 		// 测试提入单号表
-//		Singlenumber singlenumber = new Singlenumber();
-//		singlenumber.setCid(123);
-//		singlenumber.setCarno("苏F1234");
-//		singlenumber.setXzdw(30.5f);
-//		singlenumber.setCarheight(2.5f);
-//		singlenumber.setHandplanno("ZT201708001454");
-//		singlenumber.setSingleno("1010W000245789");
-//
-//		SingleNumberDao singleNumberDao = new SingleNumberDao();
-//		singleNumberDao.addSingleNumber(singlenumber);
-		
-	
+		// Singlenumber singlenumber = new Singlenumber();
+		// singlenumber.setCid(123);
+		// singlenumber.setCarno("苏F1234");
+		// singlenumber.setXzdw(30.5f);
+		// singlenumber.setCarheight(2.5f);
+		// singlenumber.setHandplanno("ZT201708001454");
+		// singlenumber.setSingleno("1010W000245789");
+		//
+		// SingleNumberDao singleNumberDao = new SingleNumberDao();
+		// singleNumberDao.addSingleNumber(singlenumber);
+
 	}
 }

@@ -6,6 +6,8 @@ public class Plantime {
 	private Integer id;
 	private Integer cid;
 	private Integer sid;
+	private Integer tid;
+
 	private String changer;
 	private String telephone;
 	private Timestamp planintime;
@@ -27,6 +29,12 @@ public class Plantime {
 	}
 	public void setSid(Integer sid) {
 		this.sid = sid;
+	}
+	public Integer getTid() {
+		return tid;
+	}
+	public void setTid(Integer tid) {
+		this.tid = tid;
 	}
 	public String getChanger() {
 		return changer;

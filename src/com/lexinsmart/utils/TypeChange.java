@@ -96,4 +96,10 @@ public class TypeChange {
 	  
 	        return obj;  
 	    }    
+		//使用String的split 方法   
+	    public static String[] convertStrToArray(String str){   
+	        String[] strArray = null;   
+	        strArray = str.split(","); //拆分字符为"," ,然后把结果交给数组strArray 
+	        return strArray;
+	    }   
 }

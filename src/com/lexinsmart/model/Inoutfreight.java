@@ -100,6 +100,8 @@ public class Inoutfreight {
 	private String indate;
 	private String outdate;
 	private String outtime;
+	private String cartype;//车辆类型
+	private String carcate;//车型归类
 	public String getId() {
 		return id;
 	}
@@ -694,5 +696,16 @@ public class Inoutfreight {
 	public void setOuttime(String outtime) {
 		this.outtime = outtime;
 	}
-	
+	public String getCartype() {
+		return cartype;
+	}
+	public void setCartype(String cartype) {
+		this.cartype = cartype;
+	}
+	public String getCarcate() {
+		return carcate;
+	}
+	public void setCarcate(String carcate) {
+		this.carcate = carcate;
+	}
 }

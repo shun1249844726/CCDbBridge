@@ -21,6 +21,22 @@ public class Staff {
 	private String finger;
 	private Timestamp created;
 	private boolean privilege;
+	private Timestamp intime;
+	private Timestamp outtimt;
+	
+	
+	public Timestamp getIntime() {
+		return intime;
+	}
+	public void setIntime(Timestamp intime) {
+		this.intime = intime;
+	}
+	public Timestamp getOuttimt() {
+		return outtimt;
+	}
+	public void setOuttimt(Timestamp outtimt) {
+		this.outtimt = outtimt;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -2,12 +2,12 @@ package com.lexinsmart.model;
 
 public class Singlenumber {
 	private Integer id;
-	private Integer cid;
 	private String carno;
-	private Float xzdw;
 	private Float carheight;
+	private String ttype;
 	private String handplanno;
 	private String singleno;
+	private String depart;
 	private Integer scantimes;
 	public Integer getId() {
 		return id;
@@ -15,29 +15,23 @@ public class Singlenumber {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getCid() {
-		return cid;
-	}
-	public void setCid(Integer cid) {
-		this.cid = cid;
-	}
 	public String getCarno() {
 		return carno;
 	}
 	public void setCarno(String carno) {
 		this.carno = carno;
 	}
-	public Float getXzdw() {
-		return xzdw;
-	}
-	public void setXzdw(Float xzdw) {
-		this.xzdw = xzdw;
-	}
 	public Float getCarheight() {
 		return carheight;
 	}
 	public void setCarheight(Float carheight) {
 		this.carheight = carheight;
+	}
+	public String getTtype() {
+		return ttype;
+	}
+	public void setTtype(String ttype) {
+		this.ttype = ttype;
 	}
 	public String getHandplanno() {
 		return handplanno;
@@ -50,6 +44,12 @@ public class Singlenumber {
 	}
 	public void setSingleno(String singleno) {
 		this.singleno = singleno;
+	}
+	public String getDepart() {
+		return depart;
+	}
+	public void setDepart(String depart) {
+		this.depart = depart;
 	}
 	public Integer getScantimes() {
 		return scantimes;

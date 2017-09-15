@@ -10,13 +10,18 @@ import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
 
 public class StaffDao {
-	public void addStaff(Staff staff){
+	DBCP dbcp = DBCP.getInstance();
+	Connection conn = dbcp.getConnection();
+	PreparedStatement ptmt = null;
+
+	public void addStaff(Staff staff) {
 		try {
-			Connection conn = (Connection) DBCP.getConnection();
-			String sql = " insert into staff "+ 
-					" (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege) "+
-					" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,false) ";
-			PreparedStatement ptmt = (PreparedStatement) conn.prepareStatement(sql);
+
+			conn = (Connection) dbcp.getConnection();
+			String sql = " insert into staff "
+					+ " (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege) "
+					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,false) ";
+			ptmt = (PreparedStatement) conn.prepareStatement(sql);
 			ptmt.setString(1, staff.getRequestid());
 			ptmt.setString(2, staff.getName());
 			ptmt.setString(3, staff.getSex());
@@ -36,26 +41,34 @@ public class StaffDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			dbcp.closeStatement(ptmt);
+			dbcp.releaseConnection(conn);
 		}
 	}
-	public boolean checkIsExist(String iden){
+
+	public boolean checkIsExist(String iden) {
 		boolean isExist = false;
+		ResultSet rs =null;
 		try {
-			Connection connection = DBCP.getConnection();
+			 conn = dbcp.getConnection();
 			String sql = "select iden from staff where iden=? ";
-			PreparedStatement ptmt = connection.prepareStatement(sql);
+			 ptmt = conn.prepareStatement(sql);
 			ptmt.setString(1, iden);
-			
-			ResultSet rs = ptmt.executeQuery();
+
+			 rs = ptmt.executeQuery();
 			rs.last();
-			if(rs.getRow() > 0){
-				isExist = true ;
-			}else{
+			if (rs.getRow() > 0) {
+				isExist = true;
+			} else {
 				isExist = false;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			dbcp.closeStatement(ptmt, rs);
+			dbcp.releaseConnection(conn);
 		}
 		return isExist;
 	}
