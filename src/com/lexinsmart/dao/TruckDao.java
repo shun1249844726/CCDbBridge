@@ -14,6 +14,9 @@ public class TruckDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 
+	public TruckDao(Connection connection) {
+		this.connection = connection;
+	}
 	/**
 	 * 添加车辆表
 	 * 
@@ -21,7 +24,7 @@ public class TruckDao {
 	 */
 	public void addTruck(Truck truck) {
 		try {
-			connection = dbcp.getConnection();
+//			connection = dbcp.getConnection();
 			String sql = " insert into truck "
 					+ " (requestid,company,ttype,carno,xzdw,atfactorynum,created,forbidden,privilege) "
 					+ " values(?,?,?,?,?,0,?,false,false) ";
@@ -39,8 +42,8 @@ public class TruckDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(connection);
 		}
 
 	}
@@ -49,7 +52,7 @@ public class TruckDao {
 		ResultSet rs = null;
 		boolean isExist = false;
 		try {
-			connection = dbcp.getConnection();
+//			connection = dbcp.getConnection();
 			String sql = "select carno from truck where carno=? ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, carno);
@@ -65,7 +68,8 @@ public class TruckDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.closeStatement(ptmt, rs);
+//			dbcp.closeStatement(ptmt, rs);
+//			dbcp.releaseConnection(connection);
 		}
 		return isExist;
 	}
@@ -74,7 +78,7 @@ public class TruckDao {
 		ResultSet resultSet = null;
 		int id = 0;
 		try {
-			connection = dbcp.getConnection();
+//			connection = dbcp.getConnection();
 			String sql = " select id from truck where carno=? ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, carno);
@@ -87,7 +91,8 @@ public class TruckDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt, resultSet);
+//			dbcp.closeStatement(ptmt, resultSet);
+//			dbcp.releaseConnection(connection);
 		}
 
 		return id;

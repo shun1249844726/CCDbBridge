@@ -14,11 +14,14 @@ public class EntranceGuardDao {
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
 
+	public EntranceGuardDao(Connection connection) {
+		this.connection = connection;
+	}
 	public List<Integer> getId(int type) {
 		ResultSet rest = null;
 		List<Integer> ids = new ArrayList<Integer>();
 		try {
-			connection = dbcp.getConnection();
+//			connection = dbcp.getConnection();
 			String sql = "select id from entrance_guard where type=?";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setInt(1, type);
@@ -30,14 +33,9 @@ public class EntranceGuardDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.closeStatement(ptmt, rest);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt, rest);
+//			dbcp.releaseConnection(connection);
 		}
 		return ids;
-	}
-
-	public static void main(String[] args) {
-		EntranceGuardDao entranceGuardDao = new EntranceGuardDao();
-		entranceGuardDao.getId(1);
 	}
 }

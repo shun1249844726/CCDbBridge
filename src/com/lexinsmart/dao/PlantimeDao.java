@@ -12,11 +12,15 @@ import com.lexinsmart.utils.DBCP;
 
 public class PlantimeDao {
 	DBCP dbcp = DBCP.getInstance();
-	Connection connection = dbcp.getConnection();
+	Connection connection = null;
 	PreparedStatement ptmt = null;
 
+	public PlantimeDao(Connection connection) {
+		this.connection =  connection;
+	}
 	public void addPlanTime(Plantime plantime) {
 		try {
+//			connection = dbcp.getConnection();
 			String sql = " insert into plan_time " + " (cid,sid,tid,changer,telephone,planintime,planouttime) "
 					+ " values(?,?,?,?,?,?,?) ";
 
@@ -36,7 +40,9 @@ public class PlantimeDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(connection);
+			
 		}
 
 	}

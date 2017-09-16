@@ -14,9 +14,12 @@ public class SingleNumberDao {
 	DBCP dbcp = DBCP.getInstance();
 
 
+	public SingleNumberDao(Connection conn ) {
+		this.connection  = conn;
+	}
 	public void addSingleNumber(Singlenumber singlenumber) {
 		try {
-			connection = dbcp.getConnection();
+	//		connection = dbcp.getConnection();
 			String sql = " insert into single_number "
 					+ " (carno,carheight,ttype,handplanno,singleno,depart,scantimes) " + " values(?,?,?,?,?,?,0) ";
 			ptmt = connection.prepareStatement(sql);
@@ -32,8 +35,8 @@ public class SingleNumberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(connection);
 		}
 	}
 
@@ -41,7 +44,7 @@ public class SingleNumberDao {
 		ResultSet rs = null;
 		boolean isExist = false;
 		try {
-			connection = dbcp.getConnection();
+	//		connection = dbcp.getConnection();
 			String sql = "select singleno from single_number where singleno=? ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, singleno);
@@ -57,8 +60,8 @@ public class SingleNumberDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.closeStatement(ptmt, rs);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt, rs);
+//			dbcp.releaseConnection(connection);
 		}
 		return isExist;
 	}

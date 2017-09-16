@@ -13,9 +13,13 @@ public class TruckPrivilegeDao {
 
 	Connection connection  = null;
 	PreparedStatement ptmt  = null;
+	
+	public TruckPrivilegeDao(Connection connection) {
+		this.connection =  connection;
+	}
 	public void addTruckPrivilege(TruckPrivilege truckPrivilege) {
 		try {
-			 connection = dbcp.getConnection();
+//			 connection = dbcp.getConnection();
 			String sql = " insert into truck_privilege " + " (egid,tid,tyid) " + " values(?,?,0) ";
 			 ptmt = connection.prepareStatement(sql);
 			ptmt.setInt(1, truckPrivilege.getEgid());
@@ -26,8 +30,8 @@ public class TruckPrivilegeDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(connection);
 		}
 	}
 
@@ -35,7 +39,7 @@ public class TruckPrivilegeDao {
 		boolean isExist = false;
 		ResultSet rs  = null;
 		try {
-			 connection = dbcp.getConnection();
+//			 connection = dbcp.getConnection();
 			String sql = " select * from truck_privilege where egid=? and tid=?";
 			 ptmt = connection.prepareStatement(sql);
 
@@ -53,8 +57,8 @@ public class TruckPrivilegeDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt, rs);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt, rs);
+//			dbcp.releaseConnection(connection);
 		}
 		return isExist;
 	}

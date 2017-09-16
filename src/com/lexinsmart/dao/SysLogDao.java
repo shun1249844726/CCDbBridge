@@ -11,13 +11,16 @@ import com.lexinsmart.utils.DBCP;
 
 public class SysLogDao {
 	DBCP dbcp = DBCP.getInstance();
-	Connection connection = dbcp.getConnection();
+	Connection connection =null;
 	PreparedStatement ptmt = null;
 
+	public SysLogDao(Connection connection) {
+		this.connection = connection;
+	}
 	public void addSysLog(SysLog sysLog) {
 
 		try {
-			connection = dbcp.getConnection();
+//			connection = dbcp.getConnection();
 			String sql = " insert into sys_log " + " (username,ip,logintime,proxy,content) " + " values(?,?,?,?,?) ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, sysLog.getUsername());
@@ -32,8 +35,8 @@ public class SysLogDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(connection);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(connection);
 		}
 	}
 

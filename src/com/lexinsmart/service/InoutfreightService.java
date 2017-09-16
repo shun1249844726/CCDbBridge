@@ -135,7 +135,7 @@ public class InoutfreightService {
 		try {
 			Date c = new Date();
 			// 1提入单号表
-			SingleNumberDao singleNumberDao = new SingleNumberDao();
+			SingleNumberDao singleNumberDao = new SingleNumberDao(connection);
 			String singleno = inoutfreight.getSingleno();
 			String[] singlenos = TypeChange.convertStrToArray(singleno);
 			int singlenonum = singlenos.length;// 提入单号中包含的提入单号数量
@@ -157,7 +157,7 @@ public class InoutfreightService {
 			}
 
 			// 2插入司机
-			StaffDao staffDao = new StaffDao();
+			StaffDao staffDao = new StaffDao(connection);
 			if (inoutfreight.getLicensenum() != null && !staffDao.checkIsExist(inoutfreight.getLicensenum())) {
 				staffDao.addStaff(staff);
 				System.out.println("insert staff！");
@@ -190,23 +190,20 @@ public class InoutfreightService {
 			}
 
 			// 7.插入车辆表
-			TruckDao truckDao = new TruckDao();
+			TruckDao truckDao = new TruckDao(connection);
 			if (!truckDao.checkIsExist(inoutfreight.getCarno())) {
 				System.out.println("insert truck！");
 				truckDao.addTruck(truck);
 			}
 
 			int carid = truckDao.getId(inoutfreight.getCarno());// 车辆ID
-			System.out.println("carid " + carid);
-
-			EntranceGuardDao entranceGuardDao = new EntranceGuardDao();
+			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(1);
-
 			for (int i = 0; i < ids.size(); i++) {
 				// 8.插入车辆权限表
 				truckPrivilege.setEgid(ids.get(i));// 查询门禁表id
 				truckPrivilege.setTid(carid); // 查询车辆表ID
-				TruckPrivilegeDao truckPrivilegeDao = new TruckPrivilegeDao();
+				TruckPrivilegeDao truckPrivilegeDao = new TruckPrivilegeDao(connection);
 
 				if (!truckPrivilegeDao.checkIsExist(ids.get(i), carid)) {
 					truckPrivilegeDao.addTruckPrivilege(truckPrivilege);
@@ -215,7 +212,7 @@ public class InoutfreightService {
 			}
 
 			// 9.插入在厂时间
-			PlantimeDao plantimeDao = new PlantimeDao();
+			PlantimeDao plantimeDao = new PlantimeDao(connection);
 			plantime.setTid(carid);
 			plantimeDao.addPlanTime(plantime);
 			System.out.println("insert plantime！");
@@ -237,10 +234,11 @@ public class InoutfreightService {
 			sysLog.setLogintime(new Timestamp(System.currentTimeMillis()));
 			sysLog.setProxy("java bridge");
 			sysLog.setContent("add inoutfreight ");
-			SysLogDao sysLogDao = new SysLogDao();
+			SysLogDao sysLogDao = new SysLogDao(connection);
 			sysLogDao.addSysLog(sysLog);
 			System.out.println("add syslog！");
 
+			connection.commit();
 			System.out.println("commit！");
 			Date d = new Date();
 			System.out.println("耗时： " + "\t" + (d.getTime() - c.getTime()) + " ms");

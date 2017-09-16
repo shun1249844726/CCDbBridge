@@ -18,10 +18,13 @@ public class CompanyDao {
 	 * 添加公司
 	 * @param company
 	 */
+	public CompanyDao(Connection connection) {
+		this.conn = connection;
+	}
 	public void addCompany(Company company){
 
 		try {
-			 conn = dbcp.getConnection();
+		//	 conn = dbcp.getConnection();
 			String sql = "" + " insert into company " + " (id,requestid,company,ctype,created,forbidden,atfactorynum) " + " values("
 					+ "?,?,?,1,?,false,0) ";
 			 ptmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -36,14 +39,14 @@ public class CompanyDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(conn);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(conn);
 		}
 	}
 	public boolean checkIsExist(String id) {
 		boolean isExist = false;
 		try {
-			 conn = dbcp.getConnection();
+	//		 conn = dbcp.getConnection();
 
 			String sql;
 			sql = "SELECT id FROM company where id=? ";
@@ -60,8 +63,8 @@ public class CompanyDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(conn);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(conn);
 		}
 		return isExist;
 	}

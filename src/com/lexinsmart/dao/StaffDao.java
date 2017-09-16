@@ -14,10 +14,13 @@ public class StaffDao {
 	Connection conn = dbcp.getConnection();
 	PreparedStatement ptmt = null;
 
+	public StaffDao(Connection connection) {
+		this.conn = connection;
+	}
 	public void addStaff(Staff staff) {
 		try {
 
-			conn = (Connection) dbcp.getConnection();
+//			conn = (Connection) dbcp.getConnection();
 			String sql = " insert into staff "
 					+ " (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege) "
 					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,false) ";
@@ -42,8 +45,8 @@ public class StaffDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt);
-			dbcp.releaseConnection(conn);
+//			dbcp.closeStatement(ptmt);
+//			dbcp.releaseConnection(conn);
 		}
 	}
 
@@ -51,7 +54,7 @@ public class StaffDao {
 		boolean isExist = false;
 		ResultSet rs =null;
 		try {
-			 conn = dbcp.getConnection();
+//			 conn = dbcp.getConnection();
 			String sql = "select iden from staff where iden=? ";
 			 ptmt = conn.prepareStatement(sql);
 			ptmt.setString(1, iden);
@@ -67,8 +70,8 @@ public class StaffDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			dbcp.closeStatement(ptmt, rs);
-			dbcp.releaseConnection(conn);
+//			dbcp.closeStatement(ptmt, rs);
+//			dbcp.releaseConnection(conn);
 		}
 		return isExist;
 	}
