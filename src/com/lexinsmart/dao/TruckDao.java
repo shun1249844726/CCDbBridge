@@ -97,4 +97,15 @@ public class TruckDao {
 
 		return id;
 	}
+	
+	public void deleteStaff(String requestid) {
+		try {
+			String sql = "delete from truck where requestid="+requestid;
+			ptmt = connection.prepareStatement(sql);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -9,6 +9,14 @@ public class Singlenumber {
 	private String singleno;
 	private String depart;
 	private Integer scantimes;
+	private String requestid;
+	
+	public String getRequestid() {
+		return requestid;
+	}
+	public void setRequestid(String requestid) {
+		this.requestid = requestid;
+	}
 	public Integer getId() {
 		return id;
 	}

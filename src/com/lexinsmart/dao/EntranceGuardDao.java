@@ -38,4 +38,23 @@ public class EntranceGuardDao {
 		}
 		return ids;
 	}
+	
+	public List<Integer> getId(int type,boolean privilege){
+		ResultSet rest = null;
+		List<Integer> ids = new ArrayList<Integer>();
+		try {
+			String sql = " select id from entrance_guard where type=? and privilege=? ";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setInt(1,type );
+			ptmt.setBoolean(2, privilege);
+			rest = ptmt.executeQuery();
+			while(rest.next()){
+				ids.add(rest.getInt("id"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return ids;
+		
+	}
 }

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.lexinsmart.dao.CompanyDao;
 import com.lexinsmart.dao.EntranceGuardDao;
 import com.lexinsmart.dao.PlantimeDao;
 import com.lexinsmart.dao.SingleNumberDao;
@@ -14,6 +15,7 @@ import com.lexinsmart.dao.StaffDao;
 import com.lexinsmart.dao.SysLogDao;
 import com.lexinsmart.dao.TruckDao;
 import com.lexinsmart.dao.TruckPrivilegeDao;
+import com.lexinsmart.model.Company;
 import com.lexinsmart.model.Inoutfreight;
 import com.lexinsmart.model.Plantime;
 import com.lexinsmart.model.Singlenumber;
@@ -41,9 +43,12 @@ public class InoutfreightService {
 	private Staff staff4 = new Staff();// 6. 随车人司机4
 	private Truck truck = new Truck();// 7 插入车辆表
 	private TruckPrivilege truckPrivilege = new TruckPrivilege();// 8.车辆权限表
-	private Plantime plantime = new Plantime();// 9. 在厂时间。
+	private Company company = new Company();// 11货运人员的公司
 
-	Inoutfreight inoutfreight;
+	Inoutfreight inoutfreight;//货运人员
+	
+	DBCP dbcp = DBCP.getInstance();
+	Connection connection = null;//数据库的连接
 
 	public InoutfreightService(Inoutfreight inoutfreight) {
 
@@ -56,8 +61,8 @@ public class InoutfreightService {
 		staff.setLocation(inoutfreight.getBirthplace());
 		staff.setHomeaddr(inoutfreight.getHomeaddr());
 		staff.setTelephone(inoutfreight.getPhone());
-		staff.setCompany(inoutfreight.getHygs());
-		staff.setRemarks("");
+		staff.setCompany(inoutfreight.getCarno());//公司写车牌
+		staff.setRemarks(inoutfreight.getHygs());//remarks 写所属公司
 		staff.setRelative(inoutfreight.getRelative());
 		staff.setRelationship(inoutfreight.getRelationship());
 		staff.setTelephone2(inoutfreight.getRelativetel());
@@ -70,8 +75,8 @@ public class InoutfreightService {
 		staff1.setLocation(inoutfreight.getBirthplace1());
 		staff1.setHomeaddr(inoutfreight.getHomeaddr1());
 		staff1.setTelephone(inoutfreight.getPhone1());
-		staff1.setCompany(inoutfreight.getHygs1());
-		staff1.setRemarks("");
+		staff1.setCompany(inoutfreight.getCarno());//公司写车牌
+		staff1.setRemarks(inoutfreight.getHygs1());//remarks 写所属公司
 		staff1.setRelative(inoutfreight.getRelative1());
 		staff1.setRelationship(inoutfreight.getRelationship1());
 		staff1.setTelephone2(inoutfreight.getRelativetel1());
@@ -84,8 +89,8 @@ public class InoutfreightService {
 		staff2.setLocation(inoutfreight.getBirthplace2());
 		staff2.setHomeaddr(inoutfreight.getHomeaddr2());
 		staff2.setTelephone(inoutfreight.getPhone2());
-		staff2.setCompany(inoutfreight.getHygs2());
-		staff2.setRemarks("");
+		staff2.setCompany(inoutfreight.getCarno());//公司写车牌
+		staff2.setRemarks(inoutfreight.getHygs2());//remarks 写所属公司
 		staff2.setRelative(inoutfreight.getRelative2());
 		staff2.setRelationship(inoutfreight.getRelationship2());
 		staff2.setTelephone2(inoutfreight.getRelativetel2());
@@ -98,19 +103,34 @@ public class InoutfreightService {
 		staff3.setLocation(inoutfreight.getBirthplace3());
 		staff3.setHomeaddr(inoutfreight.getHomeaddr3());
 		staff3.setTelephone(inoutfreight.getPhone3());
-		staff3.setCompany(inoutfreight.getHygs3());
-		staff3.setRemarks("");
+		staff3.setCompany(inoutfreight.getCarno());//公司写车牌
+		staff3.setRemarks(inoutfreight.getHygs3());//remarks 写所属公司
 		staff3.setRelative(inoutfreight.getRelative3());
 		staff3.setRelationship(inoutfreight.getRelationship3());
 		staff3.setTelephone2(inoutfreight.getRelativetel3());
 		staff3.setIden(inoutfreight.getIdcard3());
 
-		plantime.setCid(0);//
-		plantime.setSid(0);//
-		plantime.setTid(1);// 货运 用车辆外键 限制
-		plantime.setChanger(inoutfreight.getDriver());
-		plantime.setTelephone(inoutfreight.getPhone());
-		plantime.setPlanouttime(null);
+		staff3.setRequestid(inoutfreight.getRequestid());
+		staff4.setName(inoutfreight.getAttendant4());
+		staff4.setSex(inoutfreight.getSex4());
+		staff4.setAge(TypeChange.stringToInt(inoutfreight.getAge4()));
+		staff4.setLocation(inoutfreight.getBirthplace4());
+		staff4.setHomeaddr(inoutfreight.getHomeaddr4());
+		staff4.setTelephone(inoutfreight.getPhone4());
+		staff4.setCompany(inoutfreight.getCarno());//公司写车牌
+		staff4.setRemarks(inoutfreight.getHygs4());//remarks 写所属公司
+		staff4.setRelative(inoutfreight.getRelative4());
+		staff4.setRelationship(inoutfreight.getRelationship4());
+		staff4.setTelephone2(inoutfreight.getRelativetel4());
+		staff4.setIden(inoutfreight.getIdcard4());
+//		plantime.setCid(0);//
+//		plantime.setSid(0);//
+//		plantime.setTid(1);// 货运 用车辆外键 限制
+//		plantime.setChanger(inoutfreight.getDriver());
+//		plantime.setTelephone(inoutfreight.getPhone());
+//		plantime.setPlanintime(null);
+//		plantime.setPlanouttime(null);
+//		plantime.setRequesid(inoutfreight.getRequestid());
 
 		truck.setRequestid(inoutfreight.getRequestid());
 		truck.setCompany(inoutfreight.getHygs());
@@ -118,6 +138,19 @@ public class InoutfreightService {
 		truck.setCarno(inoutfreight.getCarno());
 		float xzdw = DropDownTools.stringToTon(inoutfreight.getXzdw());
 		truck.setXzdw(xzdw);
+		
+		company.setRequestid(inoutfreight.getRequestid());
+		company.setCompany(inoutfreight.getCarno());// 车辆表的公司，，，，写车牌号
+		company.setCtype(4);//货运单位  4
+		company.setRemarks(inoutfreight.getHygs());//所属公司；
+
+		connection = dbcp.getConnection();// 事物管理，最后commit；
+		try {
+			connection.setAutoCommit(false);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -127,10 +160,6 @@ public class InoutfreightService {
 	 * @throws SQLException
 	 */
 	public void setInoutfreight() throws SQLException {
-
-		DBCP dbcp = DBCP.getInstance();
-		Connection connection = dbcp.getConnection();// 事物管理，最后commit；
-		connection.setAutoCommit(false);
 
 		try {
 			Date c = new Date();
@@ -151,6 +180,7 @@ public class InoutfreightService {
 					singlenumber.setDepart(inoutfreight.getDepotname());// 装卸地点
 																		// =
 																		// depotname
+					singlenumber.setRequestid(inoutfreight.getRequestid());
 					singleNumberDao.addSingleNumber(singlenumber);
 					System.out.println("insert singlenumber！");
 				}
@@ -211,11 +241,11 @@ public class InoutfreightService {
 				}
 			}
 
-			// 9.插入在厂时间
-			PlantimeDao plantimeDao = new PlantimeDao(connection);
-			plantime.setTid(carid);
-			plantimeDao.addPlanTime(plantime);
-			System.out.println("insert plantime！");
+//			// 9.插入在厂时间
+//			PlantimeDao plantimeDao = new PlantimeDao(connection);
+//			plantime.setTid(carid);
+//			plantimeDao.addPlanTime(plantime);
+//			System.out.println("insert plantime！");
 
 			// 10 插入系统日志
 			InetAddress ia = null;
@@ -238,6 +268,19 @@ public class InoutfreightService {
 			sysLogDao.addSysLog(sysLog);
 			System.out.println("add syslog！");
 
+			
+			//11 .写入公司
+			CompanyDao companyDao = new CompanyDao(connection);
+			if (!companyDao.checkIsExist(company.getCompany())) {
+				companyDao.addCompany(company);
+				System.out.println("add company");
+			}else{
+				companyDao.delete(companyDao.getId(company.getCompany()));
+				companyDao.addCompany(company);
+				System.out.println("delete & add company");
+			}
+			
+			
 			connection.commit();
 			System.out.println("commit！");
 			Date d = new Date();
@@ -251,7 +294,26 @@ public class InoutfreightService {
 		}
 	}
 
-	public void editInoutfreight() {
-
+	public void editInoutfreight() throws SQLException {
+		String requestid = inoutfreight.getRequestid();
+		
+		//1.删除提入单号
+		SingleNumberDao singleNumberDao = new SingleNumberDao(connection);
+		singleNumberDao.deleteStaff(requestid);
+		
+		//2.删除 staff
+		StaffDao staffDao = new StaffDao(connection);
+		staffDao.deleteStaff(requestid);
+		
+		//3. 删除车辆
+		TruckDao truckDao = new TruckDao(connection);
+		truckDao.deleteStaff(requestid);
+		
+//		//4.删除在厂时间
+//		PlantimeDao plantimeDao = new PlantimeDao(connection);
+//		plantimeDao.deleteplantime(requestid);
+		
+		setInoutfreight();
+		
 	}
 }

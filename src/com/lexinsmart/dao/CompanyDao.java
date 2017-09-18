@@ -25,13 +25,13 @@ public class CompanyDao {
 
 		try {
 		//	 conn = dbcp.getConnection();
-			String sql = "" + " insert into company " + " (id,requestid,company,ctype,created,forbidden,atfactorynum) " + " values("
-					+ "?,?,?,1,?,false,0) ";
+			String sql = "" + " insert into company " + " (requestid,company,ctype,created,forbidden,atfactorynum) " + " values("
+					+ "?,?,?,?,false,0) ";
 			 ptmt = (PreparedStatement) conn.prepareStatement(sql);
 
-			ptmt.setInt(1, company.getId());
-			ptmt.setString(2, company.getRequestid());
-			ptmt.setString(3, company.getCompany());
+			ptmt.setString(1, company.getRequestid());
+			ptmt.setString(2, company.getCompany());
+			ptmt.setInt(3, company.getCtype());
 			ptmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 
 			ptmt.execute();
@@ -43,15 +43,15 @@ public class CompanyDao {
 //			dbcp.releaseConnection(conn);
 		}
 	}
-	public boolean checkIsExist(String id) {
+	public boolean checkIsExist(String company) {
 		boolean isExist = false;
 		try {
 	//		 conn = dbcp.getConnection();
 
 			String sql;
-			sql = "SELECT id FROM company where id=? ";
+			sql = "SELECT id FROM company where company=? ";
 			ptmt = (PreparedStatement) conn.prepareStatement(sql);
-			ptmt.setInt(1, TypeChange.stringToInt(id));
+			ptmt.setString(1, company);
 			ResultSet rs = ptmt.executeQuery();
 			rs.last();
 			if (rs.getRow() > 0) {
@@ -67,5 +67,32 @@ public class CompanyDao {
 //			dbcp.releaseConnection(conn);
 		}
 		return isExist;
+	}
+	public int getId(String company){
+		int id =0;
+		try {
+			String sql = " select id from company where company=?";
+			ptmt = conn.prepareStatement(sql);
+			ptmt.setString(1, company);
+			ResultSet rest = ptmt.executeQuery();
+			while(rest.next()){
+				id = rest.getInt("id");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
+	}
+	public void delete(int id){
+		try {
+			String sql ="delete from company where id="+id;
+			ptmt=conn.prepareStatement(sql);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

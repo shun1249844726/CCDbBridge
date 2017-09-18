@@ -12,6 +12,14 @@ public class Plantime {
 	private String telephone;
 	private Timestamp planintime;
 	private Timestamp planouttime;
+	private String requesid;
+	
+	public String getRequesid() {
+		return requesid;
+	}
+	public void setRequesid(String requesid) {
+		this.requesid = requesid;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -21,7 +21,7 @@ public class SingleNumberDao {
 		try {
 	//		connection = dbcp.getConnection();
 			String sql = " insert into single_number "
-					+ " (carno,carheight,ttype,handplanno,singleno,depart,scantimes) " + " values(?,?,?,?,?,?,0) ";
+					+ " (carno,carheight,ttype,handplanno,singleno,depart,scantimes,requestid) " + " values(?,?,?,?,?,?,0,?) ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, singlenumber.getCarno());
 			ptmt.setFloat(2, singlenumber.getCarheight());
@@ -29,6 +29,7 @@ public class SingleNumberDao {
 			ptmt.setString(4, singlenumber.getHandplanno());
 			ptmt.setString(5, singlenumber.getSingleno());
 			ptmt.setString(6, singlenumber.getDepart());
+			ptmt.setString(7, singlenumber.getRequestid());
 
 			ptmt.execute();
 		} catch (SQLException e) {
@@ -64,5 +65,16 @@ public class SingleNumberDao {
 //			dbcp.releaseConnection(connection);
 		}
 		return isExist;
+	}
+	
+	public void deleteStaff(String requestid) {
+		try {
+			String sql = "delete from single_number where requestid="+requestid;
+			ptmt = connection.prepareStatement(sql);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

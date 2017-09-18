@@ -11,20 +11,21 @@ import com.lexinsmart.utils.DBCP;
 
 public class StaffDao {
 	DBCP dbcp = DBCP.getInstance();
-	Connection conn = dbcp.getConnection();
+	Connection connection = null;
 	PreparedStatement ptmt = null;
 
 	public StaffDao(Connection connection) {
-		this.conn = connection;
+		this.connection = connection;
 	}
+
 	public void addStaff(Staff staff) {
 		try {
 
-//			conn = (Connection) dbcp.getConnection();
+			// conn = (Connection) dbcp.getConnection();
 			String sql = " insert into staff "
 					+ " (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege) "
 					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,false) ";
-			ptmt = (PreparedStatement) conn.prepareStatement(sql);
+			ptmt = (PreparedStatement) connection.prepareStatement(sql);
 			ptmt.setString(1, staff.getRequestid());
 			ptmt.setString(2, staff.getName());
 			ptmt.setString(3, staff.getSex());
@@ -44,22 +45,22 @@ public class StaffDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-//			dbcp.closeStatement(ptmt);
-//			dbcp.releaseConnection(conn);
+		} finally {
+			// dbcp.closeStatement(ptmt);
+			// dbcp.releaseConnection(conn);
 		}
 	}
 
 	public boolean checkIsExist(String iden) {
 		boolean isExist = false;
-		ResultSet rs =null;
+		ResultSet rs = null;
 		try {
-//			 conn = dbcp.getConnection();
+			// conn = dbcp.getConnection();
 			String sql = "select iden from staff where iden=? ";
-			 ptmt = conn.prepareStatement(sql);
+			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, iden);
 
-			 rs = ptmt.executeQuery();
+			rs = ptmt.executeQuery();
 			rs.last();
 			if (rs.getRow() > 0) {
 				isExist = true;
@@ -69,10 +70,21 @@ public class StaffDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-//			dbcp.closeStatement(ptmt, rs);
-//			dbcp.releaseConnection(conn);
+		} finally {
+			// dbcp.closeStatement(ptmt, rs);
+			// dbcp.releaseConnection(conn);
 		}
 		return isExist;
+	}
+
+	public void deleteStaff(String requestid) {
+		try {
+			String sql = "delete from staff where requestid="+requestid;
+			ptmt = connection.prepareStatement(sql);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

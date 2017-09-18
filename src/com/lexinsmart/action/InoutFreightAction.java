@@ -14,15 +14,20 @@ import com.lexinsmart.model.Staff;
 import com.lexinsmart.service.InoutfreightService;
 import com.lexinsmart.utils.TypeChange;
 
-public class TestAction {
+/**
+ * 货运司机测试类
+ * @author xushun
+ *
+ */
+public class InoutFreightAction {
 	public static void main(String[] args) {
 		Inoutfreight inoutfreight = new Inoutfreight();
 		String id = "2";
-		String requestid = "103";
+		String requestid = "1031";
 		String nodeid = null;
 		String rowindex = null;
 		String handplanno = "ZT201604004227";// 装卸计划号
-		String depotname = "LBE原料非保税库";//主仓库名称
+		String depotname = "LBE原料非保税库";// 主仓库名称
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
 		String singleno = "1020T000063115,1020T000063113,1020T000063114";// 提入单号
@@ -223,8 +228,11 @@ public class TestAction {
 
 		InoutfreightService inoutfreightService = new InoutfreightService(inoutfreight);
 		try {
-			inoutfreightService.setInoutfreight();
+			 inoutfreightService.setInoutfreight();//添加
+
+	//		inoutfreightService.editInoutfreight();//编辑
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
