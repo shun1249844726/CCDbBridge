@@ -40,7 +40,6 @@ public class LwgStructionService {
 			// 1.添加劳务工单位
 
 			CompanyDao companyDao = new CompanyDao(connection);
-
 			if (!companyDao.checkIsExist(lwgstruction.getContractorn())) {
 				Company company = new Company();
 				company.setRequestid(lwgstruction.getRequestid());
@@ -75,7 +74,7 @@ public class LwgStructionService {
 
 			// 3 添加单位权限
 			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
-			List<Integer> ids = entranceGuardDao.getId(1, false);
+			List<Integer> ids = entranceGuardDao.getId(0, false);
 
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);

@@ -38,7 +38,12 @@ public class EntranceGuardDao {
 		}
 		return ids;
 	}
-	
+	/**
+	 * 
+	 * @param type 门禁类型  车1  人0
+	 * @param privilege 二道门标志  true ：是二道门，  false 不是
+	 * @return 搜索到的ID的列表
+	 */
 	public List<Integer> getId(int type,boolean privilege){
 		ResultSet rest = null;
 		List<Integer> ids = new ArrayList<Integer>();
