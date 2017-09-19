@@ -1,6 +1,6 @@
 package com.lexinsmart.model;
 
-public class OABlcklist {
+public class OABlacklist {
 	private String idcard;
 	private String name;
 	private String mantype;
@@ -10,6 +10,13 @@ public class OABlcklist {
 	private String reason;
 	private String plleavedate;
 	private String plemployno;
+	private String pldepartment;
+	public String getPldepartment() {
+		return pldepartment;
+	}
+	public void setPldepartment(String pldepartment) {
+		this.pldepartment = pldepartment;
+	}
 	public String getIdcard() {
 		return idcard;
 	}

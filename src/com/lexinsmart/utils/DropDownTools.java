@@ -37,5 +37,48 @@ public class DropDownTools {
 			}
 			return xzdw;
 		}
+		public static String stringToSex(String messysex){
+			String sex = "";
+			if (messysex !=null ) {
+				if (messysex.equals("40285a8d4d459849014d45cbfcd60193")) {
+					sex = "男";
+				}else if(messysex.equals("40285a8d4d459849014d45cbfcd60194")){
+					sex="女";
+				}else{
+					sex="不限";
+				}
+			}
+			return sex;
+		}
+		public static String stringToType(String messytype){
+			String type = "";
+			
+			if (messytype != null) {
+				if (messytype.equals("40285a8d55c3ffed0155e226f71356b0")) {
+					type="劳务";
+				} else if (messytype.equals("40285a8d55c3ffed0155e226f71356b1")) {
+					type="包商";
+				} else if (messytype.equals("40285a8d55c3ffed0155e226f71356b2")) {
+					type="人事";
+				}else if (messytype.equals("40285a8d5610857701561fbe7d122bb2")) {
+					type="司机";
+				}else if (messytype.equals("40285a8d57d51e140157dac717702f44")) {
+					type="其他";
+				}
+			}
+			return type;
+		}
+		
+		public static String stringToState(String messystate){
+			String state = "";
+			if (messystate != null) {
+				if (messystate.equals("402864d149df48ff0149df70dc7b0007")) {
+					state="正常";
+				} else if(messystate.equals("402864d149df48ff0149df70dc7b0008")) {
+					state="黑名单";
+				}
+			}
+			return state;
+		}
 	}
 

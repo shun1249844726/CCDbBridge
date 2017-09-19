@@ -1,6 +1,9 @@
 package com.lexinsmart.utils;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +23,25 @@ public class DateUtils {
         }  
 		return ts;
 	}
-	
+	/**
+	 * string -> date
+	 * yyyy-MM-dd
+	 * @param datestring
+	 * @return
+	 */
+	public static Date StringToDate(String dateStr){
+        Date date = new Date();  
+        //注意format的格式要与日期String的格式相匹配  
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
+        try {  
+            date = sdf.parse(dateStr);  
+            System.out.println(date.toString());  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }
+		return date;  
+	}
+
 	/**
 	 * 获取指定字符串出现的次数
 	 * 

@@ -42,7 +42,7 @@ public class OARegistration {
 	private String returndocuments;
 	private String lsnumber;
 	private String choosedoc;
-	private String ifunit;
+	private String lfunit;
 	private String whylegacy;
 	private String guestscope;
 	private String bmid;
@@ -55,6 +55,7 @@ public class OARegistration {
 	private String planroute;
 	private String lsctrlarea;
 	private String hdleader;
+	private String allleader;
 	private String currentnode;
 	private String deptscode;
 	private String title;
@@ -283,11 +284,11 @@ public class OARegistration {
 	public void setChoosedoc(String choosedoc) {
 		this.choosedoc = choosedoc;
 	}
-	public String getIfunit() {
-		return ifunit;
+	public String getLfunit() {
+		return lfunit;
 	}
-	public void setIfunit(String ifunit) {
-		this.ifunit = ifunit;
+	public void setLfunit(String lfunit) {
+		this.lfunit = lfunit;
 	}
 	public String getWhylegacy() {
 		return whylegacy;
@@ -360,6 +361,12 @@ public class OARegistration {
 	}
 	public void setHdleader(String hdleader) {
 		this.hdleader = hdleader;
+	}
+	public String getAllleader() {
+		return allleader;
+	}
+	public void setAllleader(String allleader) {
+		this.allleader = allleader;
 	}
 	public String getCurrentnode() {
 		return currentnode;
