@@ -17,7 +17,6 @@ import com.lexinsmart.model.SELwgstruction;
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
 import com.lexinsmart.utils.TypeChange;
-import com.sun.tools.javac.code.Attribute.Array;
 
 public class LwgStructionService {
 
