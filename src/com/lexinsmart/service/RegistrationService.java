@@ -22,6 +22,7 @@ import com.lexinsmart.utils.TypeChange;
 
 /**
  * 访客管理
+ * 
  * @author xushun
  *
  */
@@ -38,7 +39,8 @@ public class RegistrationService {
 	}
 
 	/**
-	 * 根据填入的访客主表   信息，将信息拆分到各个表
+	 * 根据填入的访客主表 信息，将信息拆分到各个表
+	 * 
 	 * @param registration
 	 */
 	public void setRegistration(OARegistration registration) {
@@ -67,8 +69,8 @@ public class RegistrationService {
 
 			plantime.setChanger(registration.getGuestname());
 			plantime.setTelephone(null);
-			String intime = registration.getVisitingdate() + " " + registration.getVisitingtime();// TODO
-																									// 确认日期和时间的格式
+			String intime = registration.getVisitingdate() + " " + registration.getVisitingtime();
+			// 确认日期和时间的格式
 			String outtime = registration.getLeavedate() + " " + registration.getLeavetime();
 			plantime.setPlanintime(DateUtils.StringToTimestamp(intime));
 			plantime.setPlanouttime(DateUtils.StringToTimestamp(outtime));
@@ -92,7 +94,7 @@ public class RegistrationService {
 			companyprivilege.setCid(cid);
 
 			CompanyPrivilegeDao companyPrivilegeDao = new CompanyPrivilegeDao(connection);
-			Integer egid = 0;// TODO 查询ID
+			Integer egid = 0;//  查询ID
 
 			for (int i = 0; i < ids.size(); i++) {
 				egid = ids.get(i);
@@ -116,19 +118,19 @@ public class RegistrationService {
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-		}	
+		}
 	}
-	
+
 	/**
 	 * 访客子表
-	 * @param oaFkjcsub 
+	 * 
+	 * @param oaFkjcsub
 	 * @throws SQLException
 	 */
-	public void setFkjcsub(OAFkjcsub oaFkjcsub) throws SQLException{
+	public void setFkjcsub(OAFkjcsub oaFkjcsub) throws SQLException {
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
@@ -140,21 +142,27 @@ public class RegistrationService {
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
-			staff.setCompany(oaFkjcsub.getFkcom());//TODO 所属公司，是不是同主表来访单位。
+			staff.setCompany(oaFkjcsub.getFkcom());//  所属公司，是不是同主表来访单位。
 			staff.setRemarks("");
 			staff.setRelative(oaFkjcsub.getRelative());
 			staff.setRelationship(oaFkjcsub.getRelationship());
 			staff.setTelephone2(oaFkjcsub.getRelativetel());
 			staff.setIden(oaFkjcsub.getQtnum());
+			staff.setPrivilege(false);
 
 			StaffDao staffDao = new StaffDao(connection);
 
-			if (oaFkjcsub.getQtnum() != null && !staffDao.checkIsExist(oaFkjcsub.getQtnum())) {
+			int id = staffDao.getid(oaFkjcsub.getQtnum());
+			if (id > 0) {
+				staffDao.deleteStaffbyid(id);
+				staffDao.addStaff(staff);
+				System.out.println("delete  & add staff！");
+			} else {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");
 			}
+			
 			System.out.println("commit");
-
 			connection.commit();
 		} catch (Exception e) {
 			connection.rollback();

@@ -101,6 +101,28 @@ public class CompanyDao {
 		return id;
 	}
 	/**
+	 * 根据公司名称获取requestid
+	 * @param company
+	 * @return ID
+	 */
+	public String getrequestId(String company){
+		String requestid ="";
+		try {
+			String sql = " select requestid from company where company=?";
+			ptmt = conn.prepareStatement(sql);
+			ptmt.setString(1, company);
+			ResultSet rest = ptmt.executeQuery();
+			while(rest.next()){
+				requestid = rest.getString("requestid");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return requestid;
+	}
+	/**
 	 * 根据ID 删除一列数据
 	 * @param id
 	 */

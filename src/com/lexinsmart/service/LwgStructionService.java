@@ -2,6 +2,7 @@ package com.lexinsmart.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.lexinsmart.dao.CompanyDao;
@@ -16,9 +17,12 @@ import com.lexinsmart.model.SEConstructionp;
 import com.lexinsmart.model.SELwgstruction;
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
+import com.lexinsmart.utils.DateUtils;
 import com.lexinsmart.utils.TypeChange;
+
 /**
  * 劳务工表
+ * 
  * @author xushun
  *
  */
@@ -37,8 +41,10 @@ public class LwgStructionService {
 		}
 
 	}
+
 	/**
 	 * 设置劳务工主表
+	 * 
 	 * @param lwgstruction
 	 * @throws SQLException
 	 */
@@ -56,28 +62,8 @@ public class LwgStructionService {
 				System.out.println("add company");
 			}
 
-			// 2. 添加在厂时间。
-			Plantime plantime = new Plantime();
 			int cid = companyDao.getId(lwgstruction.getContractorn());// 查询单位外键的表ID
-			plantime.setCid(cid);
-			plantime.setSid(0);
-			plantime.setTid(0);
 
-			plantime.setChanger(lwgstruction.getCharger());
-			plantime.setTelephone(lwgstruction.getTelephone());
-			plantime.setPlanintime(null);
-			plantime.setPlanouttime(null);
-			PlantimeDao plantimeDao = new PlantimeDao(connection);
-
-			int id = plantimeDao.getIdIfExist(cid, 0, 0);
-			if (id > 0) {
-				plantimeDao.deleteplantime(id);
-				plantimeDao.addPlanTime(plantime);
-				System.out.println("delete & add plantime");
-			} else if (id == 0) {
-				plantimeDao.addPlanTime(plantime);
-				System.out.println("add plantime");
-			}
 
 			// 3 添加单位权限
 			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
@@ -115,8 +101,10 @@ public class LwgStructionService {
 			// dbcp.releaseConnection(connection);
 		}
 	}
+
 	/**
 	 * 设置劳务工子表
+	 * 
 	 * @param constructionp
 	 * @throws SQLException
 	 */
@@ -125,7 +113,9 @@ public class LwgStructionService {
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
-			staff.setRequestid(constructionp.getRequesstid());
+			CompanyDao companyDao = new CompanyDao(connection);
+			String requestid = companyDao.getrequestId(constructionp.getDepart());
+			staff.setRequestid(requestid);
 			staff.setName(constructionp.getName());
 			staff.setSex(constructionp.getSexs());
 			staff.setAge(TypeChange.stringToInt(constructionp.getAge()));
@@ -138,15 +128,33 @@ public class LwgStructionService {
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
 			staff.setIden(constructionp.getIden());
+			staff.setPrivilege(true);
 
 			StaffDao staffDao = new StaffDao(connection);
-
 			if (constructionp.getIden() != null && !staffDao.checkIsExist(constructionp.getIden())) {
 				staffDao.addStaff(staff);
-				System.out.println("add staff！");
+				System.out.println("add staff");
 			}
-			System.out.println("commit");
+			
 
+			// 2. 添加在厂时间。
+			Plantime plantime = new Plantime();
+			plantime.setCid(0);
+			int id = staffDao.getid(constructionp.getIden());
+			plantime.setSid(id);
+			plantime.setTid(0);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+			plantime.setChanger(constructionp.getName());
+			plantime.setTelephone(constructionp.getTelephone());
+			
+			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
+			Timestamp outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			plantime.setPlanouttime(outtime);
+			PlantimeDao plantimeDao = new PlantimeDao(connection);
+			plantimeDao.addPlanTime(plantime);
+			System.out.println("add plantime");
+			
+			System.out.println("commit");
 			connection.commit();
 		} catch (Exception e) {
 			connection.rollback();

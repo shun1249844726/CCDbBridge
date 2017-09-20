@@ -145,5 +145,6 @@ public class Staff {
 	public void setPrivilege(boolean privilege) {
 		this.privilege = privilege;
 	}
+
 	
 }

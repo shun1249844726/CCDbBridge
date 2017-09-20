@@ -29,7 +29,7 @@ public class StaffDao {
 			// conn = (Connection) dbcp.getConnection();
 			String sql = " insert into staff "
 					+ " (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege) "
-					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,false) ";
+					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 			ptmt = (PreparedStatement) connection.prepareStatement(sql);
 			ptmt.setString(1, staff.getRequestid());
 			ptmt.setString(2, staff.getName());
@@ -45,6 +45,7 @@ public class StaffDao {
 			ptmt.setString(12, staff.getTelephone2());
 			ptmt.setString(13, staff.getIden());
 			ptmt.setTimestamp(14, new Timestamp(System.currentTimeMillis()));
+			ptmt.setBoolean(15,staff.isPrivilege());
 
 			ptmt.execute();
 		} catch (SQLException e) {
@@ -82,14 +83,36 @@ public class StaffDao {
 		return isExist;
 	}
 
-	public void deleteStaff(String requestid) {
+	public void deleteStaffbyid(int id) {
 		try {
-			String sql = "delete from staff where requestid="+requestid;
+			String sql = "delete from staff where id="+id;
 			ptmt = connection.prepareStatement(sql);
 			ptmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public int getid(String iden){
+		ResultSet resultSet = null;
+		int id = 0;
+		try {
+//			connection = dbcp.getConnection();
+			String sql = " select id from staff where iden=? ";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, iden);
+			resultSet = ptmt.executeQuery();
+			while (resultSet.next()) {
+				id = resultSet.getInt("id");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+//			dbcp.closeStatement(ptmt, resultSet);
+//			dbcp.releaseConnection(connection);
+		}
+
+		return id;
 	}
 }

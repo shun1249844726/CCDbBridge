@@ -2,6 +2,7 @@ package com.lexinsmart.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.lexinsmart.dao.CompanyDao;
@@ -17,6 +18,7 @@ import com.lexinsmart.model.Plantime;
 import com.lexinsmart.model.SEConstructionp;
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
+import com.lexinsmart.utils.DateUtils;
 import com.lexinsmart.utils.TypeChange;
 
 /**
@@ -39,13 +41,15 @@ public class ConstractortermService {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 设置承包商主表
+	 * 
 	 * @param contractortem
 	 * @throws SQLException
 	 */
 	public void setContractorterm(OAContractortem contractortem) throws SQLException {
-		
+
 		try {
 			// 1. 添加单位表
 			CompanyDao companyDao = new CompanyDao(connection);
@@ -58,33 +62,11 @@ public class ConstractortermService {
 				companyDao.addCompany(company);
 				System.out.println("add company");
 			}
-			// 2. 添加在厂时间。
-			Plantime plantime = new Plantime();
-			int cid = companyDao.getId(contractortem.getContractorn());// 查询单位外键的表ID
-			plantime.setCid(cid);
-			plantime.setSid(0);
-			plantime.setTid(0);
-
-			plantime.setChanger(contractortem.getCharger());
-			plantime.setTelephone(contractortem.getTeltphone());
-			plantime.setPlanintime(null);
-			plantime.setPlanouttime(null);
-			PlantimeDao plantimeDao = new PlantimeDao(connection);
-
-			int id = plantimeDao.getIdIfExist(cid, 0, 0);
-			if (id > 0) {
-				plantimeDao.deleteplantime(id);
-				plantimeDao.addPlanTime(plantime);
-				System.out.println("delete & add plantime");
-			} else if (id == 0) {
-				plantimeDao.addPlanTime(plantime);
-				System.out.println("add plantime");
-			}
 
 			// 3 添加单位权限
 			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
-			List<Integer> ids = entranceGuardDao.getId(0, false);  //获取门禁的ID
-
+			List<Integer> ids = entranceGuardDao.getId(0, false); // 获取门禁的ID
+			int cid = companyDao.getId(contractortem.getContractorn());// 查询单位外键的表ID
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);
 
@@ -92,7 +74,7 @@ public class ConstractortermService {
 			Integer egid = 0;
 
 			for (int i = 0; i < ids.size(); i++) {
-				egid = ids.get(i);//  查询ID
+				egid = ids.get(i);// 查询ID
 				companyprivilege.setEgid(egid);
 
 				int privilegeid = companyPrivilegeDao.getIdIfExist(cid, egid);
@@ -107,16 +89,18 @@ public class ConstractortermService {
 					System.out.println("add companyprivilege");
 				}
 			}
-			
+
 			connection.commit();
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
 		}
-		
+
 	}
+
 	/**
 	 * 设置承包商子表
+	 * 
 	 * @param constructionp
 	 * @throws SQLException
 	 */
@@ -125,7 +109,9 @@ public class ConstractortermService {
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
-			staff.setRequestid(constructionp.getRequestid());
+			CompanyDao companyDao = new CompanyDao(connection);
+			String requestid = companyDao.getrequestId(constructionp.getDepart());
+			staff.setRequestid(requestid);
 			staff.setName(constructionp.getName());
 			staff.setSex(constructionp.getSexs());
 			staff.setAge(TypeChange.stringToInt(constructionp.getAge()));
@@ -138,15 +124,37 @@ public class ConstractortermService {
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
 			staff.setIden(constructionp.getIden());
+			staff.setPrivilege(true);
 
 			StaffDao staffDao = new StaffDao(connection);
 
-			if (constructionp.getIden() != null && !staffDao.checkIsExist(constructionp.getIden())) {
+			int id = staffDao.getid(constructionp.getIden());
+			if (id > 0) {
+				staffDao.deleteStaffbyid(id);
+				staffDao.addStaff(staff);
+				System.out.println("delete  & add staff！");
+			} else {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");
 			}
-			System.out.println("commit");
 
+			// 2. 添加在厂时间。
+			Plantime plantime = new Plantime();
+			plantime.setCid(0);
+			plantime.setSid(id);// TODO 使用个人外键控制；
+			plantime.setTid(0);
+
+			plantime.setChanger(constructionp.getName());
+			plantime.setTelephone(constructionp.getTelephone());
+			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
+			Timestamp outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			plantime.setPlanouttime(outtime);
+			PlantimeDao plantimeDao = new PlantimeDao(connection);
+
+			plantimeDao.addPlanTime(plantime);
+			System.out.println("add plantime");
+
+			System.out.println("commit");
 			connection.commit();
 		} catch (Exception e) {
 			connection.rollback();

@@ -40,7 +40,7 @@ public class PlantimeDao {
 
 			ptmt.setString(4, plantime.getChanger());
 			ptmt.setString(5, plantime.getTelephone());
-			ptmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
+			ptmt.setTimestamp(6, plantime.getPlanintime());
 			ptmt.setTimestamp(7, plantime.getPlanouttime());
 			ptmt.setString(8, plantime.getRequesid());
 

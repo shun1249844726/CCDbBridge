@@ -294,27 +294,4 @@ public class InoutfreightService {
 			dbcp.releaseConnection(connection);
 		}
 	}
-
-	public void editInoutfreight() throws SQLException {
-		String requestid = inoutfreight.getRequestid();
-
-		// 1.删除提入单号
-		SingleNumberDao singleNumberDao = new SingleNumberDao(connection);
-		singleNumberDao.deleteStaff(requestid);
-
-		// 2.删除 staff
-		StaffDao staffDao = new StaffDao(connection);
-		staffDao.deleteStaff(requestid);
-
-		// 3. 删除车辆
-		TruckDao truckDao = new TruckDao(connection);
-		truckDao.deleteStaff(requestid);
-
-		// //4.删除在厂时间
-		// PlantimeDao plantimeDao = new PlantimeDao(connection);
-		// plantimeDao.deleteplantime(requestid);
-
-		setInoutfreight();
-
-	}
 }

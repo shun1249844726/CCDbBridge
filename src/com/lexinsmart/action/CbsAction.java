@@ -17,9 +17,9 @@ public class CbsAction {
 		String requestid = "211";
 		String nodeid = null;
 		String rowindex = null;
-		String charger = null;//承包商负责人
+		String charger ="bs1";//承包商负责人
 		String request = null;
-		String contractorn = "40285a905d72f4e3015dc07b9ac64381";//承包商名称
+		String contractorn = "承包商公司1";//承包商名称
 		String traintime = null;
 		String requireman = null;
 		String insurance = null;
@@ -55,8 +55,8 @@ public class CbsAction {
 		String p_rowindex = null;
 		String p_num = null;
 		String p_edate = null;
-		String p_name = "Ravindra_cbs";//姓名
-		String p_iden = "ASWPP9874D";//身份证号
+		String p_name = "Ravindra_cbs_1";//姓名
+		String p_iden = "ASWPP9874D1";//身份证号
 		String p_remarks = null;
 		String p_insurancetype = null;
 		String p_validity = null;
@@ -64,14 +64,14 @@ public class CbsAction {
 		String p_ifjoin = null;
 		String p_age = null;//年龄
 		String p_location = null;//籍贯
-		String p_depart = null;//所属公司
+		String p_depart = "承包商公司1";//所属公司
 		String p_telephone = null;//联系电话
 		String p_homelocation = null;//家庭住址
 		String p_relatives = null;////亲属名字
 		String p_relativeship = null;//亲属关系
 		String p_telephone2 = null;//亲属电话
 		String p_sexs = null;//性别
-		String p_indates = null;//入厂有效期／／／／／／
+		String p_indates = "2018-07-05";//入厂有效期／／／／／／必填
 		OAConstructionp constructionp = new OAConstructionp();
 		constructionp.setRequestid(p_requestid);
 		constructionp.setNodeid(p_nodeid);

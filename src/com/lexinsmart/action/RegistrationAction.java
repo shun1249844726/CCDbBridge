@@ -149,13 +149,13 @@ public class RegistrationAction {
 		String p_fknum = null;
 		String p_qtnum = "535353535353535";//访客证件号码
 		String p_byear = null;
-		String p_gender = null;
+		String p_gender = "40285a8d4d459849014d45cbfcd60194";//性别
 		String p_edate = null;
 		String p_zjnum = null;
-		String p_sex = "40285a8d4d459849014d45cbfcd60194";//性别
+		String p_sex = null;
 		String p_age = null;
 		String p_birthplace = null;
-		String p_fkcom = null;//TODO  所属公司是不是等同上面的公司
+		String p_fkcom = "lexinsmart";//  所属公司是不是等同上面的公司
 		String p_homeaddr = null;
 		String p_telephone = null;
 		String p_relative = null;
@@ -183,9 +183,7 @@ public class RegistrationAction {
 		fkjcsub.setRelative(p_relative);
 		fkjcsub.setRelationship(p_relationship);
 		fkjcsub.setRelativetel(p_relativetel);
-		
-		
-	
+
 		try {
 			RegistrationService registrationService = new RegistrationService();
 			registrationService.setRegistration(registration);  //设置访客主表
