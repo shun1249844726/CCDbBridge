@@ -6,6 +6,11 @@ import com.lexinsmart.model.SEConstructionp;
 import com.lexinsmart.model.SELwgstruction;
 import com.lexinsmart.service.LwgStructionService;
 
+/**
+ * 劳务工测试类
+ * @author xushun
+ *
+ */
 public class LwgAction {
 
 	public static void main(String[] args) {
@@ -52,25 +57,25 @@ public class LwgAction {
 		String p_requesstid= "111";
 		String p_nodeid= null;
 		String p_rowindex= null;
-		String p_age= null;
-		String p_location= null;
-		String p_depart= null;
-		String p_telephone= null;
-		String p_homelocation= null;
-		String p_relatives= null;
-		String p_relativeship= null;
-		String p_teltphone2= null;
-		String p_sexs= null;
-		String p_indates= null;
-		String p_num= null;
-		String p_name= "lwg1";
-		String p_iden= "666777555587677777";
+		String p_age= null;//年龄
+		String p_location= null;//籍贯
+		String p_depart= null;//所属部门
+		String p_telephone= null;//联系电话
+		String p_homelocation= null;//家庭住址
+		String p_relatives= null;//亲属名字
+		String p_relativeship= null;//亲属关系
+		String p_teltphone2= null;//亲属联系电话
+		String p_sexs= null;//性别
+		String p_indates= null;//入厂 有效期。。。。
+		String p_num= null;//序号
+		String p_name= "lwg1";//姓名
+		String p_iden= "666777555587677777";//身份证号
 		String p_insurancetype= null;
 		String p_validity= null;
-		String p_remarks= null;
+		String p_remarks= null;//备注
 		String p_edate= null;
-		String p_ifjoin= null;
-		String p_reasons= null;
+		String p_ifjoin= null;//是否加入黑名单
+		String p_reasons= null;//加入黑名单原因
 		constructionp.setRequesstid(p_requesstid);
 		constructionp.setNodeid(p_nodeid);
 		constructionp.setRowindex(p_rowindex);
@@ -97,8 +102,8 @@ public class LwgAction {
 		
 		LwgStructionService lwgStructionService = new LwgStructionService();
 		try {
-			lwgStructionService.setLwgstruction(lwgstruction);
-			lwgStructionService.setConstructionp(constructionp);
+			lwgStructionService.setLwgstruction(lwgstruction);// 设置劳务工主表
+			lwgStructionService.setConstructionp(constructionp);//设置劳务工子表
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

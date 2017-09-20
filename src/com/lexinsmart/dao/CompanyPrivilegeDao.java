@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import com.lexinsmart.model.Companyprivilege;
 import com.lexinsmart.utils.DBCP;
 
+/**
+ * 公司权限表操作
+ * @author xushun
+ *
+ */
 public class CompanyPrivilegeDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
@@ -16,6 +21,10 @@ public class CompanyPrivilegeDao {
 		this.connection = connection;
 		
 	}
+	/**
+	 * 添加公司权限
+	 * @param companyprivilege
+	 */
 	public void addCompanyPrivilege(Companyprivilege companyprivilege){
 		try {
 			String sql = "insert into company_privilege "+
@@ -31,6 +40,12 @@ public class CompanyPrivilegeDao {
 			// TODO: handle exception
 		}
 	}
+	/**
+	 * 如果存在 返回ID
+	 * @param cid
+	 * @param egid
+	 * @return ID
+	 */
 	public int getIdIfExist(int cid,int egid){
 		int id=-1;
 		try {
@@ -55,6 +70,10 @@ public class CompanyPrivilegeDao {
 		return id;
 		
 	}
+	/**
+	 * 根据ID 删除一列
+	 * @param id
+	 */
 	public void delete(int id){
 		try {
 			String sql ="delete from company_privilege where id="+id;

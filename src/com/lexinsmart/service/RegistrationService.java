@@ -20,6 +20,11 @@ import com.lexinsmart.utils.DateUtils;
 import com.lexinsmart.utils.DropDownTools;
 import com.lexinsmart.utils.TypeChange;
 
+/**
+ * 访客管理
+ * @author xushun
+ *
+ */
 public class RegistrationService {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
@@ -32,6 +37,10 @@ public class RegistrationService {
 		}
 	}
 
+	/**
+	 * 根据填入的访客主表   信息，将信息拆分到各个表
+	 * @param registration
+	 */
 	public void setRegistration(OARegistration registration) {
 
 		try {
@@ -114,6 +123,11 @@ public class RegistrationService {
 		}	
 	}
 	
+	/**
+	 * 访客子表
+	 * @param oaFkjcsub 
+	 * @throws SQLException
+	 */
 	public void setFkjcsub(OAFkjcsub oaFkjcsub) throws SQLException{
 		try {
 			// 1. 添加员工表

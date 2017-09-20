@@ -9,6 +9,11 @@ import java.util.List;
 
 import com.lexinsmart.utils.DBCP;
 
+/**
+ * 门禁数据表操作
+ * @author xushun
+ *
+ */
 public class EntranceGuardDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;

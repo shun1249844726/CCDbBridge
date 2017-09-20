@@ -17,7 +17,11 @@ import com.lexinsmart.model.SELwgstruction;
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
 import com.lexinsmart.utils.TypeChange;
-
+/**
+ * 劳务工表
+ * @author xushun
+ *
+ */
 public class LwgStructionService {
 
 	DBCP dbcp = DBCP.getInstance();
@@ -33,7 +37,11 @@ public class LwgStructionService {
 		}
 
 	}
-
+	/**
+	 * 设置劳务工主表
+	 * @param lwgstruction
+	 * @throws SQLException
+	 */
 	public void setLwgstruction(SELwgstruction lwgstruction) throws SQLException {
 		try {
 			// 1.添加劳务工单位
@@ -107,7 +115,11 @@ public class LwgStructionService {
 			// dbcp.releaseConnection(connection);
 		}
 	}
-
+	/**
+	 * 设置劳务工子表
+	 * @param constructionp
+	 * @throws SQLException
+	 */
 	public void setConstructionp(SEConstructionp constructionp) throws SQLException {
 
 		try {

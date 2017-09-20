@@ -49,7 +49,10 @@ public class InoutfreightService {
 
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
-
+	/**
+	 * 货运司机 主表
+	 * @param inoutfreight
+	 */
 	public InoutfreightService(Inoutfreight inoutfreight) {
 
 		this.inoutfreight = inoutfreight;

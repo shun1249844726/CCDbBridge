@@ -15,10 +15,19 @@ import com.lexinsmart.utils.DBCP;
 import com.lexinsmart.utils.DateUtils;
 import com.lexinsmart.utils.DropDownTools;
 
+/**
+ *  黑名单的管理
+ * @author xushun
+ *
+ */
 public class BlackListService {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
+	/**
+	 *  添加人员黑名单
+	 * @param blacklist  人员黑名单
+	 */
 	public void addBlackListP(OABlacklist blacklist) {
 
 		try {
@@ -69,6 +78,10 @@ public class BlackListService {
 		}
 	}
 
+	/**
+	 * 添加车辆黑名单
+	 * @param vehicle
+	 */
 	public void addBlackListC(OAVehicle vehicle) {
 		try {
 			connection = dbcp.getConnection();// 事物管理，最后commit；

@@ -10,6 +10,11 @@ import com.lexinsmart.model.Company;
 import com.lexinsmart.utils.DBCP;
 import com.lexinsmart.utils.TypeChange;
 
+/**
+ * 公司数据表的操作
+ * @author xushun
+ *
+ */
 public class CompanyDao {
 	Connection conn = null;
 	PreparedStatement ptmt = null;
@@ -43,6 +48,11 @@ public class CompanyDao {
 //			dbcp.releaseConnection(conn);
 		}
 	}
+	/**
+	 * 查查是否存在
+	 * @param company
+	 * @return 存在：true   不存在  false
+	 */
 	public boolean checkIsExist(String company) {
 		boolean isExist = false;
 		try {
@@ -68,6 +78,11 @@ public class CompanyDao {
 		}
 		return isExist;
 	}
+	/**
+	 * 根据公司名称获取ID
+	 * @param company
+	 * @return ID
+	 */
 	public int getId(String company){
 		int id =0;
 		try {
@@ -85,6 +100,10 @@ public class CompanyDao {
 		}
 		return id;
 	}
+	/**
+	 * 根据ID 删除一列数据
+	 * @param id
+	 */
 	public void delete(int id){
 		try {
 			String sql ="delete from company where id="+id;

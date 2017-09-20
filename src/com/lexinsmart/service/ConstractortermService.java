@@ -39,7 +39,11 @@ public class ConstractortermService {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * 设置承包商主表
+	 * @param contractortem
+	 * @throws SQLException
+	 */
 	public void setContractorterm(OAContractortem contractortem) throws SQLException {
 		
 		try {
@@ -111,7 +115,11 @@ public class ConstractortermService {
 		}
 		
 	}
-	
+	/**
+	 * 设置承包商子表
+	 * @param constructionp
+	 * @throws SQLException
+	 */
 	public void setConstructionp(OAConstructionp constructionp) throws SQLException {
 
 		try {

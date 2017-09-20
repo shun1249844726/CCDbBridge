@@ -9,6 +9,11 @@ import java.sql.Timestamp;
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
 
+/**
+ * 人员管理表操作
+ * @author xushun
+ *
+ */
 public class StaffDao {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;

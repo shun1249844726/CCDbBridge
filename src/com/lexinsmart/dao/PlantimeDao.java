@@ -10,7 +10,11 @@ import java.util.Date;
 
 import com.lexinsmart.model.Plantime;
 import com.lexinsmart.utils.DBCP;
-
+/**
+ * 计划在厂时间表操作
+ * @author xushun
+ *
+ */
 public class PlantimeDao {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
@@ -19,7 +23,10 @@ public class PlantimeDao {
 	public PlantimeDao(Connection connection) {
 		this.connection = connection;
 	}
-
+	/**
+	 * 添加在厂时间
+	 * @param plantime
+	 */
 	public void addPlanTime(Plantime plantime) {
 		try {
 			// connection = dbcp.getConnection();
@@ -48,6 +55,10 @@ public class PlantimeDao {
 		}
 
 	}
+	/**
+	 * 根据ID 删除在厂时间
+	 * @param id
+	 */
 	public void deleteplantime(int id) {
 		try {
 			String sql = "delete from plan_time where id="+id;
@@ -58,6 +69,13 @@ public class PlantimeDao {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 如果存在 返回ID
+	 * @param cid
+	 * @param sid
+	 * @param tid
+	 * @return
+	 */
 	public int getIdIfExist(int cid,int sid,int tid){
 		int id=-1;
 		try {

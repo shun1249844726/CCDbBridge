@@ -12,6 +12,11 @@ import com.lexinsmart.utils.DBCP;
 import com.lexinsmart.utils.DateUtils;
 import com.lexinsmart.utils.TypeChange;
 
+/**
+ * 人员黑名单表管理
+ * @author xushun
+ *
+ */
 public class PBlacklistDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
@@ -20,7 +25,10 @@ public class PBlacklistDao {
 	public PBlacklistDao(Connection connection) {
 		this.connection = connection;
 	}
-
+	/**
+	 * 添加人员黑名单
+	 * @param blacklistp
+	 */
 	public void addBlackList(BlacklistP blacklistp) {
 
 		String sql = "insert into blacklist_p "
@@ -45,7 +53,11 @@ public class PBlacklistDao {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * 根据身份证号码 获取ID
+	 * @param idcard
+	 * @return
+	 */
 	public int getId(String idcard){
 		int id =-1;
 		try {
@@ -63,6 +75,10 @@ public class PBlacklistDao {
 		}
 		return id;
 	}
+	/**
+	 * 根据ID 删除一列
+	 * @param id
+	 */
 	public void delete(int id){
 		try {
 			String sql ="delete from blacklist_p where id="+id;

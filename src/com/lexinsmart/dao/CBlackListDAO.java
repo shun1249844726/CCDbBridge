@@ -22,6 +22,10 @@ public class CBlackListDAO {
 		this.connection = connection;
 	}
 
+	/**
+	 * 添加车辆黑名单
+	 * @param blacklistC
+	 */
 	public void addCblack(BlacklistC blacklistC) {
 		try {
 			String sql = "insert into blacklist_c " + " (requestid,carno,state ) " + " values(?,?,?) ";
@@ -36,6 +40,11 @@ public class CBlackListDAO {
 		}
 	}
 
+	/**
+	 * 根据车牌号获取在数据库中的ID
+	 * @param carno
+	 * @return
+	 */
 	public int getid(String carno) {
 		int id = 0;
 		try {
@@ -52,6 +61,10 @@ public class CBlackListDAO {
 		}
 		return id;
 	}
+	/**
+	 * 根据ID删除一列数据
+	 * @param id
+	 */
 	public void delete(int id){
 		try {
 			String sql = "delete from blacklist_c where id="+id;

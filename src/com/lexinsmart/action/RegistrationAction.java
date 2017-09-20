@@ -7,6 +7,11 @@ import com.lexinsmart.model.OAFkjcsub;
 import com.lexinsmart.model.OARegistration;
 import com.lexinsmart.service.RegistrationService;
 
+/**
+ * 访客测试类
+ * @author xushun
+ *
+ */
 public class RegistrationAction {
 
 	public static void main(String[] args) {
@@ -183,8 +188,8 @@ public class RegistrationAction {
 	
 		try {
 			RegistrationService registrationService = new RegistrationService();
-			registrationService.setRegistration(registration);
-			registrationService.setFkjcsub(fkjcsub);
+			registrationService.setRegistration(registration);  //设置访客主表
+			registrationService.setFkjcsub(fkjcsub);//设置访客子表
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
