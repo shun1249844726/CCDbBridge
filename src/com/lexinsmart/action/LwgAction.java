@@ -60,7 +60,7 @@ public class LwgAction {
 		String p_age= null;//年龄
 		String p_location= null;//籍贯
 		String p_depart= "40285a905d72f4e3015dc07b9ac64381";//所属部门     
-		String p_telephone= null;//联系电话
+		String p_telephone= "123456789";//联系电话
 		String p_homelocation= null;//家庭住址
 		String p_relatives= null;//亲属名字
 		String p_relativeship= null;//亲属关系
@@ -72,7 +72,7 @@ public class LwgAction {
 		String p_iden= "6667775555876777772";//身份证号
 		String p_insurancetype= null;
 		String p_validity= null;
-		String p_remarks= null;//备注
+		String p_remarks= "remarks";//备注
 		String p_edate= null;
 		String p_ifjoin= null;//是否加入黑名单
 		String p_reasons= null;//加入黑名单原因

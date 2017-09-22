@@ -40,7 +40,7 @@ public class PBlacklistDao {
 			ptmt.setString(2, blacklistp.getName());
 			ptmt.setString(3, blacklistp.getMantype());
 			ptmt.setString(4, blacklistp.getCompany());
-			ptmt.setInt(5, blacklistp.getIsblack());
+			ptmt.setBoolean(5, blacklistp.getIsblack());
 			ptmt.setTimestamp(6, blacklistp.getBlackdate());
 			ptmt.setString(7, blacklistp.getReason());
 			ptmt.setTimestamp(8, blacklistp.getPlleavedate());
@@ -83,6 +83,33 @@ public class PBlacklistDao {
 		try {
 			String sql ="delete from blacklist_p where id="+id;
 			ptmt=connection.prepareStatement(sql);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void edit(BlacklistP blacklistP){
+		String sql ="update blacklist_p set "+
+				"  name=?, "+
+				"   mantype=?, "+
+				"   company=?, "+
+				"   isblack=?, "+
+				"   reason=?, "+
+				"   plemployno=?, "+
+				"   pldepartment=? "+
+				" where idcard=?";
+		try {
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, blacklistP.getName());
+			ptmt.setString(2, blacklistP.getMantype());
+			ptmt.setString(3, blacklistP.getCompany());
+			ptmt.setBoolean(4, blacklistP.getIsblack());
+			ptmt.setString(5, blacklistP.getReason());
+			ptmt.setString(6, blacklistP.getPlemployno());
+			ptmt.setString(7, blacklistP.getPldepartment());
+			ptmt.setString(8, blacklistP.getIdcard());
+			
 			ptmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

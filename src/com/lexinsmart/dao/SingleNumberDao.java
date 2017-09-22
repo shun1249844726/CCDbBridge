@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import com.lexinsmart.model.Singlenumber;
 import com.lexinsmart.utils.DBCP;
@@ -71,14 +72,22 @@ public class SingleNumberDao {
 		}
 		return isExist;
 	}
-	
-	public void deleteStaff(String requestid) {
+	public void edit(Singlenumber singlenumber){
 		try {
-			String sql = "delete from single_number where requestid="+requestid;
-			ptmt = connection.prepareStatement(sql);
+			String sql = "update single_number set carno=?,carheight=?,ttype=?,handplanno=?,singleno=?,"+
+					"depart=?,requestid=? where singleno=?";
+			ptmt=connection.prepareStatement(sql);
+			ptmt.setString(1,singlenumber.getCarno());
+			ptmt.setFloat(2, singlenumber.getCarheight());
+			ptmt.setString(3, singlenumber.getTtype());
+			ptmt.setString(4,singlenumber.getHandplanno());
+			ptmt.setString(5,singlenumber.getSingleno());
+			ptmt.setString(6,singlenumber.getDepart());
+			ptmt.setString(7, singlenumber.getRequestid());
+			ptmt.setString(8, singlenumber.getSingleno());
 			ptmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

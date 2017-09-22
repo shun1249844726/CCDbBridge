@@ -22,16 +22,15 @@ import com.lexinsmart.utils.TypeChange;
 public class InoutFreightAction {
 	public static void main(String[] args) {
 		Inoutfreight inoutfreight = new Inoutfreight();
-		String id = "2";
 		String requestid = "1031";
 		String nodeid = null;
 		String rowindex = null;
 		String handplanno = "ZT201604004227";// 装卸计划号
-		String depotname = "LBE原料非保税库";// 主仓库名称
+		String depotname = "LBE原料非保税库12";// 主仓库名称
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
 		String singleno = "1020T000063115,1020T000063113,1020T000063114";// 提入单号
-		String carno = "苏JJ5895";// 车牌号码
+		String carno = "苏JJ58959";// 车牌号码
 		String idcard1 = "320923197912034511";// 证件号(一)
 		String idcard2 = null;// 证件号(二)
 		String idcard3 = null;// 证件号(三)
@@ -40,14 +39,14 @@ public class InoutFreightAction {
 		String outregistime = null;//
 		String registerman = null;//
 		String modifyman = null;//
-		String company = null;//
+		String company = "货运司机公司1";//公司
 		String comtype = null;//
 		String licensenum = "320924198111130870";// 证件号(司机)
 		String createtime = null;//
 		String parmcarno = null;//
 		String parmno = null;//
 		String driver = "史明聪";// 司机
-		String attendant1 = "周立通";// 随车人员(一)
+		String attendant1 = "周立通1";// 随车人员(一)
 		String attendant2 = null;//
 		String attendant3 = null;//
 		String attendant4 = null;//
@@ -62,7 +61,7 @@ public class InoutFreightAction {
 		String sinstate = null;//
 		String xzdw = "40285a8d57fea8b501581e8cc344545f";// 限载吨位
 		String bloodvalue = null;//
-		String carheight = null;// 车货高度
+		String carheight = "2.3";// 车货高度
 		String alcoholtest = null;//
 		Integer bloodvalue1 = null;//
 		Integer bloodvalue2 = null;//
@@ -87,7 +86,7 @@ public class InoutFreightAction {
 		String birthplace2 = null;//
 		String birthplace3 = null;//
 		String birthplace4 = null;//
-		String hygs = null;// 所属公司(司机)
+		String hygs = "司机公司";// 所属公司(司机)
 		String hygs1 = null;//
 		String hygs2 = null;//
 		String hygs3 = null;//
@@ -123,7 +122,6 @@ public class InoutFreightAction {
 		String outtime = null;// 车辆实际出厂时间
 		String cartype = "402864d1491d17c001491d2b922c0013";// 车辆类型 必填
 		String carcate = null;// 车型归类
-		inoutfreight.setId(id);
 		inoutfreight.setRequestid(requestid);
 		inoutfreight.setNodeid(nodeid);
 		inoutfreight.setRowindex(rowindex);
@@ -230,64 +228,12 @@ public class InoutFreightAction {
 		try {
 			 inoutfreightService.setInoutfreight();//添加
 
-	//		inoutfreightService.editInoutfreight();//编辑
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		// //测试数据；
-		// inoutfreight.set
-		//
-		// inoutfreightService.setInoutfreight(inoutfreight);
 
-		// //测试插入公司
-		// Company company = new Company();
-		// company.setId(50);
-		// company.setRequestid("");
-		// company.setCompany("4028804d2083a7ed012083ebb988005b");
-		// CompanyDao companyDao = new CompanyDao();
-		// companyDao.addCompany(company);
-
-		// //测试插入个体
-		// Staff staff = new Staff();
-		// staff.setRequestid("ddd");
-		// staff.setName("张三");
-		// staff.setSex("man");
-		// staff.setAge(30);
-		// staff.setLocation("location*****");
-		// staff.setHomeaddr("homeaddress*****");
-		// staff.setTelephone("12345678123");
-		// staff.setCompany("4028804d2083a7ed012083ebb988005b");
-		// staff.setRemarks("remarks");
-		// staff.setRelative("李四");
-		// staff.setRelationship("fuzi");
-		// staff.setTelephone2("11011011011");
-		// staff.setIden("666777188298976596");
-		//
-		// StaffDao staffDao = new StaffDao();
-		// staffDao.addStaff(staff);
-
-		// 测试在厂时间
-		// Plantime plantime = new Plantime();
-		// plantime.setCid(TypeChange.stringToInt(inoutfreight.getId()));
-		// plantime.setChanger(inoutfreight.getDriver());
-		// plantime.setTelephone(inoutfreight.getPhone());
-		//
-		// PlantimeDao plantimeDao = new PlantimeDao();
-		// plantimeDao.addPlanTime(plantime);
-
-		// 测试提入单号表
-		// Singlenumber singlenumber = new Singlenumber();
-		// singlenumber.setCid(123);
-		// singlenumber.setCarno("苏F1234");
-		// singlenumber.setXzdw(30.5f);
-		// singlenumber.setCarheight(2.5f);
-		// singlenumber.setHandplanno("ZT201708001454");
-		// singlenumber.setSingleno("1010W000245789");
-		//
-		// SingleNumberDao singleNumberDao = new SingleNumberDao();
-		// singleNumberDao.addSingleNumber(singlenumber);
 
 	}
 }

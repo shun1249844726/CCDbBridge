@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Map;
 
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.utils.DBCP;
@@ -49,7 +50,6 @@ public class StaffDao {
 
 			ptmt.execute();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			// dbcp.closeStatement(ptmt);
@@ -74,7 +74,6 @@ public class StaffDao {
 				isExist = false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			// dbcp.closeStatement(ptmt, rs);
@@ -89,7 +88,6 @@ public class StaffDao {
 			ptmt = connection.prepareStatement(sql);
 			ptmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -106,13 +104,52 @@ public class StaffDao {
 				id = resultSet.getInt("id");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 //			dbcp.closeStatement(ptmt, resultSet);
 //			dbcp.releaseConnection(connection);
 		}
-
 		return id;
+	}
+	public void edit(Staff staff){
+		try {
+			String sql = "update staff set "+
+					"name=?,"+
+					"sex=?,"+
+					"age=?,"+
+					"location=?,"+
+					"homeaddr=?,"+
+					"telephone=?,"+
+					"company=?,"+
+					"remarks=?,"+
+					"relative=?,"+
+					"relationship=?,"+
+					"telephone2=?,"+
+					"iden=?,"+
+					"privilege=?,"+
+					"requestid=?"+
+					"where iden =?";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1,staff.getName());
+			ptmt.setString(2,staff.getSex());
+			ptmt.setInt(3,staff.getAge());
+			ptmt.setString(4,staff.getLocation());
+			ptmt.setString(5,staff.getHomeaddr());
+			ptmt.setString(6,staff.getTelephone());
+			ptmt.setString(7,staff.getCompany());
+			ptmt.setString(8,staff.getRemarks());
+			ptmt.setString(9,staff.getRelative());
+			ptmt.setString(10,staff.getRelationship());
+			ptmt.setString(11,staff.getTelephone2());
+			ptmt.setString(12,staff.getIden());
+			ptmt.setBoolean(13,staff.isPrivilege());
+			ptmt.setString(14,staff.getRequestid());
+			ptmt.setString(15,staff.getIden());
+			
+			ptmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

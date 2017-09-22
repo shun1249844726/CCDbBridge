@@ -3,7 +3,9 @@ package com.lexinsmart.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.lexinsmart.dao.CompanyDao;
 import com.lexinsmart.dao.CompanyPrivilegeDao;
@@ -39,7 +41,6 @@ public class LwgStructionService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class LwgStructionService {
 			// 1.添加劳务工单位
 
 			CompanyDao companyDao = new CompanyDao(connection);
-			if (!companyDao.checkIsExist(lwgstruction.getContractorn())) {
+			if (!companyDao.checkIsExist(lwgstruction.getContractorn())) {  //
 				Company company = new Company();
 				company.setRequestid(lwgstruction.getRequestid());
 				company.setCompany(lwgstruction.getContractorn());
@@ -61,10 +62,9 @@ public class LwgStructionService {
 				companyDao.addCompany(company);
 				System.out.println("add company");
 			}
-
+			
+			
 			int cid = companyDao.getId(lwgstruction.getContractorn());// 查询单位外键的表ID
-
-
 			// 3 添加单位权限
 			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(0, false);
@@ -73,12 +73,10 @@ public class LwgStructionService {
 			companyprivilege.setCid(cid);
 
 			CompanyPrivilegeDao companyPrivilegeDao = new CompanyPrivilegeDao(connection);
-			Integer egid = 0;// TODO 查询ID
 
 			for (int i = 0; i < ids.size(); i++) {
-				egid = ids.get(i);
+				Integer egid = ids.get(i);
 				companyprivilege.setEgid(egid);
-
 				int privilegeid = companyPrivilegeDao.getIdIfExist(cid, egid);
 				if (privilegeid > 0) {
 					companyPrivilegeDao.delete(privilegeid);
@@ -134,6 +132,9 @@ public class LwgStructionService {
 			if (constructionp.getIden() != null && !staffDao.checkIsExist(constructionp.getIden())) {
 				staffDao.addStaff(staff);
 				System.out.println("add staff");
+			}else{
+				staffDao.edit(staff);
+				System.out.println("edit staff");
 			}
 			
 
@@ -143,10 +144,8 @@ public class LwgStructionService {
 			int id = staffDao.getid(constructionp.getIden());
 			plantime.setSid(id);
 			plantime.setTid(0);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-
 			plantime.setChanger(constructionp.getName());
 			plantime.setTelephone(constructionp.getTelephone());
-			
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
 			Timestamp outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
 			plantime.setPlanouttime(outtime);

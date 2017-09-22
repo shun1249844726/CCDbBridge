@@ -3,6 +3,7 @@ package com.lexinsmart.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.lexinsmart.model.BlacklistC;
 import com.lexinsmart.utils.DBCP;
@@ -75,4 +76,22 @@ public class CBlackListDAO {
 		}
 	}
 
+	public void edit(BlacklistC blacklistC){
+		try {
+			String sql = " update blacklist_c set "+
+					"  requestid=?,"+
+					"  state=? "+
+					" where carno=?";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, blacklistC.getRequestid());
+			ptmt.setString(2, blacklistC.getState());
+			ptmt.setString(3, blacklistC.getCarno());
+			
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

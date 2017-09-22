@@ -86,7 +86,6 @@ public class TruckDao {
 			while (resultSet.next()) {
 				id = resultSet.getInt("id");
 			}
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -94,17 +93,26 @@ public class TruckDao {
 //			dbcp.closeStatement(ptmt, resultSet);
 //			dbcp.releaseConnection(connection);
 		}
-
 		return id;
 	}
-	
-	public void deleteStaff(String requestid) {
+	public void edit(Truck truck){
 		try {
-			String sql = "delete from truck where requestid="+requestid;
+			String sql ="update truck set "+
+					"  requestid=?, "+
+					"  company=?, "+
+					"  ttype=?, "+
+					"  carno=?, "+
+					"  xzdw=? "+
+					"  where carno=?";
 			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, truck.getRequestid());
+			ptmt.setString(2, truck.getCompany());
+			ptmt.setString(3, truck.getTtype());
+			ptmt.setString(4, truck.getCarno());
+			ptmt.setFloat(5, truck.getXzdw());
+			ptmt.setString(6, truck.getCarno());
 			ptmt.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

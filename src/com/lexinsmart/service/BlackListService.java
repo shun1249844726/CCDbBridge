@@ -43,9 +43,9 @@ public class BlackListService {
 			blacklistP.setMantype(DropDownTools.stringToType(blacklist.getMantype()));
 			blacklistP.setCompany(blacklist.getCompany());
 			if (blacklist.getIsblack().equals("40288098276fc2120127704884290210")) {// 是
-				blacklistP.setIsblack(1);
+				blacklistP.setIsblack(true);
 			} else if (blacklist.getIsblack().equals("40288098276fc2120127704884290211")) {
-				blacklistP.setIsblack(0);
+				blacklistP.setIsblack(false);
 			}
 			blacklistP.setBlackdate(new Timestamp(DateUtils.StringToDate(blacklist.getBlackdate()).getTime()));
 			blacklistP.setReason(blacklist.getReason());
@@ -55,9 +55,8 @@ public class BlackListService {
 
 			int id = pBlacklistDao.getId(blacklist.getIdcard());
 			if (id > 0) {
-				pBlacklistDao.delete(id);
-				pBlacklistDao.addBlackList(blacklistP);
-				System.out.println("delete & add blacklistp");
+				pBlacklistDao.edit(blacklistP);
+				System.out.println("edit blacklistp");
 			} else {
 				pBlacklistDao.addBlackList(blacklistP);
 				System.out.println("add blacklistp");
@@ -97,9 +96,8 @@ public class BlackListService {
 
 			int id = cBlackListDAO.getid(vehicle.getAutono());
 			if (id > 0) {
-				cBlackListDAO.delete(id);
-				cBlackListDAO.addCblack(blacklistC);
-				System.out.println("delete & add blacklist_c");
+				cBlackListDAO.edit(blacklistC);
+				System.out.println("edit blacklist_c");
 			} else if (id == 0) {
 				cBlackListDAO.addCblack(blacklistC);
 				System.out.println("add blacklist_c");

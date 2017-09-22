@@ -55,7 +55,7 @@ public class CbsAction {
 		String p_rowindex = null;
 		String p_num = null;
 		String p_edate = null;
-		String p_name = "Ravindra_cbs_1";//姓名
+		String p_name = "cbs";//姓名
 		String p_iden = "ASWPP9874D1";//身份证号
 		String p_remarks = null;
 		String p_insurancetype = null;

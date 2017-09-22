@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.lexinsmart.dao.CompanyDao;
 import com.lexinsmart.dao.EntranceGuardDao;
@@ -49,8 +51,10 @@ public class InoutfreightService {
 
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
+
 	/**
 	 * 货运司机 主表
+	 * 
 	 * @param inoutfreight
 	 */
 	public InoutfreightService(Inoutfreight inoutfreight) {
@@ -136,7 +140,7 @@ public class InoutfreightService {
 		// plantime.setRequesid(inoutfreight.getRequestid());
 
 		truck.setRequestid(inoutfreight.getRequestid());
-		truck.setCompany(inoutfreight.getHygs());
+		truck.setCompany(inoutfreight.getCompany());
 		truck.setTtype(inoutfreight.getCartype()); // 查询车型
 		truck.setCarno(inoutfreight.getCarno());
 		float xzdw = DropDownTools.stringToTon(inoutfreight.getXzdw());
@@ -173,53 +177,76 @@ public class InoutfreightService {
 			int singlenonum = singlenos.length;// 提入单号中包含的提入单号数量
 
 			for (int i = 0; i < singlenonum; i++) {
+				singlenumber.setCarno(inoutfreight.getCarno());
+				singlenumber.setCarheight(TypeChange.stringToFloat(inoutfreight.getCarheight()));
+				singlenumber.setTtype(inoutfreight.getCartype());// 车型
+																	// cartype
+				singlenumber.setHandplanno(inoutfreight.getHandplanno());
+				singlenumber.setSingleno(singlenos[i]);// 提入单号 拆分。
+				singlenumber.setDepart(inoutfreight.getDepotname());// 装卸地点
+																	// =
+																	// depotname
+				singlenumber.setRequestid(inoutfreight.getRequestid());
 				if (!singleNumberDao.checkIsExist(singlenos[i])) {// 提入单号是否重复
-					singlenumber.setCarno(inoutfreight.getCarno());
-					singlenumber.setCarheight(TypeChange.stringToFloat(inoutfreight.getCarheight()));
-					singlenumber.setTtype(inoutfreight.getCartype());// 车型
-																		// cartype
-					singlenumber.setHandplanno(inoutfreight.getHandplanno());
-					singlenumber.setSingleno(singlenos[i]);// 提入单号 拆分。
-					singlenumber.setDepart(inoutfreight.getDepotname());// 装卸地点
-																		// =
-																		// depotname
-					singlenumber.setRequestid(inoutfreight.getRequestid());
 					singleNumberDao.addSingleNumber(singlenumber);
 					System.out.println("insert singlenumber！");
+				} else {
+					singleNumberDao.edit(singlenumber);
+					System.out.println("edit single_number");
 				}
 			}
 
 			// 2插入司机
 			StaffDao staffDao = new StaffDao(connection);
-			if (inoutfreight.getLicensenum() != null && !staffDao.checkIsExist(inoutfreight.getLicensenum())) {
-				staffDao.addStaff(staff);
-				System.out.println("insert staff！");
-
+			if (inoutfreight.getLicensenum() != null) {
+				if (!staffDao.checkIsExist(inoutfreight.getLicensenum())) {
+					staffDao.addStaff(staff);
+					System.out.println("insert staff！");
+				} else {
+					staffDao.edit(staff);
+					System.out.println("edit driver");
+				}
 			}
 
 			// 3插入随车人1
-			if (inoutfreight.getIdcard1() != null && !staffDao.checkIsExist(inoutfreight.getIdcard1())) {
-				staffDao.addStaff(staff1);
-				System.out.println("insert staff1！");
-
+			if (inoutfreight.getIdcard1() != null  ) {
+				if (!staffDao.checkIsExist(inoutfreight.getIdcard1())) {
+					staffDao.addStaff(staff1);
+					System.out.println("insert staff1！");
+				}else {
+					staffDao.edit(staff1);
+					System.out.println("edit staff 1");
+				}
 			}
 			// 4插入随车人2
-			if (inoutfreight.getIdcard2() != null && !staffDao.checkIsExist(inoutfreight.getIdcard2())) {
-				staffDao.addStaff(staff2);
-				System.out.println("insert staff2！");
-
+			if (inoutfreight.getIdcard2() != null  ) {
+				if (!staffDao.checkIsExist(inoutfreight.getIdcard2())) {
+					staffDao.addStaff(staff2);
+					System.out.println("insert staff2！");
+				}else {
+					staffDao.edit(staff2);
+					System.out.println("edit staff 2");
+				}
 			}
 			// 5插入随车人3
-			if (inoutfreight.getIdcard3() != null && !staffDao.checkIsExist(inoutfreight.getIdcard3())) {
-				staffDao.addStaff(staff3);
-				System.out.println("insert staff3！");
-
+			if (inoutfreight.getIdcard3() != null  ) {
+				if (!staffDao.checkIsExist(inoutfreight.getIdcard3())) {
+					staffDao.addStaff(staff3);
+					System.out.println("insert staff 3！");
+				}else {
+					staffDao.edit(staff3);
+					System.out.println("edit staff 3");
+				}
 			}
 			// 6插入随车人4
-			if (inoutfreight.getIdcard4() != null && !staffDao.checkIsExist(inoutfreight.getIdcard4())) {
-				staffDao.addStaff(staff4);
-				System.out.println("insert staff4！");
-
+			if (inoutfreight.getIdcard4() != null  ) {
+				if (!staffDao.checkIsExist(inoutfreight.getIdcard4())) {
+					staffDao.addStaff(staff4 );
+					System.out.println("insert staff 4！");
+				}else {
+					staffDao.edit(staff4);
+					System.out.println("edit staff 4");
+				}
 			}
 
 			// 7.插入车辆表
@@ -227,6 +254,9 @@ public class InoutfreightService {
 			if (!truckDao.checkIsExist(inoutfreight.getCarno())) {
 				System.out.println("insert truck！");
 				truckDao.addTruck(truck);
+			} else {
+				System.out.println("edit truck！");
+				truckDao.edit(truck);
 			}
 
 			int carid = truckDao.getId(inoutfreight.getCarno());// 车辆ID
@@ -276,11 +306,12 @@ public class InoutfreightService {
 			if (!companyDao.checkIsExist(company.getCompany())) {
 				companyDao.addCompany(company);
 				System.out.println("add company");
-			} else {
-				companyDao.delete(companyDao.getId(company.getCompany()));
-				companyDao.addCompany(company);
-				System.out.println("delete & add company");
 			}
+			// else {
+			// companyDao.delete(companyDao.getId(company.getCompany()));
+			// companyDao.addCompany(company);
+			// System.out.println("delete & add company");
+			// }
 
 			connection.commit();
 			System.out.println("commit！");

@@ -1,7 +1,6 @@
 package com.lexinsmart.model;
 
 public class Inoutfreight {
-	private String id;
 	private String requestid;
 	private String nodeid;
 	private String rowindex;
@@ -102,12 +101,7 @@ public class Inoutfreight {
 	private String outtime;
 	private String cartype;//车辆类型
 	private String carcate;//车型归类
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public String getRequestid() {
 		return requestid;
 	}

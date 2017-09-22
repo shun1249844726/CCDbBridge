@@ -7,7 +7,7 @@ public class BlacklistP {
 	private String name;
 	private String mantype;
 	private String company;
-	private Integer isblack;
+	private Boolean isblack;
 	private Timestamp blackdate;
 	private String reason;
 	private Timestamp plleavedate;
@@ -37,10 +37,10 @@ public class BlacklistP {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public Integer getIsblack() {
+	public Boolean getIsblack() {
 		return isblack;
 	}
-	public void setIsblack(Integer isblack) {
+	public void setIsblack(Boolean isblack) {
 		this.isblack = isblack;
 	}
 	public Timestamp getBlackdate() {

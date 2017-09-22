@@ -35,7 +35,6 @@ public class DateUtils {
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
         try {  
             date = sdf.parse(dateStr);  
-            System.out.println(date.toString());  
         } catch (Exception e) {  
             e.printStackTrace();  
         }

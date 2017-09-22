@@ -130,9 +130,8 @@ public class ConstractortermService {
 
 			int id = staffDao.getid(constructionp.getIden());
 			if (id > 0) {
-				staffDao.deleteStaffbyid(id);
-				staffDao.addStaff(staff);
-				System.out.println("delete  & add staff！");
+				staffDao.edit(staff);
+				System.out.println("edit staff！");
 			} else {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");

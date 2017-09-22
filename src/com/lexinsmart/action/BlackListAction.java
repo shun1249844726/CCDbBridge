@@ -15,7 +15,7 @@ public class BlackListAction {
 		String company = "EXIN";
 		String isblack = "40288098276fc2120127704884290210";
 		String blackdate = "2017-6-7";
-		String reason = "不开心";
+		String reason = "盗窃财物";
 		String plleavedate = "2018-8-17";
 		String plemployno = "12121212";
 		String pldepartment = "dep";
