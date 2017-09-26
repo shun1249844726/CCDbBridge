@@ -30,7 +30,7 @@ public class DBCP {
 
 	protected static final Log log = LogFactory.getLog(DBCP.class.getName());
 	private static DBCP _instance = null;
-//	private static DataSource ds;
+	private static DataSource ds;
 	private static DataSource dataSource;
 
 	public static DBCP getInstance() {
@@ -39,7 +39,7 @@ public class DBCP {
 		}
 		return _instance;
 	}
-
+//
 //	// 在静态代码块中进行配置文件与程序的关联
 //	static {
 //		Properties prop = new Properties();
@@ -54,9 +54,10 @@ public class DBCP {
 //			e1.printStackTrace();
 //		}
 //		try {
+//			long time1 = System.currentTimeMillis();
 //			prop.load(in);
 //			ds = BasicDataSourceFactory.createDataSource(prop);
-//
+//			System.out.println("t1:  "+ (System.currentTimeMillis() -time1));
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		} catch (Exception e) {
@@ -79,6 +80,7 @@ public class DBCP {
 				dbcpDataSource.setMaxWait(Integer.parseInt(config.getProperty("maxActive")));
 				DBCP.dataSource = (DataSource) dbcpDataSource;
 				System.out.println("dbcp数据源初始化成功!");
+
 			} catch (Exception ex) {
 				System.out.println("dbcp数据源初始化失败:" + ex.getMessage());
 			}
@@ -102,12 +104,11 @@ public class DBCP {
 	 * @return
 	 */
 
-//	public Connection getConnection_2() {
+//	public static Connection getConnection_2() {
 //		Connection conn = null;
 //		if (ds != null) {
 //			try {
 //				conn = ds.getConnection();
-//
 //			} catch (Exception e) {
 //				log.info("getConnection fail:", e);
 //				e.printStackTrace();
