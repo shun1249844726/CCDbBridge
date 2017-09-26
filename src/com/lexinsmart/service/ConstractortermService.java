@@ -124,7 +124,8 @@ public class ConstractortermService {
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
 			staff.setIden(constructionp.getIden());
-			staff.setPrivilege(true);
+			staff.setPrivilege(false);
+			staff.setCtype(3);//承包商人员类型 3
 
 			StaffDao staffDao = new StaffDao(connection);
 

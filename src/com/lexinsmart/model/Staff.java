@@ -23,8 +23,15 @@ public class Staff {
 	private boolean privilege;
 	private Timestamp intime;
 	private Timestamp outtimt;
+	private Integer ctype;
 	
 	
+	public Integer getCtype() {
+		return ctype;
+	}
+	public void setCtype(Integer ctype) {
+		this.ctype = ctype;
+	}
 	public Timestamp getIntime() {
 		return intime;
 	}

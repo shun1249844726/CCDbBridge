@@ -15,10 +15,10 @@ import com.lexinsmart.service.RegistrationService;
 public class RegistrationAction {
 
 	public static void main(String[] args) {
-		 String requestid ="301";
+		 String requestid ="2001";
 		 String nodeid =null;
 		 String rowindex =null;
-		 String guestname ="朱总";//访客名称
+		 String guestname ="朱1渊";//访客名称
 		 String guestnumber =null;
 		 String specificlocation =null;
 		 String scene =null;
@@ -31,9 +31,9 @@ public class RegistrationAction {
 		 String reqdept =null;
 		 String comtype =null;
 		 String fktype =null;
-		 String visitingdate = "2017-09-19";//预计来访时期   yyyy-mm-dd
+		 String visitingdate = "2017-09-22";//预计来访时期   yyyy-mm-dd
 		 String visitingtime ="11:40:23";//预计来访时间     hh:mm:ss
-		 String leavedate ="2017-09-20";//预计出厂时间
+		 String leavedate ="2017-09-24";//预计出厂时间
 		 String leavetime ="14:20:49";
 		 String visitobject =null;
 		 String things =null;
@@ -140,14 +140,14 @@ public class RegistrationAction {
 		 registration.setFkdwty(fkdwty);
 		 registration.setLfunit2(lfunit2);
 
-		String p_requestid = "301";
+		String p_requestid = "2001";
 		String p_nodeid = null;
 		String p_rowindex = null;
 		String p_sno = null;
-		String p_fkname = "李四";//访客名字
+		String p_fkname = "徐顺";//访客名字
 		String p_sfnum = null;
 		String p_fknum = null;
-		String p_qtnum = "535353535353535";//访客证件号码
+		String p_qtnum = "411328199309155010";//访客证件号码
 		String p_byear = null;
 		String p_gender = "40285a8d4d459849014d45cbfcd60194";//性别
 		String p_edate = null;

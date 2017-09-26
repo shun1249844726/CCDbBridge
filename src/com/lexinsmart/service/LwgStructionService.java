@@ -126,7 +126,9 @@ public class LwgStructionService {
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
 			staff.setIden(constructionp.getIden());
-			staff.setPrivilege(true);
+			staff.setPrivilege(false);
+			staff.setCtype(1);
+
 
 			StaffDao staffDao = new StaffDao(connection);
 			if (constructionp.getIden() != null && !staffDao.checkIsExist(constructionp.getIden())) {

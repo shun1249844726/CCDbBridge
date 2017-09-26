@@ -74,6 +74,7 @@ public class InoutfreightService {
 		staff.setRelationship(inoutfreight.getRelationship());
 		staff.setTelephone2(inoutfreight.getRelativetel());
 		staff.setIden(inoutfreight.getLicensenum());
+		staff.setCtype(4);
 
 		staff1.setRequestid(inoutfreight.getRequestid());
 		staff1.setName(inoutfreight.getAttendant1());
@@ -88,6 +89,8 @@ public class InoutfreightService {
 		staff1.setRelationship(inoutfreight.getRelationship1());
 		staff1.setTelephone2(inoutfreight.getRelativetel1());
 		staff1.setIden(inoutfreight.getIdcard1());
+		staff1.setCtype(4);
+
 
 		staff2.setRequestid(inoutfreight.getRequestid());
 		staff2.setName(inoutfreight.getAttendant2());
@@ -102,6 +105,8 @@ public class InoutfreightService {
 		staff2.setRelationship(inoutfreight.getRelationship2());
 		staff2.setTelephone2(inoutfreight.getRelativetel2());
 		staff2.setIden(inoutfreight.getIdcard2());
+		staff2.setCtype(4);
+
 
 		staff3.setRequestid(inoutfreight.getRequestid());
 		staff3.setName(inoutfreight.getAttendant3());
@@ -116,6 +121,8 @@ public class InoutfreightService {
 		staff3.setRelationship(inoutfreight.getRelationship3());
 		staff3.setTelephone2(inoutfreight.getRelativetel3());
 		staff3.setIden(inoutfreight.getIdcard3());
+		staff3.setCtype(4);
+
 
 		staff3.setRequestid(inoutfreight.getRequestid());
 		staff4.setName(inoutfreight.getAttendant4());
@@ -130,6 +137,8 @@ public class InoutfreightService {
 		staff4.setRelationship(inoutfreight.getRelationship4());
 		staff4.setTelephone2(inoutfreight.getRelativetel4());
 		staff4.setIden(inoutfreight.getIdcard4());
+		staff4.setCtype(4);
+
 		// plantime.setCid(0);//
 		// plantime.setSid(0);//
 		// plantime.setTid(1);// 货运 用车辆外键 限制
@@ -259,20 +268,20 @@ public class InoutfreightService {
 				truckDao.edit(truck);
 			}
 
-			int carid = truckDao.getId(inoutfreight.getCarno());// 车辆ID
-			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
-			List<Integer> ids = entranceGuardDao.getId(1);
-			for (int i = 0; i < ids.size(); i++) {
-				// 8.插入车辆权限表
-				truckPrivilege.setEgid(ids.get(i));// 查询门禁表id
-				truckPrivilege.setTid(carid); // 查询车辆表ID
-				TruckPrivilegeDao truckPrivilegeDao = new TruckPrivilegeDao(connection);
-
-				if (!truckPrivilegeDao.checkIsExist(ids.get(i), carid)) {
-					truckPrivilegeDao.addTruckPrivilege(truckPrivilege);
-					System.out.println("insert truckPrivilege！");
-				}
-			}
+//			int carid = truckDao.getId(inoutfreight.getCarno());// 车辆ID
+//			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
+//			List<Integer> ids = entranceGuardDao.getId(1);
+//			for (int i = 0; i < ids.size(); i++) {
+//				// 8.插入车辆权限表
+//				truckPrivilege.setEgid(ids.get(i));// 查询门禁表id
+//				truckPrivilege.setTid(carid); // 查询车辆表ID
+//				TruckPrivilegeDao truckPrivilegeDao = new TruckPrivilegeDao(connection);
+//
+//				if (!truckPrivilegeDao.checkIsExist(ids.get(i), carid)) {
+//					truckPrivilegeDao.addTruckPrivilege(truckPrivilege);
+//					System.out.println("insert truckPrivilege！");
+//				}
+//			}
 
 			// // 9.插入在厂时间
 			// PlantimeDao plantimeDao = new PlantimeDao(connection);

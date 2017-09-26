@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lexinsmart.model.Companyprivilege;
+import com.lexinsmart.model.Singlenumber;
 import com.lexinsmart.utils.DBCP;
 
 /**
@@ -85,4 +86,5 @@ public class CompanyPrivilegeDao {
 			e.printStackTrace();
 		}
 	}
+
 }

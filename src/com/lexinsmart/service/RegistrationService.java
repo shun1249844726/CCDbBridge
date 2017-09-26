@@ -76,15 +76,15 @@ public class RegistrationService {
 			plantime.setPlanouttime(DateUtils.StringToTimestamp(outtime));
 			PlantimeDao plantimeDao = new PlantimeDao(connection);
 
-			int id = plantimeDao.getIdIfExist(cid, 0, 0);
-			if (id > 0) {
-				plantimeDao.deleteplantime(id);
-				plantimeDao.addPlanTime(plantime);
-				System.out.println("delete & add plantime");
-			} else if (id == 0) {
+//			int id = plantimeDao.getIdIfExist(cid, 0, 0);
+//			if (id > 0) {
+//				plantimeDao.deleteplantime(id);
+//				plantimeDao.addPlanTime(plantime);
+//				System.out.println("delete & add plantime");
+//			} else if (id == 0) {
 				plantimeDao.addPlanTime(plantime);
 				System.out.println("add plantime");
-			}
+//			}
 
 			// 3 添加单位权限
 			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
@@ -149,14 +149,14 @@ public class RegistrationService {
 			staff.setTelephone2(oaFkjcsub.getRelativetel());
 			staff.setIden(oaFkjcsub.getQtnum());
 			staff.setPrivilege(false);
+			staff.setCtype(2);
 
 			StaffDao staffDao = new StaffDao(connection);
 
 			int id = staffDao.getid(oaFkjcsub.getQtnum());
 			if (id > 0) {
-				staffDao.deleteStaffbyid(id);
-				staffDao.addStaff(staff);
-				System.out.println("delete  & add staff！");
+				staffDao.edit(staff);
+				System.out.println("edit staff！");
 			} else {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");

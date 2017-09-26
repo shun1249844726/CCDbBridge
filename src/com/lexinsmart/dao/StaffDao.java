@@ -29,8 +29,8 @@ public class StaffDao {
 
 			// conn = (Connection) dbcp.getConnection();
 			String sql = " insert into staff "
-					+ " (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege) "
-					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+					+ " (requestid,name,sex,age,location,homeaddr,telephone,company,remarks,relative,relationship,telephone2,iden,created,privilege,ctype) "
+					+ " values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 			ptmt = (PreparedStatement) connection.prepareStatement(sql);
 			ptmt.setString(1, staff.getRequestid());
 			ptmt.setString(2, staff.getName());
@@ -47,6 +47,7 @@ public class StaffDao {
 			ptmt.setString(13, staff.getIden());
 			ptmt.setTimestamp(14, new Timestamp(System.currentTimeMillis()));
 			ptmt.setBoolean(15,staff.isPrivilege());
+			ptmt.setInt(16, staff.getCtype());
 
 			ptmt.execute();
 		} catch (SQLException e) {
@@ -127,8 +128,9 @@ public class StaffDao {
 					"telephone2=?,"+
 					"iden=?,"+
 					"privilege=?,"+
-					"requestid=?"+
-					"where iden =?";
+					"requestid=?,"+
+					"ctype=?"+
+					" where iden =?";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1,staff.getName());
 			ptmt.setString(2,staff.getSex());
@@ -144,7 +146,8 @@ public class StaffDao {
 			ptmt.setString(12,staff.getIden());
 			ptmt.setBoolean(13,staff.isPrivilege());
 			ptmt.setString(14,staff.getRequestid());
-			ptmt.setString(15,staff.getIden());
+			ptmt.setInt(15, staff.getCtype());
+			ptmt.setString(16,staff.getIden());
 			
 			ptmt.executeUpdate();
 
