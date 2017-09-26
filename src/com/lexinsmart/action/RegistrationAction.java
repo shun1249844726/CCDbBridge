@@ -15,10 +15,10 @@ import com.lexinsmart.service.RegistrationService;
 public class RegistrationAction {
 
 	public static void main(String[] args) {
-		 String requestid ="2001";
+		 String requestid ="2011";
 		 String nodeid =null;
 		 String rowindex =null;
-		 String guestname ="朱1渊";//访客名称
+		 String guestname ="朱2渊";//访客名称
 		 String guestnumber =null;
 		 String specificlocation =null;
 		 String scene =null;
@@ -33,7 +33,7 @@ public class RegistrationAction {
 		 String fktype =null;
 		 String visitingdate = "2017-09-22";//预计来访时期   yyyy-mm-dd
 		 String visitingtime ="11:40:23";//预计来访时间     hh:mm:ss
-		 String leavedate ="2017-09-24";//预计出厂时间
+		 String leavedate ="2017-09-29";//预计出厂时间
 		 String leavetime ="14:20:49";
 		 String visitobject =null;
 		 String things =null;
@@ -50,7 +50,7 @@ public class RegistrationAction {
 		 String returndocuments =null;
 		 String lsnumber =null;
 		 String choosedoc =null;
-		 String lfunit ="lexinsmart";//来访单位。
+		 String lfunit ="glrsmart";//来访单位。
 		 String whylegacy =null;
 		 String guestscope =null;
 		 String bmid =null;
@@ -140,7 +140,7 @@ public class RegistrationAction {
 		 registration.setFkdwty(fkdwty);
 		 registration.setLfunit2(lfunit2);
 
-		String p_requestid = "2001";
+		String p_requestid = "2011";
 		String p_nodeid = null;
 		String p_rowindex = null;
 		String p_sno = null;
@@ -155,7 +155,7 @@ public class RegistrationAction {
 		String p_sex = null;
 		String p_age = null;
 		String p_birthplace = null;
-		String p_fkcom = "lexinsmart";//  所属公司是不是等同上面的公司
+		String p_fkcom = "glrsmart";//  所属公司是不是等同上面的公司
 		String p_homeaddr = null;
 		String p_telephone = null;
 		String p_relative = null;

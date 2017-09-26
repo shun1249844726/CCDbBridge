@@ -79,10 +79,10 @@ public class ConstractortermService {
 
 				int privilegeid = companyPrivilegeDao.getIdIfExist(cid, egid);
 				if (privilegeid > 0) {
-					companyPrivilegeDao.delete(privilegeid);
-					companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
+//					companyPrivilegeDao.delete(privilegeid);
+//					companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
 					// 循环，看多少个门禁ID了
-					System.out.println("delete & add  companyprivilege");
+//					System.out.println("exit ");
 				} else if (privilegeid == 0) {
 					companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
 					// 循环，看多少个门禁ID了
@@ -137,10 +137,12 @@ public class ConstractortermService {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");
 			}
-
+			
+		
 			// 2. 添加在厂时间。
 			Plantime plantime = new Plantime();
-			plantime.setCid(0);
+			plantime.setCid(companyDao.getId(constructionp.getDepart()));
+			id = staffDao.getid(constructionp.getIden());//重新查询ID
 			plantime.setSid(id);// TODO 使用个人外键控制；
 			plantime.setTid(0);
 

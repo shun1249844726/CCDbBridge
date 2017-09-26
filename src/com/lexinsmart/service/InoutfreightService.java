@@ -68,7 +68,7 @@ public class InoutfreightService {
 		staff.setLocation(inoutfreight.getBirthplace());
 		staff.setHomeaddr(inoutfreight.getHomeaddr());
 		staff.setTelephone(inoutfreight.getPhone());
-		staff.setCompany(inoutfreight.getCarno());// 公司写车牌
+		staff.setCompany("货运单位");// 公司写车牌
 		staff.setRemarks(inoutfreight.getHygs());// remarks 写所属公司
 		staff.setRelative(inoutfreight.getRelative());
 		staff.setRelationship(inoutfreight.getRelationship());
@@ -83,7 +83,7 @@ public class InoutfreightService {
 		staff1.setLocation(inoutfreight.getBirthplace1());
 		staff1.setHomeaddr(inoutfreight.getHomeaddr1());
 		staff1.setTelephone(inoutfreight.getPhone1());
-		staff1.setCompany(inoutfreight.getCarno());// 公司写车牌
+		staff1.setCompany("货运单位");// 公司写车牌
 		staff1.setRemarks(inoutfreight.getHygs1());// remarks 写所属公司
 		staff1.setRelative(inoutfreight.getRelative1());
 		staff1.setRelationship(inoutfreight.getRelationship1());
@@ -99,7 +99,7 @@ public class InoutfreightService {
 		staff2.setLocation(inoutfreight.getBirthplace2());
 		staff2.setHomeaddr(inoutfreight.getHomeaddr2());
 		staff2.setTelephone(inoutfreight.getPhone2());
-		staff2.setCompany(inoutfreight.getCarno());// 公司写车牌
+		staff2.setCompany("货运单位");// 公司写车牌
 		staff2.setRemarks(inoutfreight.getHygs2());// remarks 写所属公司
 		staff2.setRelative(inoutfreight.getRelative2());
 		staff2.setRelationship(inoutfreight.getRelationship2());
@@ -115,7 +115,7 @@ public class InoutfreightService {
 		staff3.setLocation(inoutfreight.getBirthplace3());
 		staff3.setHomeaddr(inoutfreight.getHomeaddr3());
 		staff3.setTelephone(inoutfreight.getPhone3());
-		staff3.setCompany(inoutfreight.getCarno());// 公司写车牌
+		staff3.setCompany("货运单位");// 公司写车牌
 		staff3.setRemarks(inoutfreight.getHygs3());// remarks 写所属公司
 		staff3.setRelative(inoutfreight.getRelative3());
 		staff3.setRelationship(inoutfreight.getRelationship3());
@@ -131,7 +131,7 @@ public class InoutfreightService {
 		staff4.setLocation(inoutfreight.getBirthplace4());
 		staff4.setHomeaddr(inoutfreight.getHomeaddr4());
 		staff4.setTelephone(inoutfreight.getPhone4());
-		staff4.setCompany(inoutfreight.getCarno());// 公司写车牌
+		staff4.setCompany("货运单位");// 公司写车牌
 		staff4.setRemarks(inoutfreight.getHygs4());// remarks 写所属公司
 		staff4.setRelative(inoutfreight.getRelative4());
 		staff4.setRelationship(inoutfreight.getRelationship4());
@@ -191,7 +191,7 @@ public class InoutfreightService {
 				singlenumber.setTtype(inoutfreight.getCartype());// 车型
 																	// cartype
 				singlenumber.setHandplanno(inoutfreight.getHandplanno());
-				singlenumber.setSingleno(singlenos[i]);// 提入单号 拆分。
+				singlenumber.setSingleno(singlenos[i].toLowerCase());// 提入单号 拆分。
 				singlenumber.setDepart(inoutfreight.getDepotname());// 装卸地点
 																	// =
 																	// depotname

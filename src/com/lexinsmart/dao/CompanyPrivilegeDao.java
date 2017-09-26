@@ -86,5 +86,9 @@ public class CompanyPrivilegeDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void edit(){
+		
+	}
 
 }

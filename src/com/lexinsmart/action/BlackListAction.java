@@ -9,10 +9,10 @@ public class BlackListAction {
 	public static void main(String[] args) {
 
 		// 人员黑名单。
-		String idcard = "66554433221";
+		String idcard = "411328199309155010";
 		String name = "黑1";
 		String mantype = "40285a8d55c3ffed0155e226f71356b1";
-		String company = "EXIN";
+		String company = "glrsmart";
 		String isblack = "40288098276fc2120127704884290210";
 		String blackdate = "2017-6-7";
 		String reason = "盗窃财物";
@@ -32,10 +32,10 @@ public class BlackListAction {
 		oa_blacklist_p.setPlemployno(plemployno);
 		oa_blacklist_p.setPldepartment(pldepartment);
 
-		String requestid = "411";
+		String requestid = "999";
 		String nodeid = null;
 		String rowindex = null;
-		String autono = "苏F12345";
+		String autono = "闽J19718";
 		String state = "402864d149df48ff0149df70dc7b0007";
 
 		OAVehicle vehicle = new OAVehicle();

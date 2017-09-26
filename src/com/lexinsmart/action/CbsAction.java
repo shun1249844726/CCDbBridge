@@ -14,12 +14,12 @@ import com.lexinsmart.service.ConstractortermService;
 public class CbsAction {
 
 	public static void main(String[] args) {
-		String requestid = "211";
+		String requestid = "222";
 		String nodeid = null;
 		String rowindex = null;
-		String charger ="bs1";//承包商负责人
+		String charger ="Cbs1";//承包商负责人
 		String request = null;
-		String contractorn = "承包商公司1";//承包商名称
+		String contractorn = "承包商公司2";//承包商名称
 		String traintime = null;
 		String requireman = null;
 		String insurance = null;
@@ -50,13 +50,13 @@ public class CbsAction {
 		contractortem.setEnclosure(enclosure);
 		contractortem.setFactory(factory);
 
-		String p_requestid = "211";
+		String p_requestid = "222";
 		String p_nodeid = null;
 		String p_rowindex = null;
 		String p_num = null;
 		String p_edate = null;
-		String p_name = "cbs";//姓名
-		String p_iden = "ASWPP9874D1";//身份证号
+		String p_name = "cbs2";//姓名
+		String p_iden = "411328199309155010";//身份证号
 		String p_remarks = null;
 		String p_insurancetype = null;
 		String p_validity = null;
@@ -64,7 +64,7 @@ public class CbsAction {
 		String p_ifjoin = null;
 		String p_age = null;//年龄
 		String p_location = null;//籍贯
-		String p_depart = "承包商公司1";//所属公司
+		String p_depart = "承包商公司2";//所属公司
 		String p_telephone = null;//联系电话
 		String p_homelocation = null;//家庭住址
 		String p_relatives = null;////亲属名字
