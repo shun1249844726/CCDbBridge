@@ -49,7 +49,7 @@ public class InoutfreightService {
 
 	Inoutfreight inoutfreight;// 货运人员
 
-	DBCP dbcp = DBCP.getInstance();
+//	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
 	/**
@@ -161,7 +161,7 @@ public class InoutfreightService {
 		company.setRemarks(inoutfreight.getHygs());// 所属公司；
 
 		try {
-			connection = dbcp.getConnection();// 事物管理，最后commit；
+			connection = DBCP.getConnection();// 事物管理，最后commit；
 			connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -331,7 +331,7 @@ public class InoutfreightService {
 			e.printStackTrace();
 			connection.rollback();
 		} finally {
-			dbcp.releaseConnection(connection);
+			DBCP.releaseConnection(connection);
 		}
 	}
 }

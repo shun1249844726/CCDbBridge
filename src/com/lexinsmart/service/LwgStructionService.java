@@ -30,12 +30,12 @@ import com.lexinsmart.utils.TypeChange;
  */
 public class LwgStructionService {
 
-	DBCP dbcp = DBCP.getInstance();
+//	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
 	public LwgStructionService() {
 		try {
-			connection = dbcp.getConnection();// 事物管理，最后commit；
+			connection = DBCP.getConnection();// 事物管理，最后commit；
 			connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -161,7 +161,7 @@ public class LwgStructionService {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			dbcp.releaseConnection(connection);
+			DBCP.releaseConnection(connection);
 		}
 	}
 

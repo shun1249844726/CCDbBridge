@@ -27,12 +27,12 @@ import com.lexinsmart.utils.TypeChange;
  *
  */
 public class RegistrationService {
-	DBCP dbcp = DBCP.getInstance();
+//	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 
 	public RegistrationService() {
 		try {
-			connection = dbcp.getConnection();
+			connection = DBCP.getConnection();
 			connection.setAutoCommit(false);
 		} catch (Exception e) {
 		}
@@ -168,7 +168,7 @@ public class RegistrationService {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			dbcp.releaseConnection(connection);
+			DBCP.releaseConnection(connection);
 		}
 	}
 }

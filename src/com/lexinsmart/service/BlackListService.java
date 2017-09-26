@@ -21,7 +21,7 @@ import com.lexinsmart.utils.DropDownTools;
  *
  */
 public class BlackListService {
-	DBCP dbcp = DBCP.getInstance();
+//	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
 	/**
@@ -32,7 +32,7 @@ public class BlackListService {
 
 		try {
 
-			connection = dbcp.getConnection();// 事物管理，最后commit；
+			connection = DBCP.getConnection();// 事物管理，最后commit；
 			connection.setAutoCommit(false);
 
 			PBlacklistDao pBlacklistDao = new PBlacklistDao(connection);
@@ -73,7 +73,7 @@ public class BlackListService {
 				e1.printStackTrace();
 			}
 		} finally {
-			dbcp.releaseConnection(connection);
+			DBCP.releaseConnection(connection);
 		}
 	}
 
@@ -83,7 +83,7 @@ public class BlackListService {
 	 */
 	public void addBlackListC(OAVehicle vehicle) {
 		try {
-			connection = dbcp.getConnection();// 事物管理，最后commit；
+			connection = DBCP.getConnection();// 事物管理，最后commit；
 			connection.setAutoCommit(false);
 
 			CBlackListDAO cBlackListDAO = new CBlackListDAO(connection);
@@ -115,7 +115,7 @@ public class BlackListService {
 			}
 			e.printStackTrace();
 		} finally {
-			dbcp.releaseConnection(connection);
+			DBCP.releaseConnection(connection);
 		}
 	}
 }
