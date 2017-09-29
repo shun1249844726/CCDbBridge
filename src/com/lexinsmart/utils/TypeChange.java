@@ -14,7 +14,7 @@ public class TypeChange {
 	// change the string type to the int type
 	public static int stringToInt(String intstr) {
 		
-		if (intstr==null) {
+		if (intstr==null || intstr.equals("")) {
 			return 0;
 		}
 		Integer integer;
@@ -31,7 +31,7 @@ public class TypeChange {
 
 	// change the string type to the float type
 	public static float stringToFloat(String floatstr) {
-		if (floatstr == null) {
+		if (floatstr == null || floatstr.equals("")) {
 			return 0.0f;
 		}
 		Float floatee;
