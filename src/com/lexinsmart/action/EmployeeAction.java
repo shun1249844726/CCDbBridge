@@ -16,7 +16,7 @@ public class EmployeeAction {
 		for (int i = 0; i < 1000; i++) {
 			EmployeeString employeestring = new EmployeeString();
 			
-			String name ="1name"+i;
+			String name ="name"+i;
 			String cardno =""+i;
 			String checkintime = "2017-09-01 07:27:57";
 			String checkouttime = "2017-09-03 07:27:57";
