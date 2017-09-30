@@ -50,7 +50,7 @@ public class RegistrationAction {
 		 String returndocuments =null;
 		 String lsnumber =null;
 		 String choosedoc =null;
-		 String lfunit ="glrsmart";//来访单位。
+		 String lfunit ="glrsmartt";//来访单位。
 		 String whylegacy =null;
 		 String guestscope =null;
 		 String bmid =null;
@@ -155,7 +155,7 @@ public class RegistrationAction {
 		String p_sex = null;
 		String p_age = null;
 		String p_birthplace = null;
-		String p_fkcom = "glrsmart";//  所属公司是不是等同上面的公司
+		String p_fkcom = "glrss";//  所属公司是不是等同上面的公司
 		String p_homeaddr = null;
 		String p_telephone = null;
 		String p_relative = null;

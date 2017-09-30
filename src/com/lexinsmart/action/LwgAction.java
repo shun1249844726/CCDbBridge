@@ -59,7 +59,7 @@ public class LwgAction {
 		String p_rowindex= null;
 		String p_age= null;//年龄
 		String p_location= null;//籍贯
-		String p_depart= "劳务工单位1";//所属部门     
+		String p_depart= "";//所属部门     
 		String p_telephone= "123456222";//联系电话
 		String p_homelocation= null;//家庭住址
 		String p_relatives= null;//亲属名字
@@ -69,7 +69,7 @@ public class LwgAction {
 		String p_indates= "2018-09-27";//入厂 有效期。。。。必填
 		String p_num= null;//序号
 		String p_name= "劳务工2";//姓名
-		String p_iden= "6667775555876777772";//身份证号
+		String p_iden= "6667775555876777772ddd";//身份证号
 		String p_insurancetype= null;
 		String p_validity= null;
 		String p_remarks= "remarks";//备注

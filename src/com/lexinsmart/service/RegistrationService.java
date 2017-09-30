@@ -27,6 +27,7 @@ import com.lexinsmart.utils.TypeChange;
  *
  */
 public class RegistrationService {
+	static  String lfunit = "";
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 
@@ -44,7 +45,7 @@ public class RegistrationService {
 	 * @param registration
 	 */
 	public void setRegistration(OARegistration registration) {
-
+		lfunit = registration.getLfunit();
 		try {
 			// 1. 添加单位表
 			CompanyDao companyDao = new CompanyDao(connection);
@@ -142,7 +143,7 @@ public class RegistrationService {
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
-			staff.setCompany(oaFkjcsub.getFkcom());//  所属公司，是不是同主表来访单位。
+			staff.setCompany(lfunit);//  所属公司，是不是同主表来访单位。
 			staff.setRemarks("");
 			staff.setRelative(oaFkjcsub.getRelative());
 			staff.setRelationship(oaFkjcsub.getRelationship());

@@ -37,6 +37,8 @@ import com.lexinsmart.utils.TypeChange;
  *
  */
 public class InoutfreightService {
+	static String carNumber = "";
+	
 	private Singlenumber singlenumber = new Singlenumber();// 1.提入单号
 	private Staff staff = new Staff();// 2. 司机
 	private Staff staff1 = new Staff();// 3. 随车人1
@@ -61,6 +63,8 @@ public class InoutfreightService {
 
 		this.inoutfreight = inoutfreight;
 
+		carNumber = inoutfreight.getCarno();
+		
 		staff.setRequestid(inoutfreight.getRequestid());
 		staff.setName(inoutfreight.getDriver());
 		staff.setSex(inoutfreight.getSex());
@@ -69,7 +73,7 @@ public class InoutfreightService {
 		staff.setHomeaddr(inoutfreight.getHomeaddr());
 		staff.setTelephone(inoutfreight.getPhone());
 		staff.setCompany("货运单位");// 公司写车牌
-		staff.setRemarks(inoutfreight.getHygs());// remarks 写所属公司
+		staff.setRemarks(carNumber);// remarks 写所属公司
 		staff.setRelative(inoutfreight.getRelative());
 		staff.setRelationship(inoutfreight.getRelationship());
 		staff.setTelephone2(inoutfreight.getRelativetel());
@@ -84,7 +88,7 @@ public class InoutfreightService {
 		staff1.setHomeaddr(inoutfreight.getHomeaddr1());
 		staff1.setTelephone(inoutfreight.getPhone1());
 		staff1.setCompany("货运单位");// 公司写车牌
-		staff1.setRemarks(inoutfreight.getHygs1());// remarks 写所属公司
+		staff1.setRemarks(carNumber);// remarks 写所属公司
 		staff1.setRelative(inoutfreight.getRelative1());
 		staff1.setRelationship(inoutfreight.getRelationship1());
 		staff1.setTelephone2(inoutfreight.getRelativetel1());
@@ -100,7 +104,7 @@ public class InoutfreightService {
 		staff2.setHomeaddr(inoutfreight.getHomeaddr2());
 		staff2.setTelephone(inoutfreight.getPhone2());
 		staff2.setCompany("货运单位");// 公司写车牌
-		staff2.setRemarks(inoutfreight.getHygs2());// remarks 写所属公司
+		staff2.setRemarks(carNumber);// remarks 写所属公司
 		staff2.setRelative(inoutfreight.getRelative2());
 		staff2.setRelationship(inoutfreight.getRelationship2());
 		staff2.setTelephone2(inoutfreight.getRelativetel2());
@@ -116,7 +120,7 @@ public class InoutfreightService {
 		staff3.setHomeaddr(inoutfreight.getHomeaddr3());
 		staff3.setTelephone(inoutfreight.getPhone3());
 		staff3.setCompany("货运单位");// 公司写车牌
-		staff3.setRemarks(inoutfreight.getHygs3());// remarks 写所属公司
+		staff3.setRemarks(carNumber);// remarks 写所属公司
 		staff3.setRelative(inoutfreight.getRelative3());
 		staff3.setRelationship(inoutfreight.getRelationship3());
 		staff3.setTelephone2(inoutfreight.getRelativetel3());
@@ -132,7 +136,7 @@ public class InoutfreightService {
 		staff4.setHomeaddr(inoutfreight.getHomeaddr4());
 		staff4.setTelephone(inoutfreight.getPhone4());
 		staff4.setCompany("货运单位");// 公司写车牌
-		staff4.setRemarks(inoutfreight.getHygs4());// remarks 写所属公司
+		staff4.setRemarks(carNumber);// remarks 写所属公司
 		staff4.setRelative(inoutfreight.getRelative4());
 		staff4.setRelationship(inoutfreight.getRelationship4());
 		staff4.setTelephone2(inoutfreight.getRelativetel4());

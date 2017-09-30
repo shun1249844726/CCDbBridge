@@ -30,6 +30,7 @@ import com.lexinsmart.utils.TypeChange;
  */
 public class LwgStructionService {
 
+	static String staticCompany = "";
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
@@ -52,6 +53,7 @@ public class LwgStructionService {
 	public void setLwgstruction(SELwgstruction lwgstruction) throws SQLException {
 		try {
 			// 1.添加劳务工单位
+			staticCompany = lwgstruction.getContractorn();
 
 			CompanyDao companyDao = new CompanyDao(connection);
 			if (!companyDao.checkIsExist(lwgstruction.getContractorn())) {  //
@@ -120,7 +122,7 @@ public class LwgStructionService {
 			staff.setLocation(constructionp.getLocation());
 			staff.setHomeaddr(constructionp.getHomelocation());
 			staff.setTelephone(constructionp.getTelephone());
-			staff.setCompany(constructionp.getDepart());
+			staff.setCompany(staticCompany);
 			staff.setRemarks(constructionp.getRemarks());
 			staff.setRelative(constructionp.getRelatives());
 			staff.setRelationship(constructionp.getRelativeship());

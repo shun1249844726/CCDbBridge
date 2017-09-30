@@ -19,7 +19,7 @@ public class CbsAction {
 		String rowindex = null;
 		String charger ="Cbs1";//承包商负责人
 		String request = null;
-		String contractorn = "承包商公司2";//承包商名称
+		String contractorn = "承包商公司222";//承包商名称
 		String traintime = null;
 		String requireman = null;
 		String insurance = null;
@@ -64,7 +64,7 @@ public class CbsAction {
 		String p_ifjoin = null;
 		String p_age = null;//年龄
 		String p_location = null;//籍贯
-		String p_depart = "承包商公司2";//所属公司
+		String p_depart = "";//所属公司
 		String p_telephone = null;//联系电话
 		String p_homelocation = null;//家庭住址
 		String p_relatives = null;////亲属名字

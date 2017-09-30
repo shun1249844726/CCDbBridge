@@ -28,6 +28,7 @@ import com.lexinsmart.utils.TypeChange;
  *
  */
 public class ConstractortermService {
+	static String staticCompany = "";
 
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
@@ -49,7 +50,7 @@ public class ConstractortermService {
 	 * @throws SQLException
 	 */
 	public void setContractorterm(OAContractortem contractortem) throws SQLException {
-
+		staticCompany = contractortem.getContractorn();
 		try {
 			// 1. 添加单位表
 			CompanyDao companyDao = new CompanyDao(connection);
@@ -118,7 +119,7 @@ public class ConstractortermService {
 			staff.setLocation(constructionp.getLocation());
 			staff.setHomeaddr(constructionp.getHomelocation());
 			staff.setTelephone(constructionp.getTelephone());
-			staff.setCompany(constructionp.getDepart());
+			staff.setCompany(staticCompany);
 			staff.setRemarks(constructionp.getRemarks());
 			staff.setRelative(constructionp.getRelatives());
 			staff.setRelationship(constructionp.getRelativeship());
@@ -141,7 +142,7 @@ public class ConstractortermService {
 		
 			// 2. 添加在厂时间。
 			Plantime plantime = new Plantime();
-			plantime.setCid(companyDao.getId(constructionp.getDepart()));
+			plantime.setCid(companyDao.getId(staticCompany));
 			id = staffDao.getid(constructionp.getIden());//重新查询ID
 			plantime.setSid(id);// TODO 使用个人外键控制；
 			plantime.setTid(0);

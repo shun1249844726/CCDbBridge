@@ -67,6 +67,8 @@ public class DropDownTools {
 				type = "司机";
 			} else if (messytype.equals("40285a8d57d51e140157dac717702f44")) {
 				type = "其他";
+			} else if (messytype.equals("40285a8c5ea7bedb015eb2586c8d14b0")) {
+				type = "访客";
 			}
 		}
 		return type;
