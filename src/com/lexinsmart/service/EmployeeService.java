@@ -31,13 +31,22 @@ public class EmployeeService {
 		List<Employee> employeeEditList = new ArrayList<Employee>();
 
 		for (int i = 0; i < employeesstring.size(); i++) {
-			
 			String name = employeesstring.get(i).getName();
 			String cardno = employeesstring.get(i).getCardno();
 			//"2011-05-09 11:49:45"
-			Timestamp checkintime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckintime());
-			Timestamp checkouttime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckouttime());
 			
+			Timestamp checkintime = null;
+			Timestamp checkouttime = null;
+			if ( employeesstring.get(i).getCheckintime() ==null || employeesstring.get(i).getCheckintime().equals("")) {
+				checkintime = null;
+			} else {
+				 checkintime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckintime());
+			}
+			if (employeesstring.get(i).getCheckouttime() ==  null|| employeesstring.get(i).getCheckouttime().equals("") ) {
+				checkouttime = null;
+			} else {
+				checkouttime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckouttime());
+			}			
 			Employee employee = new Employee();
 			employee.setName(name);
 			employee.setCardno(cardno);
