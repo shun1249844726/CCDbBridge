@@ -54,7 +54,7 @@ public class RegistrationService {
 				company.setRequestid(registration.getRequestid());
 				company.setCompany(registration.getLfunit());// 来访单位
 				company.setCtype(2);// 货运 1 访客
-				company.setRemarks("");
+				company.setRemarks("访客单位");
 
 				companyDao.addCompany(company);
 				System.out.println("add company");
@@ -144,7 +144,7 @@ public class RegistrationService {
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
 			staff.setCompany(lfunit);//  所属公司，是不是同主表来访单位。
-			staff.setRemarks("");
+			staff.setRemarks("访客");
 			staff.setRelative(oaFkjcsub.getRelative());
 			staff.setRelationship(oaFkjcsub.getRelationship());
 			staff.setTelephone2(oaFkjcsub.getRelativetel());

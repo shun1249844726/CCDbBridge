@@ -28,9 +28,12 @@ public class PBlacklistDao {
 	/**
 	 * 添加人员黑名单
 	 * @param blacklistp
+	 * @throws SQLException 
 	 */
-	public void addBlackList(BlacklistP blacklistp) {
+	public void addBlackList(BlacklistP blacklistp) throws SQLException {
 
+		connection = DBCP.getConnection();// 事物管理，最后commit；
+		connection.setAutoCommit(false);
 		String sql = "insert into blacklist_p "
 				+ " (idcard,name,mantype,company,isblack,blackdate,reason,plleavedate,plemployno,pldepartment) "
 				+ "values(?,?,?,?,?,?,?,?,?,?) ";
@@ -52,6 +55,7 @@ public class PBlacklistDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		connection.commit();
 	}
 	/**
 	 * 根据身份证号码 获取ID

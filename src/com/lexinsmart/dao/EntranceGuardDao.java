@@ -22,6 +22,23 @@ public class EntranceGuardDao {
 	public EntranceGuardDao(Connection connection) {
 		this.connection = connection;
 	}
+	public static void addddd() throws SQLException {
+		String sql = "insert into company_privilege (cid,egid) values(?,?)";
+		PreparedStatement pdddd ;
+		Connection connectionddd = DBCP.getConnection();// 事物管理，最后commit；
+		connectionddd.setAutoCommit(false);
+		for (int i = 260; i <= 312; i++) {
+			pdddd = connectionddd.prepareStatement(sql);
+			pdddd.setInt(1, i);
+			pdddd.setInt(2, 28);
+			pdddd.execute();
+		}
+		connectionddd.commit();
+		
+	}
+	public static void main(String[] args) throws SQLException {
+		addddd();
+	}
 	public List<Integer> getId(int type) {
 		ResultSet rest = null;
 		List<Integer> ids = new ArrayList<Integer>();

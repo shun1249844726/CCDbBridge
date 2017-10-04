@@ -144,7 +144,8 @@ public class LwgStructionService {
 
 			// 2. 添加在厂时间。
 			Plantime plantime = new Plantime();
-			plantime.setCid(0);
+			int cid = companyDao.getId(staticCompany);// 10.3发现劳务工的在厂时间没有cid
+			plantime.setCid(cid);
 			int id = staffDao.getid(constructionp.getIden());
 			plantime.setSid(id);
 			plantime.setTid(0);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
