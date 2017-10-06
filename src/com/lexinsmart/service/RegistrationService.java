@@ -27,7 +27,7 @@ import com.lexinsmart.utils.TypeChange;
  *
  */
 public class RegistrationService {
-	static  String lfunit = "";
+	static String lfunit = "";
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 
@@ -46,6 +46,7 @@ public class RegistrationService {
 	 */
 	public void setRegistration(OARegistration registration) {
 		lfunit = registration.getLfunit();
+		String scene = registration.getScene();
 		try {
 			// 1. 添加单位表
 			CompanyDao companyDao = new CompanyDao(connection);
@@ -54,11 +55,13 @@ public class RegistrationService {
 				company.setRequestid(registration.getRequestid());
 				company.setCompany(registration.getLfunit());// 来访单位
 				company.setCtype(2);// 货运 1 访客
-				company.setRemarks("访客单位");
-
+				if (scene.equals("是")) {
+					company.setRemarks("能进入二道门的访客单位");
+				} else {
+					company.setRemarks("不能进入二道门的访客单位");
+				}
 				companyDao.addCompany(company);
 				System.out.println("add company");
-
 			}
 
 			// 2. 添加在厂时间。
@@ -90,6 +93,13 @@ public class RegistrationService {
 			// 3 添加单位权限
 			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(0, false);
+			if (scene.equals("是")) {//如果是可以进入二道门的，把二道门也给添加进去。
+				List<Integer> erDaoMenids = entranceGuardDao.getId(0, true);
+				for (int i = 0; i < erDaoMenids.size(); i++) {
+					ids.add(erDaoMenids.get(i));
+				}
+			}
+
 
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);
@@ -143,7 +153,7 @@ public class RegistrationService {
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
-			staff.setCompany(lfunit);//  所属公司，是不是同主表来访单位。
+			staff.setCompany(lfunit);//  访客的单位用来访单位。
 			staff.setRemarks("访客");
 			staff.setRelative(oaFkjcsub.getRelative());
 			staff.setRelationship(oaFkjcsub.getRelationship());

@@ -21,7 +21,7 @@ public class RegistrationAction {
 		 String guestname ="朱2渊";//访客名称
 		 String guestnumber =null;
 		 String specificlocation =null;
-		 String scene =null;
+		 String scene = "是";
 		 String certificatenumber =null;
 		 String arrivenumber =null;
 		 String sjleavenumber =null;
@@ -50,7 +50,7 @@ public class RegistrationAction {
 		 String returndocuments =null;
 		 String lsnumber =null;
 		 String choosedoc =null;
-		 String lfunit ="glrsmartt";//来访单位。
+		 String lfunit ="glrsmarttd";//来访单位。
 		 String whylegacy =null;
 		 String guestscope =null;
 		 String bmid =null;

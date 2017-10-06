@@ -16,14 +16,14 @@ public class LwgAction {
 	public static void main(String[] args) {
 		// 劳务工 主表
 		SELwgstruction lwgstruction = new SELwgstruction();
-		String requestid= "112";
+		String requestid= "112da";
 		String nodeid= null;
 		String rowindex= null;
-		String contractorn="劳务工单位1";//劳务商名称；
+		String contractorn="劳务工单位1da";//劳务商名称；
 		String insurancetype= null;
 		String insurancetime= null;
-		String charger= "lwgCharger1";//负责人
-		String telephone= "16757576111";//负责人电话
+		String charger= "lwgCharger1da";//负责人
+		String telephone= "167575761111";//负责人电话
 		String traintime= null;
 		String cexpire= null;
 		String enclossure= null;
@@ -54,22 +54,22 @@ public class LwgAction {
 		
 		// 劳务工子表
 		SEConstructionp constructionp = new SEConstructionp();
-		String p_requesstid= "112";
+		String p_requesstid= "112da";
 		String p_nodeid= null;
 		String p_rowindex= null;
 		String p_age= null;//年龄
 		String p_location= null;//籍贯
 		String p_depart= "";//所属部门     
-		String p_telephone= "123456222";//联系电话
+		String p_telephone= "123456222da";//联系电话
 		String p_homelocation= null;//家庭住址
 		String p_relatives= null;//亲属名字
 		String p_relativeship= null;//亲属关系
 		String p_teltphone2= null;//亲属联系电话
 		String p_sexs= null;//性别
-		String p_indates= "2018-09-27";//入厂 有效期。。。。必填
+		String p_indates= null;//入厂 有效期。。。。必填
 		String p_num= null;//序号
-		String p_name= "劳务工2";//姓名
-		String p_iden= "6667775555876777772ddd";//身份证号
+		String p_name= "劳务工2da";//姓名
+		String p_iden= "6667775555876777772dddda";//身份证号
 		String p_insurancetype= null;
 		String p_validity= null;
 		String p_remarks= "remarks";//备注

@@ -123,7 +123,7 @@ public class LwgStructionService {
 			staff.setHomeaddr(constructionp.getHomelocation());
 			staff.setTelephone(constructionp.getTelephone());
 			staff.setCompany(staticCompany);
-			staff.setRemarks(constructionp.getRemarks());
+			staff.setRemarks("劳务工："+constructionp.getRemarks());
 			staff.setRelative(constructionp.getRelatives());
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
@@ -146,13 +146,18 @@ public class LwgStructionService {
 			Plantime plantime = new Plantime();
 			int cid = companyDao.getId(staticCompany);// 10.3发现劳务工的在厂时间没有cid
 			plantime.setCid(cid);
-			int id = staffDao.getid(constructionp.getIden());
-			plantime.setSid(id);
+			int sid = staffDao.getid(constructionp.getIden());
+			plantime.setSid(sid);
 			plantime.setTid(0);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 			plantime.setChanger(constructionp.getName());
 			plantime.setTelephone(constructionp.getTelephone());
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
-			Timestamp outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			Timestamp outtime = null;
+			if (constructionp.getIndates() == null || constructionp.getIndates().equals("")) {
+				outtime = null;
+			}else{
+				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			}
 			plantime.setPlanouttime(outtime);
 			PlantimeDao plantimeDao = new PlantimeDao(connection);
 			plantimeDao.addPlanTime(plantime);

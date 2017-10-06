@@ -35,14 +35,15 @@ public class CompanyDao {
 
 		try {
 			// conn = dbcp.getConnection();
-			String sql = "" + " insert into company " + " (requestid,company,ctype,created,forbidden,atfactorynum) "
-					+ " values(" + "?,?,?,?,false,0) ";
+			String sql = "" + " insert into company " + " (requestid,company,ctype,remarks,created,forbidden,atfactorynum) "
+					+ " values(" + "?,?,?,?,?,false,0) ";
 			ptmt = (PreparedStatement) conn.prepareStatement(sql);
 
 			ptmt.setString(1, company.getRequestid());
 			ptmt.setString(2, company.getCompany());
 			ptmt.setInt(3, company.getCtype());
-			ptmt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+			ptmt.setString(4,company.getRemarks());
+			ptmt.setTimestamp(5, new Timestamp(System.currentTimeMillis()));
 
 			ptmt.execute();
 		} catch (SQLException e) {

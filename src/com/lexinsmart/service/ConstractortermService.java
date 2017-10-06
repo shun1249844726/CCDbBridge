@@ -120,7 +120,7 @@ public class ConstractortermService {
 			staff.setHomeaddr(constructionp.getHomelocation());
 			staff.setTelephone(constructionp.getTelephone());
 			staff.setCompany(staticCompany);
-			staff.setRemarks(constructionp.getRemarks());
+			staff.setRemarks("承包商："+constructionp.getRemarks());
 			staff.setRelative(constructionp.getRelatives());
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
@@ -150,7 +150,12 @@ public class ConstractortermService {
 			plantime.setChanger(constructionp.getName());
 			plantime.setTelephone(constructionp.getTelephone());
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
-			Timestamp outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			Timestamp outtime = null;
+			if (constructionp.getIndates() == null || constructionp.getIndates().equals("")) {
+				outtime = null;
+			}else{
+				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			}
 			plantime.setPlanouttime(outtime);
 			PlantimeDao plantimeDao = new PlantimeDao(connection);
 

@@ -37,7 +37,7 @@ public class EmployeeService {
 			
 			Timestamp checkintime = null;
 			Timestamp checkouttime = null;
-			if ( employeesstring.get(i).getCheckintime() ==null || employeesstring.get(i).getCheckintime().equals("")) {
+			if ( employeesstring.get(i).getCheckintime() == null || employeesstring.get(i).getCheckintime().equals("")) {
 				checkintime = null;
 			} else {
 				 checkintime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckintime());
