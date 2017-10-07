@@ -87,7 +87,6 @@ public class LwgStructionService {
 					System.out.println("delete & add  companyprivilege");
 				} else if (privilegeid == 0) {
 					companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
-					// 循环，看多少个门禁ID了
 					System.out.println("add companyprivilege");
 				}
 

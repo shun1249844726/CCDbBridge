@@ -208,7 +208,6 @@ public class InoutfreightService {
 					System.out.println("edit single_number");
 				}
 			}
-
 			// 2插入司机
 			StaffDao staffDao = new StaffDao(connection);
 			if (inoutfreight.getLicensenum() != null) {

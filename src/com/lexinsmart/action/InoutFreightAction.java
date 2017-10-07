@@ -29,7 +29,7 @@ public class InoutFreightAction {
 		String depotname = "PBT原材料保税库";// 主仓库名称
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
-		String singleno = "1020T000063119,1020T000063118,1020T000063117";// 提入单号
+		String singleno = "1020T000063119d,1020T000063118d,1020T000063117d";// 提入单号
 		String carno = "闽J1971899";// 车牌号码
 		String idcard1 = "320923197912034111";// 证件号(一)
 		String idcard2 = null;// 证件号(二)
