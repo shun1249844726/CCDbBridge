@@ -45,15 +45,15 @@ public class RegistrationService {
 	 * @param registration
 	 */
 	public void setRegistration(OARegistration registration) {
-		lfunit = registration.getLfunit();
+		lfunit = registration.getLfunit()+"访客单位";
 		String scene = registration.getScene();
 		try {
 			// 1. 添加单位表
 			CompanyDao companyDao = new CompanyDao(connection);
-			if (!companyDao.checkIsExist(registration.getLfunit())) {
+			if (!companyDao.checkIsExist(lfunit)) {
 				Company company = new Company();
 				company.setRequestid(registration.getRequestid());
-				company.setCompany(registration.getLfunit());// 来访单位
+				company.setCompany(lfunit);// 来访单位
 				company.setCtype(2);// 货运 1 访客
 				if (scene.equals("是")) {
 					company.setRemarks("能进入二道门的访客单位");
@@ -66,7 +66,7 @@ public class RegistrationService {
 
 			// 2. 添加在厂时间。
 			Plantime plantime = new Plantime();
-			int cid = companyDao.getId(registration.getLfunit());// 查询单位外键的表ID
+			int cid = companyDao.getId(lfunit);// 查询单位外键的表ID
 			plantime.setCid(cid);
 			plantime.setSid(0);
 			plantime.setTid(0);
