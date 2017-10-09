@@ -53,7 +53,12 @@ public class InoutfreightService {
 
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
-
+	SingleNumberDao singleNumberDao = null;
+	StaffDao staffDao = null;
+	TruckDao truckDao  = null;
+	SysLogDao sysLogDao = null;
+	CompanyDao companyDao = null;
+	
 	/**
 	 * 货运司机 主表
 	 * 
@@ -184,7 +189,7 @@ public class InoutfreightService {
 		try {
 			Date c = new Date();
 			// 1提入单号表
-			SingleNumberDao singleNumberDao = new SingleNumberDao(connection);
+			singleNumberDao = new SingleNumberDao(connection);
 			String singleno = inoutfreight.getSingleno();
 			String[] singlenos = TypeChange.convertStrToArray(singleno);
 			int singlenonum = singlenos.length;// 提入单号中包含的提入单号数量
@@ -209,7 +214,7 @@ public class InoutfreightService {
 				}
 			}
 			// 2插入司机
-			StaffDao staffDao = new StaffDao(connection);
+			staffDao = new StaffDao(connection);
 			if (inoutfreight.getLicensenum() != null) {
 				if (!staffDao.checkIsExist(inoutfreight.getLicensenum())) {
 					staffDao.addStaff(staff);
@@ -262,7 +267,7 @@ public class InoutfreightService {
 			}
 
 			// 7.插入车辆表
-			TruckDao truckDao = new TruckDao(connection);
+			truckDao = new TruckDao(connection);
 			if (!truckDao.checkIsExist(inoutfreight.getCarno())) {
 				System.out.println("insert truck！");
 				truckDao.addTruck(truck);
@@ -309,12 +314,12 @@ public class InoutfreightService {
 			sysLog.setLogintime(new Timestamp(System.currentTimeMillis()));
 			sysLog.setProxy("java bridge");
 			sysLog.setContent("add inoutfreight ");
-			SysLogDao sysLogDao = new SysLogDao(connection);
+			sysLogDao = new SysLogDao(connection);
 			sysLogDao.addSysLog(sysLog);
 			System.out.println("add syslog！");
 
 			// 11 .写入公司
-			CompanyDao companyDao = new CompanyDao(connection);
+			companyDao = new CompanyDao(connection);
 			if (!companyDao.checkIsExist(company.getCompany())) {
 				companyDao.addCompany(company);
 				System.out.println("add company");
@@ -330,11 +335,17 @@ public class InoutfreightService {
 			Date d = new Date();
 			System.out.println("耗时： " + "\t" + (d.getTime() - c.getTime()) + " ms");
 		} catch (Exception e) {
-			System.out.println("插入数据  失败！");
 			e.printStackTrace();
 			connection.rollback();
 		} finally {
+			
+			 singleNumberDao.release();
+			 staffDao.release();
+			 truckDao.release();
+			 sysLogDao.release();
+			 companyDao.release();
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
 		}
 	}
 }

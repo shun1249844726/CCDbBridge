@@ -13,11 +13,16 @@ public class TruckPrivilegeDao {
 
 	Connection connection = null;
 	PreparedStatement ptmt = null;
+	ResultSet rest = null;
 
 	public TruckPrivilegeDao(Connection connection) {
 		this.connection = connection;
 	}
-
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 TruckPrivilegeDao 连接和语句");
+	}
 	public void addTruckPrivilege(TruckPrivilege truckPrivilege) {
 		try {
 			// connection = dbcp.getConnection();
@@ -38,7 +43,6 @@ public class TruckPrivilegeDao {
 
 	public boolean checkIsExist(int egid, int tid) {
 		boolean isExist = false;
-		ResultSet rs = null;
 		try {
 			// connection = dbcp.getConnection();
 			String sql = " select * from truck_privilege where egid=? and tid=?";
@@ -46,9 +50,9 @@ public class TruckPrivilegeDao {
 
 			ptmt.setInt(1, egid);
 			ptmt.setInt(2, tid);
-			rs = ptmt.executeQuery();
-			rs.last();
-			if (rs.getRow() > 0) {
+			rest = ptmt.executeQuery();
+			rest.last();
+			if (rest.getRow() > 0) {
 				isExist = true;
 			} else {
 				isExist = false;

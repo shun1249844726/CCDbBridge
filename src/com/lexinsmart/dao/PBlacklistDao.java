@@ -21,9 +21,14 @@ public class PBlacklistDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
-
+	ResultSet rest  = null;
 	public PBlacklistDao(Connection connection) {
 		this.connection = connection;
+	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放人员黑名单连接和语句");
 	}
 	/**
 	 * 添加人员黑名单
@@ -68,7 +73,7 @@ public class PBlacklistDao {
 			String sql = " select id from blacklist_p where idcard=?";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, idcard);
-			ResultSet rest = ptmt.executeQuery();
+			rest = ptmt.executeQuery();
 			while(rest.next()){
 				id = rest.getInt("id");
 			}

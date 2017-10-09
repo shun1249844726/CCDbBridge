@@ -7,13 +7,19 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.lexinsmart.model.Employee;
+import com.lexinsmart.utils.DBCP;
 
 public class EmployeeDao {
 	Connection conn = null;
 	PreparedStatement ptmt = null;
-	
+	ResultSet rest = null;
 	public EmployeeDao(Connection connection) {
 		this.conn = connection;
+	}
+	public void release() {
+		DBCP.releaseConnection(conn);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 EmployeeDao 连接和语句");
 	}
 	public void addEmployees(List<Employee> employees) {
 		try {
@@ -74,9 +80,9 @@ public class EmployeeDao {
 			sql = "SELECT id FROM employee where cardno=? ";
 			ptmt = (PreparedStatement) conn.prepareStatement(sql);
 			ptmt.setString(1, cardno);
-			ResultSet rs = ptmt.executeQuery();
-			rs.last();
-			if (rs.getRow() > 0) {
+			rest = ptmt.executeQuery();
+			rest.last();
+			if (rest.getRow() > 0) {
 				isExist = true;
 			} else {
 				isExist = false;

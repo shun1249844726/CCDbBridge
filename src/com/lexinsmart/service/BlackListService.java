@@ -29,13 +29,13 @@ public class BlackListService {
 	 * @param blacklist  人员黑名单
 	 */
 	public void addBlackListP(OABlacklist blacklist) {
-
+		PBlacklistDao pBlacklistDao = null;
 		try {
 
 			connection = DBCP.getConnection();// 事物管理，最后commit；
 			connection.setAutoCommit(false);
 
-			PBlacklistDao pBlacklistDao = new PBlacklistDao(connection);
+			pBlacklistDao = new PBlacklistDao(connection);
 
 			BlacklistP blacklistP = new BlacklistP();
 			blacklistP.setIdcard(blacklist.getIdcard());
@@ -61,7 +61,6 @@ public class BlackListService {
 				pBlacklistDao.addBlackList(blacklistP);
 				System.out.println("add blacklistp");
 			}
-
 			connection.commit();
 			System.out.println("commit");
 		} catch (Exception e) {
@@ -73,7 +72,10 @@ public class BlackListService {
 				e1.printStackTrace();
 			}
 		} finally {
+			//		pBlacklistDao.release();//增加释放连接
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
+
 		}
 	}
 
@@ -82,11 +84,12 @@ public class BlackListService {
 	 * @param vehicle
 	 */
 	public void addBlackListC(OAVehicle vehicle) {
+		CBlackListDAO cBlackListDAO =null;
 		try {
 			connection = DBCP.getConnection();// 事物管理，最后commit；
 			connection.setAutoCommit(false);
 
-			CBlackListDAO cBlackListDAO = new CBlackListDAO(connection);
+			cBlackListDAO = new CBlackListDAO(connection);
 			TruckDao truckDao = new TruckDao(connection);
 
 			BlacklistC blacklistC = new BlacklistC();
@@ -103,7 +106,6 @@ public class BlackListService {
 				System.out.println("add blacklist_c");
 
 			}
-
 			connection.commit();
 			System.out.println("commit");
 		} catch (SQLException e) {
@@ -115,7 +117,10 @@ public class BlackListService {
 			}
 			e.printStackTrace();
 		} finally {
+	//		cBlackListDAO.release();
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
+
 		}
 	}
 }

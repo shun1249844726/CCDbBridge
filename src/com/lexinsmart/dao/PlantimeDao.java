@@ -19,9 +19,14 @@ public class PlantimeDao {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 	PreparedStatement ptmt = null;
-
+	ResultSet rest = null;
 	public PlantimeDao(Connection connection) {
 		this.connection = connection;
+	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 PlantimeDao 连接和语句");
 	}
 	/**
 	 * 添加在厂时间
@@ -85,12 +90,12 @@ public class PlantimeDao {
 			ptmt.setInt(2, sid);
 			ptmt.setInt(3, tid);
 			
-			ResultSet rs = ptmt.executeQuery();
-			rs.last();
-			if (rs.getRow()>0) {
-				rs.beforeFirst();
-				while(rs.next()){
-					id = rs.getInt("id");
+			 rest = ptmt.executeQuery();
+			rest.last();
+			if (rest.getRow()>0) {
+				rest.beforeFirst();
+				while(rest.next()){
+					id = rest.getInt("id");
 				}
 			} else{
 				id=0;

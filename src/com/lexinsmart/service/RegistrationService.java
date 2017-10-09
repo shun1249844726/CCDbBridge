@@ -30,7 +30,12 @@ public class RegistrationService {
 	static String lfunit = "";
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
-
+	CompanyDao companyDao = null;
+	PlantimeDao plantimeDao  = null;
+	EntranceGuardDao entranceGuardDao  = null;
+	CompanyPrivilegeDao companyPrivilegeDao  =  null;
+	StaffDao staffDao = null;
+	
 	public RegistrationService() {
 		try {
 			connection = DBCP.getConnection();
@@ -49,7 +54,7 @@ public class RegistrationService {
 		String scene = registration.getScene();
 		try {
 			// 1. 添加单位表
-			CompanyDao companyDao = new CompanyDao(connection);
+			 companyDao = new CompanyDao(connection);
 			if (!companyDao.checkIsExist(lfunit)) {
 				Company company = new Company();
 				company.setRequestid(registration.getRequestid());
@@ -78,7 +83,7 @@ public class RegistrationService {
 			String outtime = registration.getLeavedate() + " " + registration.getLeavetime();
 			plantime.setPlanintime(DateUtils.StringToTimestamp(intime));
 			plantime.setPlanouttime(DateUtils.StringToTimestamp(outtime));
-			PlantimeDao plantimeDao = new PlantimeDao(connection);
+			plantimeDao = new PlantimeDao(connection);
 
 //			int id = plantimeDao.getIdIfExist(cid, 0, 0);
 //			if (id > 0) {
@@ -91,7 +96,7 @@ public class RegistrationService {
 //			}
 
 			// 3 添加单位权限
-			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
+			entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(0, false);
 			if (scene.equals("是")) {//如果是可以进入二道门的，把二道门也给添加进去。
 				List<Integer> erDaoMenids = entranceGuardDao.getId(0, true);
@@ -104,7 +109,7 @@ public class RegistrationService {
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);
 
-			CompanyPrivilegeDao companyPrivilegeDao = new CompanyPrivilegeDao(connection);
+			 companyPrivilegeDao = new CompanyPrivilegeDao(connection);
 			Integer egid = 0;//  查询ID
 
 			for (int i = 0; i < ids.size(); i++) {
@@ -162,7 +167,7 @@ public class RegistrationService {
 			staff.setPrivilege(false);
 			staff.setCtype(2);
 
-			StaffDao staffDao = new StaffDao(connection);
+			staffDao = new StaffDao(connection);
 
 			int id = staffDao.getid(oaFkjcsub.getQtnum());
 			if (id > 0) {
@@ -179,7 +184,15 @@ public class RegistrationService {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
+			 companyDao.release();
+			 plantimeDao.release();
+			 entranceGuardDao.release();
+			 companyPrivilegeDao.release();
+			 staffDao.release();
+			
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
+
 		}
 	}
 }

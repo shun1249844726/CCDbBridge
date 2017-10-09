@@ -18,11 +18,15 @@ public class CBlackListDAO {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
-
+	ResultSet rest  = null;
 	public CBlackListDAO(Connection connection) {
 		this.connection = connection;
 	}
-
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放车辆黑名单连接和语句");
+	}
 	/**
 	 * 添加车辆黑名单
 	 * @param blacklistC
@@ -53,7 +57,7 @@ public class CBlackListDAO {
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, carno);
 
-			ResultSet rest = ptmt.executeQuery();
+			rest = ptmt.executeQuery();
 			while(rest.next()){
 				id = rest.getInt("id");
 			}

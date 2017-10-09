@@ -33,6 +33,12 @@ public class ConstractortermService {
 //	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
+	CompanyDao companyDao =null;
+	EntranceGuardDao entranceGuardDao = null;
+	CompanyPrivilegeDao companyPrivilegeDao = null;
+	StaffDao staffDao =null;
+	PlantimeDao plantimeDao = null;
+	
 	public ConstractortermService() {
 		try {
 			connection = DBCP.getConnection();// 事物管理，最后commit；
@@ -51,9 +57,10 @@ public class ConstractortermService {
 	 */
 	public void setContractorterm(OAContractortem contractortem) throws SQLException {
 		staticCompany = contractortem.getContractorn();
+
 		try {
 			// 1. 添加单位表
-			CompanyDao companyDao = new CompanyDao(connection);
+			companyDao = new CompanyDao(connection);
 			if (!companyDao.checkIsExist(contractortem.getContractorn())) {
 				Company company = new Company();
 				company.setRequestid(contractortem.getRequestid());
@@ -65,13 +72,13 @@ public class ConstractortermService {
 			}
 
 			// 3 添加单位权限
-			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
+			entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(0, false); // 获取门禁的ID
 			int cid = companyDao.getId(contractortem.getContractorn());// 查询单位外键的表ID
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);
 
-			CompanyPrivilegeDao companyPrivilegeDao = new CompanyPrivilegeDao(connection);
+			companyPrivilegeDao = new CompanyPrivilegeDao(connection);
 			Integer egid = 0;
 
 			for (int i = 0; i < ids.size(); i++) {
@@ -96,7 +103,6 @@ public class ConstractortermService {
 			connection.rollback();
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -128,7 +134,7 @@ public class ConstractortermService {
 			staff.setPrivilege(false);
 			staff.setCtype(3);//承包商人员类型 3
 
-			StaffDao staffDao = new StaffDao(connection);
+			staffDao = new StaffDao(connection);
 
 			int id = staffDao.getid(constructionp.getIden());
 			if (id > 0) {
@@ -157,7 +163,7 @@ public class ConstractortermService {
 				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
 			}
 			plantime.setPlanouttime(outtime);
-			PlantimeDao plantimeDao = new PlantimeDao(connection);
+			plantimeDao = new PlantimeDao(connection);
 
 			plantimeDao.addPlanTime(plantime);
 			System.out.println("add plantime");
@@ -168,7 +174,14 @@ public class ConstractortermService {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
+			
+			 companyDao.release();
+			 entranceGuardDao.release();
+			 companyPrivilegeDao.release();
+			 staffDao.release();
+			 plantimeDao.release();
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
 		}
 	}
 }

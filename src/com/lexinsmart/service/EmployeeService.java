@@ -14,6 +14,7 @@ import com.lexinsmart.utils.DateUtils;
 
 public class EmployeeService {
 	Connection connection = null;// 数据库的连接
+	EmployeeDao employeeDao = null;
 
 	public EmployeeService() {
 		try {
@@ -24,43 +25,45 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 	}
+
 	public void setEmployees(List<EmployeeString> employeesstring) {
-		
-		EmployeeDao employeeDao = new EmployeeDao(connection);
+
+		employeeDao = new EmployeeDao(connection);
 		List<Employee> employeeList = new ArrayList<Employee>();
 		List<Employee> employeeEditList = new ArrayList<Employee>();
 
 		for (int i = 0; i < employeesstring.size(); i++) {
 			String name = employeesstring.get(i).getName();
 			String cardno = employeesstring.get(i).getCardno();
-			//"2011-05-09 11:49:45"
-			
+			// "2011-05-09 11:49:45"
+
 			Timestamp checkintime = null;
 			Timestamp checkouttime = null;
-			if ( employeesstring.get(i).getCheckintime() == null || employeesstring.get(i).getCheckintime().equals("")) {
+			if (employeesstring.get(i).getCheckintime() == null || employeesstring.get(i).getCheckintime().equals("")) {
 				checkintime = null;
 			} else {
-				 checkintime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckintime());
+				checkintime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckintime());
 			}
-			if (employeesstring.get(i).getCheckouttime() ==  null|| employeesstring.get(i).getCheckouttime().equals("") ) {
+			if (employeesstring.get(i).getCheckouttime() == null
+					|| employeesstring.get(i).getCheckouttime().equals("")) {
 				checkouttime = null;
 			} else {
 				checkouttime = DateUtils.StringToTimestamp(employeesstring.get(i).getCheckouttime());
-			}			
+			}
 			Employee employee = new Employee();
 			employee.setName(name);
 			employee.setCardno(cardno);
 			employee.setCheckintime(checkintime);
 			employee.setCheckouttime(checkouttime);
-			
+
 			if (employeeDao.checkIsExist(cardno)) {
 				employeeEditList.add(employee);
-			}else {
+			} else {
 				employeeList.add(employee);
 			}
 		}
-		
-		System.out.println("edits:  "+employeeEditList.size());
+
+		System.out.println("edits:  " + employeeEditList.size());
 		employeeDao.edit(employeeEditList);
 		employeeDao.addEmployees(employeeList);
 		try {
@@ -73,8 +76,11 @@ public class EmployeeService {
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-		}finally {
+		} finally {
+			employeeDao.release();
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
+
 		}
 	}
 }

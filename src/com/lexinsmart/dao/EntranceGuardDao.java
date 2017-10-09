@@ -18,9 +18,15 @@ public class EntranceGuardDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
+	ResultSet rest = null;
 
 	public EntranceGuardDao(Connection connection) {
 		this.connection = connection;
+	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 EntranceGuardDao 连接和语句");
 	}
 	public static void addddd() throws SQLException {
 		String sql = "insert into company_privilege (cid,egid) values(?,?)";
@@ -40,7 +46,6 @@ public class EntranceGuardDao {
 		addddd();
 	}
 	public List<Integer> getId(int type) {
-		ResultSet rest = null;
 		List<Integer> ids = new ArrayList<Integer>();
 		try {
 //			connection = dbcp.getConnection();
@@ -67,7 +72,6 @@ public class EntranceGuardDao {
 	 * @return 搜索到的ID的列表
 	 */
 	public List<Integer> getId(int type,boolean privilege){
-		ResultSet rest = null;
 		List<Integer> ids = new ArrayList<Integer>();
 		try {
 			String sql = " select id from entrance_guard where type=? and privilege=? ";

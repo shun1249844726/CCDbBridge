@@ -18,10 +18,18 @@ public class CompanyPrivilegeDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 	DBCP dbcp =  DBCP.getInstance();
+	ResultSet rs =null;
+	
 	public CompanyPrivilegeDao(Connection connection) {
 		this.connection = connection;
 		
 	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rs);
+		System.out.println("释放 CompanyPrivilegeDao 连接和语句");
+	}
+	
 	/**
 	 * 添加公司权限
 	 * @param companyprivilege
@@ -55,7 +63,7 @@ public class CompanyPrivilegeDao {
 			ptmt.setInt(1, cid);
 			ptmt.setInt(2, egid);
 			
-			ResultSet rs = ptmt.executeQuery();
+			 rs = ptmt.executeQuery();
 			rs.last();
 			if (rs.getRow()>0) {
 				rs.beforeFirst();

@@ -145,7 +145,7 @@ public class DBCP {
 	 * @param stm
 	 * @param result
 	 */
-	public void closeStatement(Statement stm, ResultSet result) {
+	public static void closeStatement(Statement stm, ResultSet result) {
 		try {
 			if (result != null) {
 				result.close();
@@ -170,7 +170,7 @@ public class DBCP {
 	 * 
 	 * @param st
 	 */
-	public void closeStatement(Statement st) {
+	public static void closeStatement(Statement st) {
 		if (st != null) {
 			try {
 				st.close();

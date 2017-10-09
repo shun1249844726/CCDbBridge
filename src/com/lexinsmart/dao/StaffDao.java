@@ -19,9 +19,15 @@ public class StaffDao {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 	PreparedStatement ptmt = null;
+	ResultSet rest = null;
 
 	public StaffDao(Connection connection) {
 		this.connection = connection;
+	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 StaffDao 连接和语句");
 	}
 
 	public void addStaff(Staff staff) {
@@ -60,16 +66,15 @@ public class StaffDao {
 
 	public boolean checkIsExist(String iden) {
 		boolean isExist = false;
-		ResultSet rs = null;
 		try {
 			// conn = dbcp.getConnection();
 			String sql = "select iden from staff where iden=? ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, iden);
 
-			rs = ptmt.executeQuery();
-			rs.last();
-			if (rs.getRow() > 0) {
+			rest = ptmt.executeQuery();
+			rest.last();
+			if (rest.getRow() > 0) {
 				isExist = true;
 			} else {
 				isExist = false;
@@ -93,16 +98,15 @@ public class StaffDao {
 		}
 	}
 	public int getid(String iden){
-		ResultSet resultSet = null;
 		int id = 0;
 		try {
 //			connection = dbcp.getConnection();
 			String sql = " select id from staff where iden=? ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, iden);
-			resultSet = ptmt.executeQuery();
-			while (resultSet.next()) {
-				id = resultSet.getInt("id");
+			rest = ptmt.executeQuery();
+			while (rest.next()) {
+				id = rest.getInt("id");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

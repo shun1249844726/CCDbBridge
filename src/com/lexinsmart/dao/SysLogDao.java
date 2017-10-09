@@ -17,6 +17,11 @@ public class SysLogDao {
 	public SysLogDao(Connection connection) {
 		this.connection = connection;
 	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt);
+		System.out.println("释放 SysLogDao 连接和语句");
+	}
 	public void addSysLog(SysLog sysLog) {
 
 		try {

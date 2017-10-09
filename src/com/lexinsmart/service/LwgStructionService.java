@@ -31,9 +31,15 @@ import com.lexinsmart.utils.TypeChange;
 public class LwgStructionService {
 
 	static String staticCompany = "";
-//	DBCP dbcp = DBCP.getInstance();
+	static String requestidTemp = "";
+	// DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
-
+	CompanyDao companyDao = null;
+	EntranceGuardDao entranceGuardDao = null;
+	CompanyPrivilegeDao companyPrivilegeDao = null;
+	StaffDao staffDao = null;
+	PlantimeDao plantimeDao = null;
+	
 	public LwgStructionService() {
 		try {
 			connection = DBCP.getConnection();// 事物管理，最后commit；
@@ -54,9 +60,9 @@ public class LwgStructionService {
 		try {
 			// 1.添加劳务工单位
 			staticCompany = lwgstruction.getContractorn();
-
-			CompanyDao companyDao = new CompanyDao(connection);
-			if (!companyDao.checkIsExist(lwgstruction.getContractorn())) {  //
+			requestidTemp = lwgstruction.getRequestid();
+			companyDao = new CompanyDao(connection);
+			if (!companyDao.checkIsExist(lwgstruction.getContractorn())) { //
 				Company company = new Company();
 				company.setRequestid(lwgstruction.getRequestid());
 				company.setCompany(lwgstruction.getContractorn());
@@ -64,17 +70,16 @@ public class LwgStructionService {
 				companyDao.addCompany(company);
 				System.out.println("add company");
 			}
-			
-			
+
 			int cid = companyDao.getId(lwgstruction.getContractorn());// 查询单位外键的表ID
 			// 3 添加单位权限
-			EntranceGuardDao entranceGuardDao = new EntranceGuardDao(connection);
+			entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(0, false);
 
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);
 
-			CompanyPrivilegeDao companyPrivilegeDao = new CompanyPrivilegeDao(connection);
+			companyPrivilegeDao = new CompanyPrivilegeDao(connection);
 
 			for (int i = 0; i < ids.size(); i++) {
 				Integer egid = ids.get(i);
@@ -98,6 +103,7 @@ public class LwgStructionService {
 			e.printStackTrace();
 		} finally {
 			// dbcp.releaseConnection(connection);
+
 		}
 	}
 
@@ -112,8 +118,7 @@ public class LwgStructionService {
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
-			CompanyDao companyDao = new CompanyDao(connection);
-			String requestid = companyDao.getrequestId(constructionp.getDepart());
+			String requestid = requestidTemp;
 			staff.setRequestid(requestid);
 			staff.setName(constructionp.getName());
 			staff.setSex(constructionp.getSexs());
@@ -122,7 +127,7 @@ public class LwgStructionService {
 			staff.setHomeaddr(constructionp.getHomelocation());
 			staff.setTelephone(constructionp.getTelephone());
 			staff.setCompany(staticCompany);
-			staff.setRemarks("劳务工："+constructionp.getRemarks());
+			staff.setRemarks("劳务工：" + constructionp.getRemarks());
 			staff.setRelative(constructionp.getRelatives());
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
@@ -130,16 +135,14 @@ public class LwgStructionService {
 			staff.setPrivilege(false);
 			staff.setCtype(1);
 
-
-			StaffDao staffDao = new StaffDao(connection);
+		 staffDao = new StaffDao(connection);
 			if (constructionp.getIden() != null && !staffDao.checkIsExist(constructionp.getIden())) {
 				staffDao.addStaff(staff);
 				System.out.println("add staff");
-			}else{
+			} else {
 				staffDao.edit(staff);
 				System.out.println("edit staff");
 			}
-			
 
 			// 2. 添加在厂时间。
 			Plantime plantime = new Plantime();
@@ -147,28 +150,37 @@ public class LwgStructionService {
 			plantime.setCid(cid);
 			int sid = staffDao.getid(constructionp.getIden());
 			plantime.setSid(sid);
-			plantime.setTid(0);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+			plantime.setTid(0);
 			plantime.setChanger(constructionp.getName());
 			plantime.setTelephone(constructionp.getTelephone());
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
 			Timestamp outtime = null;
 			if (constructionp.getIndates() == null || constructionp.getIndates().equals("")) {
 				outtime = null;
-			}else{
+			} else {
 				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
 			}
 			plantime.setPlanouttime(outtime);
-			PlantimeDao plantimeDao = new PlantimeDao(connection);
+			 plantimeDao = new PlantimeDao(connection);
 			plantimeDao.addPlanTime(plantime);
 			System.out.println("add plantime");
-			
+
 			System.out.println("commit");
 			connection.commit();
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
+			companyDao.release();
+			entranceGuardDao.release();
+			companyPrivilegeDao.release();
+			
+			 staffDao.release();
+			 plantimeDao.release();
+					
 			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
+
 		}
 	}
 

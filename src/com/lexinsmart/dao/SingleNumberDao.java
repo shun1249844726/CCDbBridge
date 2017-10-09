@@ -18,10 +18,16 @@ public class SingleNumberDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
+	ResultSet rest = null;
 
 
 	public SingleNumberDao(Connection conn ) {
 		this.connection  = conn;
+	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 SingleNumberDao 连接和语句");
 	}
 	public void addSingleNumber(Singlenumber singlenumber) {
 		try {
@@ -48,7 +54,6 @@ public class SingleNumberDao {
 	}
 
 	public boolean checkIsExist(String singleno) {
-		ResultSet rs = null;
 		boolean isExist = false;
 		try {
 	//		connection = dbcp.getConnection();
@@ -56,9 +61,9 @@ public class SingleNumberDao {
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, singleno);
 
-			rs = ptmt.executeQuery();
-			rs.last();
-			if (rs.getRow() > 0) {
+			rest = ptmt.executeQuery();
+			rest.last();
+			if (rest.getRow() > 0) {
 				isExist = true;
 			} else {
 				isExist = false;

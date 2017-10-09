@@ -13,10 +13,17 @@ public class TruckDao {
 	DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 	PreparedStatement ptmt = null;
+	ResultSet rest = null;
 
 	public TruckDao(Connection connection) {
 		this.connection = connection;
 	}
+	public void release() {
+		DBCP.releaseConnection(connection);
+		DBCP.closeStatement(ptmt, rest);
+		System.out.println("释放 TruckDao 连接和语句");
+	}
+
 	/**
 	 * 添加车辆表
 	 * 
@@ -49,7 +56,6 @@ public class TruckDao {
 	}
 
 	public boolean checkIsExist(String carno) {
-		ResultSet rs = null;
 		boolean isExist = false;
 		try {
 //			connection = dbcp.getConnection();
@@ -57,9 +63,9 @@ public class TruckDao {
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, carno);
 
-			rs = ptmt.executeQuery();
-			rs.last();
-			if (rs.getRow() > 0) {
+			rest = ptmt.executeQuery();
+			rest.last();
+			if (rest.getRow() > 0) {
 				isExist = true;
 			} else {
 				isExist = false;
@@ -75,16 +81,15 @@ public class TruckDao {
 	}
 
 	public int getId(String carno) {
-		ResultSet resultSet = null;
 		int id = 0;
 		try {
 //			connection = dbcp.getConnection();
 			String sql = " select id from truck where carno=? ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, carno);
-			resultSet = ptmt.executeQuery();
-			while (resultSet.next()) {
-				id = resultSet.getInt("id");
+			rest = ptmt.executeQuery();
+			while (rest.next()) {
+				id = rest.getInt("id");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

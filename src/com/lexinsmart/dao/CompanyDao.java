@@ -21,6 +21,7 @@ public class CompanyDao {
 	Connection conn = null;
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
+	ResultSet rs  = null;
 
 	/**
 	 * 添加公司
@@ -30,7 +31,11 @@ public class CompanyDao {
 	public CompanyDao(Connection connection) {
 		this.conn = connection;
 	}
-
+	public void release() {
+		DBCP.releaseConnection(conn);
+		DBCP.closeStatement(ptmt, rs);
+		System.out.println("释放 CompanyDao 连接和语句");
+	}
 	public void addCompany(Company company) {
 
 		try {
@@ -70,7 +75,7 @@ public class CompanyDao {
 			sql = "SELECT id FROM company where company=? ";
 			ptmt = (PreparedStatement) conn.prepareStatement(sql);
 			ptmt.setString(1, company);
-			ResultSet rs = ptmt.executeQuery();
+			 rs = ptmt.executeQuery();
 			rs.last();
 			if (rs.getRow() > 0) {
 				isExist = true;
@@ -123,9 +128,9 @@ public class CompanyDao {
 			String sql = " select requestid from company where company=?";
 			ptmt = conn.prepareStatement(sql);
 			ptmt.setString(1, company);
-			ResultSet rest = ptmt.executeQuery();
-			while (rest.next()) {
-				requestid = rest.getString("requestid");
+			 rs = ptmt.executeQuery();
+			while (rs.next()) {
+				requestid = rs.getString("requestid");
 			}
 
 		} catch (SQLException e) {
