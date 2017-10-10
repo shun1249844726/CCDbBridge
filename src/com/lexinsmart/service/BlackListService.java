@@ -72,7 +72,7 @@ public class BlackListService {
 				e1.printStackTrace();
 			}
 		} finally {
-			//		pBlacklistDao.release();//增加释放连接
+			pBlacklistDao.release();// 增加释放连接
 			DBCP.releaseConnection(connection);
 			System.out.println("释放连接");
 
@@ -117,7 +117,7 @@ public class BlackListService {
 			}
 			e.printStackTrace();
 		} finally {
-	//		cBlackListDAO.release();
+			cBlackListDAO.release();
 			DBCP.releaseConnection(connection);
 			System.out.println("释放连接");
 

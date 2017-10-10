@@ -13,7 +13,7 @@ public class EmployeeAction {
 	public static void main(String[] args) {
 		List<EmployeeString> employeesstringList = new ArrayList<EmployeeString>();
 		EmployeeService employeeService = new EmployeeService();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 5; i++) {
 			EmployeeString employeestring = new EmployeeString();
 			
 			String name ="named"+i;

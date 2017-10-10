@@ -24,18 +24,18 @@ import com.lexinsmart.utils.TypeChange;
  * 访客管理
  * 
  * @author xushun
- *
+ * 
  */
 public class RegistrationService {
 	static String lfunit = "";
-//	DBCP dbcp = DBCP.getInstance();
+	// DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;
 	CompanyDao companyDao = null;
-	PlantimeDao plantimeDao  = null;
-	EntranceGuardDao entranceGuardDao  = null;
-	CompanyPrivilegeDao companyPrivilegeDao  =  null;
+	PlantimeDao plantimeDao = null;
+	EntranceGuardDao entranceGuardDao = null;
+	CompanyPrivilegeDao companyPrivilegeDao = null;
 	StaffDao staffDao = null;
-	
+
 	public RegistrationService() {
 		try {
 			connection = DBCP.getConnection();
@@ -50,11 +50,11 @@ public class RegistrationService {
 	 * @param registration
 	 */
 	public void setRegistration(OARegistration registration) {
-		lfunit = registration.getLfunit()+"访客单位";
+		lfunit = registration.getLfunit() + "访客单位";
 		String scene = registration.getScene();
 		try {
 			// 1. 添加单位表
-			 companyDao = new CompanyDao(connection);
+			companyDao = new CompanyDao(connection);
 			if (!companyDao.checkIsExist(lfunit)) {
 				Company company = new Company();
 				company.setRequestid(registration.getRequestid());
@@ -78,39 +78,40 @@ public class RegistrationService {
 
 			plantime.setChanger(registration.getGuestname());
 			plantime.setTelephone(null);
-			String intime = registration.getVisitingdate() + " " + registration.getVisitingtime();
+			String intime = registration.getVisitingdate() + " "
+					+ registration.getVisitingtime();
 			// 确认日期和时间的格式
-			String outtime = registration.getLeavedate() + " " + registration.getLeavetime();
+			String outtime = registration.getLeavedate() + " "
+					+ registration.getLeavetime();
 			plantime.setPlanintime(DateUtils.StringToTimestamp(intime));
 			plantime.setPlanouttime(DateUtils.StringToTimestamp(outtime));
 			plantimeDao = new PlantimeDao(connection);
 
-//			int id = plantimeDao.getIdIfExist(cid, 0, 0);
-//			if (id > 0) {
-//				plantimeDao.deleteplantime(id);
-//				plantimeDao.addPlanTime(plantime);
-//				System.out.println("delete & add plantime");
-//			} else if (id == 0) {
-				plantimeDao.addPlanTime(plantime);
-				System.out.println("add plantime");
-//			}
+			// int id = plantimeDao.getIdIfExist(cid, 0, 0);
+			// if (id > 0) {
+			// plantimeDao.deleteplantime(id);
+			// plantimeDao.addPlanTime(plantime);
+			// System.out.println("delete & add plantime");
+			// } else if (id == 0) {
+			plantimeDao.addPlanTime(plantime);
+			System.out.println("add plantime");
+			// }
 
 			// 3 添加单位权限
 			entranceGuardDao = new EntranceGuardDao(connection);
 			List<Integer> ids = entranceGuardDao.getId(0, false);
-			if (scene.equals("是")) {//如果是可以进入二道门的，把二道门也给添加进去。
+			if (scene.equals("是")) {// 如果是可以进入二道门的，把二道门也给添加进去。
 				List<Integer> erDaoMenids = entranceGuardDao.getId(0, true);
 				for (int i = 0; i < erDaoMenids.size(); i++) {
 					ids.add(erDaoMenids.get(i));
 				}
 			}
 
-
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);
 
-			 companyPrivilegeDao = new CompanyPrivilegeDao(connection);
-			Integer egid = 0;//  查询ID
+			companyPrivilegeDao = new CompanyPrivilegeDao(connection);
+			Integer egid = 0;// 查询ID
 
 			for (int i = 0; i < ids.size(); i++) {
 				egid = ids.get(i);
@@ -158,7 +159,7 @@ public class RegistrationService {
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
-			staff.setCompany(lfunit);//  访客的单位用来访单位。
+			staff.setCompany(lfunit);// 访客的单位用来访单位。
 			staff.setRemarks("访客");
 			staff.setRelative(oaFkjcsub.getRelative());
 			staff.setRelationship(oaFkjcsub.getRelationship());
@@ -177,22 +178,25 @@ public class RegistrationService {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");
 			}
-			
+
 			System.out.println("commit");
 			connection.commit();
 		} catch (Exception e) {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			 companyDao.release();
-			 plantimeDao.release();
-			 entranceGuardDao.release();
-			 companyPrivilegeDao.release();
-			 staffDao.release();
-			
-			DBCP.releaseConnection(connection);
-			System.out.println("释放连接");
 
 		}
+	}
+
+	public void release() {
+		companyDao.release();
+		plantimeDao.release();
+		entranceGuardDao.release();
+		companyPrivilegeDao.release();
+		staffDao.release();
+
+		DBCP.releaseConnection(connection);
+		System.out.println("释放连接");
 	}
 }

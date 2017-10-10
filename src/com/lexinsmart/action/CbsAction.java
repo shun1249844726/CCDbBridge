@@ -99,7 +99,10 @@ public class CbsAction {
 		ConstractortermService constractortermService = new ConstractortermService();
 		try {
 			constractortermService.setContractorterm(contractortem); //添加承包商主表
-			constractortermService.setConstructionp(constructionp);//设置承包商子表
+			for (int i = 0; i < 5; i++) {
+				constractortermService.setConstructionp(constructionp);//设置承包商子表
+			}	
+			constractortermService.release();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -103,7 +103,11 @@ public class LwgAction {
 		LwgStructionService lwgStructionService = new LwgStructionService();
 		try {
 			lwgStructionService.setLwgstruction(lwgstruction);// 设置劳务工主表
-			lwgStructionService.setConstructionp(constructionp);//设置劳务工子表
+			for (int i = 0; i < 5; i++) {
+				lwgStructionService.setConstructionp(constructionp);//设置劳务工子表
+				
+			}
+			lwgStructionService.release();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

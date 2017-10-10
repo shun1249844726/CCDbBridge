@@ -184,10 +184,14 @@ public class RegistrationAction {
 		fkjcsub.setRelationship(p_relationship);
 		fkjcsub.setRelativetel(p_relativetel);
 
+		RegistrationService registrationService = new RegistrationService();
+		registrationService.setRegistration(registration);  //设置访客主表
 		try {
-			RegistrationService registrationService = new RegistrationService();
-			registrationService.setRegistration(registration);  //设置访客主表
-			registrationService.setFkjcsub(fkjcsub);//设置访客子表
+			for (int i = 0; i < 5; i++) {
+				registrationService.setFkjcsub(fkjcsub);//设置访客子表
+				
+			}
+			registrationService.release();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

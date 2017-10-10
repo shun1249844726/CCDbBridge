@@ -25,20 +25,20 @@ import com.lexinsmart.utils.TypeChange;
  * 承包商管理
  * 
  * @author xushun
- *
+ * 
  */
 public class ConstractortermService {
 	static String staticCompany = "";
 
-//	DBCP dbcp = DBCP.getInstance();
+	// DBCP dbcp = DBCP.getInstance();
 	Connection connection = null;// 数据库的连接
 
-	CompanyDao companyDao =null;
+	CompanyDao companyDao = null;
 	EntranceGuardDao entranceGuardDao = null;
 	CompanyPrivilegeDao companyPrivilegeDao = null;
-	StaffDao staffDao =null;
+	StaffDao staffDao = null;
 	PlantimeDao plantimeDao = null;
-	
+
 	public ConstractortermService() {
 		try {
 			connection = DBCP.getConnection();// 事物管理，最后commit；
@@ -55,7 +55,8 @@ public class ConstractortermService {
 	 * @param contractortem
 	 * @throws SQLException
 	 */
-	public void setContractorterm(OAContractortem contractortem) throws SQLException {
+	public void setContractorterm(OAContractortem contractortem)
+			throws SQLException {
 		staticCompany = contractortem.getContractorn();
 
 		try {
@@ -87,10 +88,10 @@ public class ConstractortermService {
 
 				int privilegeid = companyPrivilegeDao.getIdIfExist(cid, egid);
 				if (privilegeid > 0) {
-//					companyPrivilegeDao.delete(privilegeid);
-//					companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
+					// companyPrivilegeDao.delete(privilegeid);
+					// companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
 					// 循环，看多少个门禁ID了
-//					System.out.println("exit ");
+					// System.out.println("exit ");
 				} else if (privilegeid == 0) {
 					companyPrivilegeDao.addCompanyPrivilege(companyprivilege);//
 					// 循环，看多少个门禁ID了
@@ -111,13 +112,15 @@ public class ConstractortermService {
 	 * @param constructionp
 	 * @throws SQLException
 	 */
-	public void setConstructionp(OAConstructionp constructionp) throws SQLException {
+	public void setConstructionp(OAConstructionp constructionp)
+			throws SQLException {
 
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
 			CompanyDao companyDao = new CompanyDao(connection);
-			String requestid = companyDao.getrequestId(constructionp.getDepart());
+			String requestid = companyDao.getrequestId(constructionp
+					.getDepart());
 			staff.setRequestid(requestid);
 			staff.setName(constructionp.getName());
 			staff.setSex(constructionp.getSexs());
@@ -126,13 +129,13 @@ public class ConstractortermService {
 			staff.setHomeaddr(constructionp.getHomelocation());
 			staff.setTelephone(constructionp.getTelephone());
 			staff.setCompany(staticCompany);
-			staff.setRemarks("承包商："+constructionp.getRemarks());
+			staff.setRemarks("承包商：" + constructionp.getRemarks());
 			staff.setRelative(constructionp.getRelatives());
 			staff.setRelationship(constructionp.getRelativeship());
 			staff.setTelephone2(constructionp.getTelephone2());
 			staff.setIden(constructionp.getIden());
 			staff.setPrivilege(false);
-			staff.setCtype(3);//承包商人员类型 3
+			staff.setCtype(3);// 承包商人员类型 3
 
 			staffDao = new StaffDao(connection);
 
@@ -144,12 +147,11 @@ public class ConstractortermService {
 				staffDao.addStaff(staff);
 				System.out.println("add staff！");
 			}
-			
-		
+
 			// 2. 添加在厂时间。
 			Plantime plantime = new Plantime();
 			plantime.setCid(companyDao.getId(staticCompany));
-			id = staffDao.getid(constructionp.getIden());//重新查询ID
+			id = staffDao.getid(constructionp.getIden());// 重新查询ID
 			plantime.setSid(id);// TODO 使用个人外键控制；
 			plantime.setTid(0);
 
@@ -157,10 +159,12 @@ public class ConstractortermService {
 			plantime.setTelephone(constructionp.getTelephone());
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
 			Timestamp outtime = null;
-			if (constructionp.getIndates() == null || constructionp.getIndates().equals("")) {
+			if (constructionp.getIndates() == null
+					|| constructionp.getIndates().equals("")) {
 				outtime = null;
-			}else{
-				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
+			} else {
+				outtime = new Timestamp(DateUtils.StringToDate(
+						constructionp.getIndates()).getTime());
 			}
 			plantime.setPlanouttime(outtime);
 			plantimeDao = new PlantimeDao(connection);
@@ -174,14 +178,18 @@ public class ConstractortermService {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-			
-			 companyDao.release();
-			 entranceGuardDao.release();
-			 companyPrivilegeDao.release();
-			 staffDao.release();
-			 plantimeDao.release();
-			DBCP.releaseConnection(connection);
-			System.out.println("释放连接");
+
 		}
+	}
+
+	public void release() {
+		companyDao.release();
+		entranceGuardDao.release();
+		companyPrivilegeDao.release();
+		staffDao.release();
+		plantimeDao.release();
+		DBCP.releaseConnection(connection);
+		System.out.println("释放连接");
+
 	}
 }

@@ -7,6 +7,7 @@ import com.lexinsmart.service.BlackListService;
 public class BlackListAction {
 	static OABlacklist oa_blacklist_p = null;
 	static OAVehicle vehicle = null;
+
 	public static void main(String[] args) {
 
 		// 人员黑名单。
@@ -21,7 +22,7 @@ public class BlackListAction {
 		String plemployno = "12121212";
 		String pldepartment = "dep";
 
-		 oa_blacklist_p = new OABlacklist();// 人员黑名单
+		oa_blacklist_p = new OABlacklist();// 人员黑名单
 		oa_blacklist_p.setIdcard(idcard);
 		oa_blacklist_p.setName(name);
 		oa_blacklist_p.setMantype(mantype);
@@ -39,7 +40,7 @@ public class BlackListAction {
 		String autono = "闽J19718";
 		String state = "402864d149df48ff0149df70dc7b0007";
 
-		 vehicle = new OAVehicle();
+		vehicle = new OAVehicle();
 		vehicle.setRequestid(requestid);
 		vehicle.setNodeid(nodeid);
 		vehicle.setRowindex(rowindex);
@@ -47,29 +48,28 @@ public class BlackListAction {
 		vehicle.setState(state);
 
 		BlackListAction ba = new BlackListAction();
-		
-		for (int i = 0; i < 100; i++) {
-			MyThread thread =  ba.new MyThread();
-			thread.start();
-			System.out.println(i);
+
+		for (int i = 0; i < 200; i++) {
+			// MyThread thread = ba.new MyThread();
+			// thread.start();
+			// System.out.println(i);
+			BlackListService blackListService = new BlackListService();
+			blackListService.addBlackListP(oa_blacklist_p);
+
+			BlackListService CblackListService = new BlackListService();
+			CblackListService.addBlackListC(vehicle);
 		}
 
-//		BlackListService blackListService = new BlackListService();
-//		blackListService.addBlackListP(oa_blacklist_p);
-//		
-//		BlackListService CblackListService = new BlackListService();
-//		CblackListService.addBlackListC(vehicle);
-
-		
 	}
-	  class MyThread extends Thread{
-	        @Override
-	        public void run() {
-	    		BlackListService blackListService = new BlackListService();
-	    		blackListService.addBlackListP(oa_blacklist_p);
-	    		
-	    		BlackListService CblackListService = new BlackListService();
-	    		CblackListService.addBlackListC(vehicle);
-	        }
-	    }
+
+	class MyThread extends Thread {
+		@Override
+		public void run() {
+			BlackListService blackListService = new BlackListService();
+			blackListService.addBlackListP(oa_blacklist_p);
+
+			BlackListService CblackListService = new BlackListService();
+			CblackListService.addBlackListC(vehicle);
+		}
+	}
 }
