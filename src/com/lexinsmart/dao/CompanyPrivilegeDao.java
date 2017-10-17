@@ -35,6 +35,10 @@ public class CompanyPrivilegeDao {
 	 * @param companyprivilege
 	 */
 	public void addCompanyPrivilege(Companyprivilege companyprivilege){
+		//如果是化工码头，和煤码头不添加
+		if (companyprivilege.getEgid() == 23 || companyprivilege.getEgid() == 26) {
+			return;
+		}		
 		try {
 			String sql = "insert into company_privilege "+
 					" (egid,cid) "+

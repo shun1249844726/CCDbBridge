@@ -65,7 +65,7 @@ public class LwgAction {
 		String p_relatives= null;//亲属名字
 		String p_relativeship= null;//亲属关系
 		String p_teltphone2= null;//亲属联系电话
-		String p_sexs= null;//性别
+		String p_sexs= "男";//性别
 		String p_indates= null;//入厂 有效期。。。。必填
 		String p_num= null;//序号
 		String p_name= "劳务工2da";//姓名

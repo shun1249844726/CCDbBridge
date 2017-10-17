@@ -147,9 +147,9 @@ public class RegistrationAction {
 		String p_fkname = "徐顺";//访客名字
 		String p_sfnum = null;
 		String p_fknum = null;
-		String p_qtnum = "411328199309155010";//访客证件号码
+		String p_qtnum = "4113281993091550100";//访客证件号码
 		String p_byear = null;
-		String p_gender = "40285a8d4d459849014d45cbfcd60194";//性别
+		String p_gender = "男";//性别
 		String p_edate = null;
 		String p_zjnum = null;
 		String p_sex = null;

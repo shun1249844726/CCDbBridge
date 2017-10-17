@@ -153,8 +153,8 @@ public class RegistrationService {
 			Staff staff = new Staff();
 			staff.setRequestid(oaFkjcsub.getRequestid());
 			staff.setName(oaFkjcsub.getFkname());
-			String sex = DropDownTools.stringToSex(oaFkjcsub.getGender());
-			staff.setSex(sex);
+//			String sex = DropDownTools.stringToSex(oaFkjcsub.getGender());
+			staff.setSex(oaFkjcsub.getGender());
 			staff.setAge(TypeChange.stringToInt(oaFkjcsub.getAge()));
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());

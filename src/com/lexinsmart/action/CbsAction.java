@@ -56,7 +56,7 @@ public class CbsAction {
 		String p_num = null;
 		String p_edate = null;
 		String p_name = "cbs2";//姓名
-		String p_iden = "411328199309155010";//身份证号
+		String p_iden = "41132819930915501990";//身份证号
 		String p_remarks = null;
 		String p_insurancetype = null;
 		String p_validity = null;
@@ -70,7 +70,7 @@ public class CbsAction {
 		String p_relatives = null;////亲属名字
 		String p_relativeship = null;//亲属关系
 		String p_telephone2 = null;//亲属电话
-		String p_sexs = null;//性别
+		String p_sexs = "女";//性别
 		String p_indates = "2018-07-05";//入厂有效期／／／／／／必填
 		OAConstructionp constructionp = new OAConstructionp();
 		constructionp.setRequestid(p_requestid);

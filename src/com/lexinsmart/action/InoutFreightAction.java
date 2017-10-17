@@ -45,7 +45,7 @@ public class InoutFreightAction {
 		String createtime = null;//
 		String parmcarno = null;//
 		String parmno = null;//
-		String driver = "司机1";// 司机
+		String driver = "司机12";// 司机
 		String attendant1 = "随车1";// 随车人员(一)
 		String attendant2 = null;//
 		String attendant3 = null;//
@@ -76,7 +76,7 @@ public class InoutFreightAction {
 		String age2 = null;//
 		String age3 = null;//
 		String age4 = null;//
-		String sex = null;// 性别(司机)
+		String sex = "女";// 性别(司机)
 		String sex1 = null;//
 		String sex2 = null;//
 		String sex3 = null;//

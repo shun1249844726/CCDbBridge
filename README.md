@@ -25,6 +25,10 @@
 * 在DAO层释放了连接和ptmt 和ResultSet
 * 从OA拿到了dbcp.properties配置文件，文件格式没问题了
 
+# 10.17
+* 访客性别原本用的Hash的，现在统一都用汉字的性别
+* companyprivilegedao 添加公司权限时增加了 如果是化工码头和煤码头的话就不添加的代码
+
 ## TODO
 * 连接池的问题。一定不能挂了啊啊啊啊啊啊啊啊啊
  	
