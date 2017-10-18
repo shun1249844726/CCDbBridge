@@ -29,6 +29,12 @@
 * 访客性别原本用的Hash的，现在统一都用汉字的性别
 * companyprivilegedao 添加公司权限时增加了 如果是化工码头和煤码头的话就不添加的代码
 
+# 10.18
+* CompanyPrivilegeDao 更改 如果是化工码头和煤码头不添加权限
+* PlantimeDao 增加根据 cid sid 查询计划出厂时间的
+* StaffDao 增加获取company ，获取ctype
+* RegistrationService
+
 ## TODO
 * 连接池的问题。一定不能挂了啊啊啊啊啊啊啊啊啊
  	

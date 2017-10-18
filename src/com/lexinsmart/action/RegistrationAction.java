@@ -33,7 +33,7 @@ public class RegistrationAction {
 		 String fktype =null;
 		 String visitingdate = "2017-09-22";//预计来访时期   yyyy-mm-dd
 		 String visitingtime ="11:40:23";//预计来访时间     hh:mm:ss
-		 String leavedate ="2017-09-29";//预计出厂时间
+		 String leavedate ="2018-05-27";//预计出厂时间
 		 String leavetime ="14:20:49";
 		 String visitobject =null;
 		 String things =null;
@@ -50,7 +50,7 @@ public class RegistrationAction {
 		 String returndocuments =null;
 		 String lsnumber =null;
 		 String choosedoc =null;
-		 String lfunit ="glrsmarttd";//来访单位。
+		 String lfunit ="苏州昶发";//来访单位。
 		 String whylegacy =null;
 		 String guestscope =null;
 		 String bmid =null;
@@ -144,10 +144,10 @@ public class RegistrationAction {
 		String p_nodeid = null;
 		String p_rowindex = null;
 		String p_sno = null;
-		String p_fkname = "徐顺";//访客名字
+		String p_fkname = "cbs2";//访客名字
 		String p_sfnum = null;
 		String p_fknum = null;
-		String p_qtnum = "4113281993091550100";//访客证件号码
+		String p_qtnum = "41132819930915501990";//访客证件号码
 		String p_byear = null;
 		String p_gender = "男";//性别
 		String p_edate = null;
@@ -187,7 +187,7 @@ public class RegistrationAction {
 		RegistrationService registrationService = new RegistrationService();
 		registrationService.setRegistration(registration);  //设置访客主表
 		try {
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < 1; i++) {
 				registrationService.setFkjcsub(fkjcsub);//设置访客子表
 				
 			}

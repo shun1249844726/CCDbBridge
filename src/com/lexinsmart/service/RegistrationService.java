@@ -2,6 +2,9 @@ package com.lexinsmart.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.lexinsmart.dao.CompanyDao;
@@ -35,6 +38,7 @@ public class RegistrationService {
 	EntranceGuardDao entranceGuardDao = null;
 	CompanyPrivilegeDao companyPrivilegeDao = null;
 	StaffDao staffDao = null;
+	Timestamp outtimetemp = null;
 
 	public RegistrationService() {
 		try {
@@ -83,8 +87,9 @@ public class RegistrationService {
 			// 确认日期和时间的格式
 			String outtime = registration.getLeavedate() + " "
 					+ registration.getLeavetime();
+			outtimetemp = DateUtils.StringToTimestamp(outtime);
 			plantime.setPlanintime(DateUtils.StringToTimestamp(intime));
-			plantime.setPlanouttime(DateUtils.StringToTimestamp(outtime));
+			plantime.setPlanouttime(outtimetemp);
 			plantimeDao = new PlantimeDao(connection);
 
 			// int id = plantimeDao.getIdIfExist(cid, 0, 0);
@@ -151,6 +156,9 @@ public class RegistrationService {
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
+			staffDao = new StaffDao(connection);
+			String iden = oaFkjcsub.getQtnum();
+
 			staff.setRequestid(oaFkjcsub.getRequestid());
 			staff.setName(oaFkjcsub.getFkname());
 //			String sex = DropDownTools.stringToSex(oaFkjcsub.getGender());
@@ -159,19 +167,47 @@ public class RegistrationService {
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
+						
 			staff.setCompany(lfunit);// 访客的单位用来访单位。
 			staff.setRemarks("访客");
 			staff.setRelative(oaFkjcsub.getRelative());
 			staff.setRelationship(oaFkjcsub.getRelationship());
 			staff.setTelephone2(oaFkjcsub.getRelativetel());
-			staff.setIden(oaFkjcsub.getQtnum());
+			staff.setIden(iden);
 			staff.setPrivilege(false);
 			staff.setCtype(2);
 
-			staffDao = new StaffDao(connection);
 
-			int id = staffDao.getid(oaFkjcsub.getQtnum());
-			if (id > 0) {
+			int sid = staffDao.getid(iden);
+			if (sid > 0) {
+				//用来判断是否是承包商，或者劳务工的访客。
+				String companyOld = staffDao.getCompany(iden);
+				System.out.println("old:"+companyOld);
+				int oldcid = companyDao.getId(companyOld);
+				List<Timestamp> times_c = plantimeDao.getPlantimeByCid(oldcid);
+				if (times_c.size()>0) {
+					System.out.println("size: "+times_c.size() +" "+Collections.max(times_c));
+					if (Collections.max(times_c).getTime() > outtimetemp.getTime()) {
+						System.out.println("劳务单位计划时间更长");
+						staff.setCompany(staffDao.getCompany(iden));
+						staff.setCtype(staffDao.getctype(iden));
+						staff.setRemarks("原单位的时间还没到");
+					}
+				}	
+				List<Timestamp> times = plantimeDao.getPlantimeBySid(sid);
+				if (times.size()>0) {
+					System.out.println("size: "+times.size() +" "+Collections.max(times) );
+					if (Collections.max(times).getTime() > outtimetemp.getTime()) {
+						System.out.println("劳务单位中人员的计划时间更长");
+						staff.setCompany(staffDao.getCompany(iden));
+						staff.setCtype(staffDao.getctype(iden));
+						staff.setRemarks("承包商或劳务工的在厂时间还没到的中途访客");
+					}
+				}
+				System.out.println("最终使用："+staff.getCompany()  + "  ctype:"+staff.getCtype());	
+				//到这里
+				
+				
 				staffDao.edit(staff);
 				System.out.println("edit staff！");
 			} else {

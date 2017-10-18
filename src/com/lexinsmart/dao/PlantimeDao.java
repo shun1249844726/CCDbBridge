@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.lexinsmart.model.Plantime;
 import com.lexinsmart.utils.DBCP;
@@ -90,7 +92,7 @@ public class PlantimeDao {
 			ptmt.setInt(2, sid);
 			ptmt.setInt(3, tid);
 			
-			 rest = ptmt.executeQuery();
+			rest = ptmt.executeQuery();
 			rest.last();
 			if (rest.getRow()>0) {
 				rest.beforeFirst();
@@ -104,5 +106,40 @@ public class PlantimeDao {
 			// TODO: handle exception
 		}
 		return id;
+	}
+	
+	public List<Timestamp> getPlantimeBySid(int sid){
+		System.out.println("sid:"+sid);
+		List<Timestamp> times = new ArrayList<Timestamp>();
+		try {
+			String sql = "select planouttime from plan_time where sid=? ";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setInt(1, sid);
+			rest = ptmt.executeQuery();
+			while(rest.next()) {
+				times.add(rest.getTimestamp("planouttime"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return times;
+	}
+	public List<Timestamp> getPlantimeByCid(int cid){
+		System.out.println("cid:"+cid);
+		List<Timestamp> times = new ArrayList<Timestamp>();
+		try {
+			String sql = "select planouttime from plan_time where cid=? ";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setInt(1, cid);
+			rest = ptmt.executeQuery();
+			while(rest.next()) {
+				times.add(rest.getTimestamp("planouttime"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return times;
 	}
 }

@@ -159,4 +159,34 @@ public class StaffDao {
 			e.printStackTrace();
 		}
 	}
+	public String getCompany(String iden) {
+		String company = "";
+		try {
+			String sql ="select company from staff where iden=?";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, iden);
+			rest = ptmt.executeQuery();
+			while (rest.next()) {
+				company = rest.getString("company");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return company;
+	}
+	public Integer getctype(String iden) {
+		int ctype = -1;
+		try {
+			String sql ="select ctype from staff where iden=?";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, iden);
+			rest = ptmt.executeQuery();
+			while (rest.next()) {
+				ctype = rest.getInt("ctype");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return ctype;
+	}
 }
