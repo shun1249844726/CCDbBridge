@@ -25,11 +25,11 @@
 * 在DAO层释放了连接和ptmt 和ResultSet
 * 从OA拿到了dbcp.properties配置文件，文件格式没问题了
 
-# 10.17
+## 10.17
 * 访客性别原本用的Hash的，现在统一都用汉字的性别
 * companyprivilegedao 添加公司权限时增加了 如果是化工码头和煤码头的话就不添加的代码
 
-# 10.18
+## 10.18
 * CompanyPrivilegeDao 更改 如果是化工码头和煤码头不添加权限
 * PlantimeDao 增加根据 cid sid 查询计划出厂时间的
 * StaffDao 增加获取company ，获取ctype
