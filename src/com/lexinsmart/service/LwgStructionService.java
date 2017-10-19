@@ -75,7 +75,8 @@ public class LwgStructionService {
 			int cid = companyDao.getId(lwgstruction.getContractorn());// 查询单位外键的表ID
 			// 3 添加单位权限
 			entranceGuardDao = new EntranceGuardDao(connection);
-			List<Integer> ids = entranceGuardDao.getId(0, false);
+//			List<Integer> ids = entranceGuardDao.getId(0, false);
+			List<Integer> ids = entranceGuardDao.getIdsByType(0);
 
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);

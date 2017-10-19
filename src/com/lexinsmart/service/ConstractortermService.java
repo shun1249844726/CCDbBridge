@@ -74,7 +74,9 @@ public class ConstractortermService {
 
 			// 3 添加单位权限
 			entranceGuardDao = new EntranceGuardDao(connection);
-			List<Integer> ids = entranceGuardDao.getId(0, false); // 获取门禁的ID
+//			List<Integer> ids = entranceGuardDao.getId(0, false); // 获取门禁的ID
+			List<Integer> ids = entranceGuardDao.getIdsByType(0);
+
 			int cid = companyDao.getId(contractortem.getContractorn());// 查询单位外键的表ID
 			Companyprivilege companyprivilege = new Companyprivilege();
 			companyprivilege.setCid(cid);

@@ -35,6 +35,11 @@
 * StaffDao 增加获取company ，获取ctype
 * RegistrationService
 
+## 10.19
+* EntranceGuardDao 增加根据人员类型查询所有门禁
+* ConstractortermService 更改默认承包商可以进入二道门。
+* LwgStructionService 更改劳务工默认可以进入二道门。
+
 ## TODO
 * 连接池的问题。一定不能挂了啊啊啊啊啊啊啊啊啊
  	

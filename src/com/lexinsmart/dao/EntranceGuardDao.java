@@ -88,4 +88,25 @@ public class EntranceGuardDao {
 		return ids;
 		
 	}
+	/**
+	 * 
+	 * @param type 门禁类型  车1  人0
+	 * @return 搜索到的ID的列表
+	 */
+	public List<Integer> getIdsByType(int type){
+		List<Integer> ids = new ArrayList<Integer>();
+		try {
+			String sql = " select id from entrance_guard where type=? ";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setInt(1,type );
+			rest = ptmt.executeQuery();
+			while(rest.next()){
+				ids.add(rest.getInt("id"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return ids;
+		
+	}
 }
