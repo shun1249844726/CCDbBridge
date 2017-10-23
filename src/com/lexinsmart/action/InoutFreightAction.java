@@ -22,16 +22,16 @@ import com.lexinsmart.utils.TypeChange;
 public class InoutFreightAction {
 	public static void main(String[] args) {
 		Inoutfreight inoutfreight = new Inoutfreight();
-		String requestid = "1032";
+		String requestid = "10320";
 		String nodeid = null;
 		String rowindex = null;
-		String handplanno = "ZT201604004111";// 装卸计划号
-		String depotname = "PBT原材料保税库";// 主仓库名称
+		String handplanno = "FZT201710002880";// 装卸计划号
+		String depotname = "eme";// 主仓库名称
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
-		String singleno = "1020T000063119d,1020T000063118d,1020T000063117d";// 提入单号
-		String carno = "闽J1971899";// 车牌号码
-		String idcard1 = "320923197912034111";// 证件号(一)
+		String singleno = "1020T000274620,1020T000274621,1020T000274619,1020T000274618";// 提入单号
+		String carno = "苏EE7088";// 车牌号码
+		String idcard1 = "EE7088EE7088";// 证件号(一)
 		String idcard2 = null;// 证件号(二)
 		String idcard3 = null;// 证件号(三)
 		String idcard4 = null;// 证件号(四)
@@ -39,13 +39,13 @@ public class InoutFreightAction {
 		String outregistime = null;//
 		String registerman = null;//
 		String modifyman = null;//
-		String company = "货运司机公司2";//公司
+		String company = "EE7088";//公司
 		String comtype = null;//
-		String licensenum = "320924198111130111";// 证件号(司机)
+		String licensenum = "EE7088EE7088EE7088";// 证件号(司机)
 		String createtime = null;//
 		String parmcarno = null;//
 		String parmno = null;//
-		String driver = "司机12";// 司机
+		String driver = "司机EE7088";// 司机
 		String attendant1 = "随车1";// 随车人员(一)
 		String attendant2 = null;//
 		String attendant3 = null;//

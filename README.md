@@ -40,7 +40,13 @@
 * ConstractortermService 更改默认承包商可以进入二道门。
 * LwgStructionService 更改劳务工默认可以进入二道门。
 
+## 10.23
+增加出差人员的控制
+* Model: OATocsbusiness
+* Action: TocsBusiness
+* service: ToBusinessService
+
 ## TODO
-* 连接池的问题。一定不能挂了啊啊啊啊啊啊啊啊啊
+
  	
  	

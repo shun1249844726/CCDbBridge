@@ -76,7 +76,7 @@ public class EntranceGuardDao {
 		try {
 			String sql = " select id from entrance_guard where type=? and privilege=? ";
 			ptmt = connection.prepareStatement(sql);
-			ptmt.setInt(1,type );
+			ptmt.setInt(1,type);
 			ptmt.setBoolean(2, privilege);
 			rest = ptmt.executeQuery();
 			while(rest.next()){
