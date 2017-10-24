@@ -116,6 +116,19 @@ public class StaffDao {
 		}
 		return id;
 	}
+	public void editIden(String newIden,String oldIden) {
+		String sql = "update staff set iden=? where iden=?";
+		try {
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1,newIden);
+			ptmt.setString(2,oldIden);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	public void edit(Staff staff){
 		try {
 			String sql = "update staff set "+

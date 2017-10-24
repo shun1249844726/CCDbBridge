@@ -2,6 +2,8 @@ package com.lexinsmart.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.lexinsmart.dao.CompanyDao;
@@ -54,29 +56,37 @@ public class ToBusinessService {
 				System.out.println("add company");
 			}
 			// 添加 个人表
+			String idenString = oaTocsbusiness.getCardnum();//身份证用卡号
+			String remarksUseIden= oaTocsbusiness.getIden();//备注写身份证号
 			staffDao = new StaffDao(connection);
 			Staff staff = new Staff();
 			staff.setRequestid(oaTocsbusiness.getRequestid());
 			staff.setName(oaTocsbusiness.getTranname());
-			staff.setIden(oaTocsbusiness.getIden());
+			staff.setIden(idenString);
 			staff.setSex(oaTocsbusiness.getSex());
 			staff.setAge(TypeChange.stringToInt(oaTocsbusiness.getAge()));
 			staff.setLocation(oaTocsbusiness.getLoaction());
 			staff.setHomeaddr(oaTocsbusiness.getFamlocation());
 			staff.setTelephone(oaTocsbusiness.getTel());
 			staff.setCompany(companyName);
-			staff.setRemarks("事由:" + oaTocsbusiness.getReason() + "\t" + "天数:" + oaTocsbusiness.getBusday());
+			staff.setRemarks(remarksUseIden); 
 			staff.setRelative(oaTocsbusiness.getRelationname());
 			staff.setRelationship(oaTocsbusiness.getRelaction());
 			staff.setTelephone2(oaTocsbusiness.getRelactiontel());
 			staff.setPrivilege(false);
 			staff.setCtype(2);// TODO 出差人员类型 待定
+			
+
 			int sid = 0;
-			if (oaTocsbusiness.getIden() != null && !oaTocsbusiness.getIden().equals("")) {
-				sid = staffDao.getid(oaTocsbusiness.getIden());
+			if (idenString != null && !idenString.equals("")) {
+				sid = staffDao.getid(idenString);
+				System.out.println("sid:"+sid +"  "+idenString);
 				if (sid > 0) {
-					staffDao.edit(staff);
-					System.out.println("edit staff！");
+					long time = new Date().getTime();
+					Timestamp nowtime = new Timestamp(time);
+					staffDao.editIden(nowtime+"/"+idenString, idenString);
+					staffDao.addStaff(staff);
+					System.out.println("edit old and add staff！");
 				} else {
 					staffDao.addStaff(staff);
 					System.out.println("add staff！");

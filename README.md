@@ -46,6 +46,9 @@
 * Action: TocsBusiness
 * service: ToBusinessService
 
+
+## 10.24 
+* 更改出差人员公用同一个卡号。这样就直接把原来卡号加时间，新来的人卡号用最新的。
 ## TODO
 
  	
