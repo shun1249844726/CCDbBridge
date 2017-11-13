@@ -11,7 +11,7 @@ public class BlackListAction {
 	public static void main(String[] args) {
 
 		// 人员黑名单。
-		String idcard = "411328199309155010";
+		String idcard = "411328199309155010d";
 		String name = "黑1";
 		String mantype = "40285a8d55c3ffed0155e226f71356b1";
 		String company = "glrsmart";
@@ -49,17 +49,19 @@ public class BlackListAction {
 
 		BlackListAction ba = new BlackListAction();
 
-		for (int i = 0; i < 200; i++) {
-			// MyThread thread = ba.new MyThread();
-			// thread.start();
-			// System.out.println(i);
-			BlackListService blackListService = new BlackListService();
-			blackListService.addBlackListP(oa_blacklist_p);
+//		for (int i = 0; i < 2; i++) {
+//			// MyThread thread = ba.new MyThread();
+//			// thread.start();
+//			// System.out.println(i);
+//			BlackListService blackListService = new BlackListService();
+//			blackListService.addBlackListP(oa_blacklist_p);
+//
+//			BlackListService CblackListService = new BlackListService();
+//			CblackListService.addBlackListC(vehicle);
+//		}
 
-			BlackListService CblackListService = new BlackListService();
-			CblackListService.addBlackListC(vehicle);
-		}
-
+		deleteBlackListP(idcard);
+		deleteBlackListC(autono);
 	}
 
 	class MyThread extends Thread {
@@ -71,5 +73,18 @@ public class BlackListAction {
 			BlackListService CblackListService = new BlackListService();
 			CblackListService.addBlackListC(vehicle);
 		}
+	}
+
+	/**
+	 * 这个方法为删除人员黑名单的方法， 
+	 * @param iden  人员身份证号码
+	 */
+	public static void deleteBlackListP(String iden){
+		BlackListService blackListService = new BlackListService();
+		blackListService.deleteBlackP(iden);
+	}
+	public static void deleteBlackListC(String carno){
+		BlackListService blackListService = new BlackListService();
+		blackListService.deleteBlackC(carno);
 	}
 }

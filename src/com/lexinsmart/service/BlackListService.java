@@ -79,6 +79,30 @@ public class BlackListService {
 		}
 	}
 
+	public void deleteBlackP(String idcard){
+		PBlacklistDao pBlacklistDao = null;
+		try {
+			connection = DBCP.getConnection();// 事物管理，最后commit；
+			connection.setAutoCommit(false);
+			pBlacklistDao = new PBlacklistDao(connection);
+			pBlacklistDao.delete(idcard);
+			connection.commit();
+			System.out.println("commit");
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally {
+			pBlacklistDao.release();// 增加释放连接
+			DBCP.releaseConnection(connection);
+			System.out.println("释放连接");
+		}
+	}
 	/**
 	 * 添加车辆黑名单
 	 * @param vehicle
@@ -120,7 +144,31 @@ public class BlackListService {
 			cBlackListDAO.release();
 			DBCP.releaseConnection(connection);
 			System.out.println("释放连接");
-
 		}
+	}
+
+	public void deleteBlackC(String carno) {
+			CBlackListDAO cBlackListDAO = null;
+			try {
+				connection = DBCP.getConnection();// 事物管理，最后commit；
+				connection.setAutoCommit(false);
+				cBlackListDAO = new CBlackListDAO(connection);
+				cBlackListDAO.delete(carno);
+				connection.commit();
+				System.out.println("commit");
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			} finally {
+				cBlackListDAO.release();// 增加释放连接
+				DBCP.releaseConnection(connection);
+				System.out.println("释放连接");
+			}
 	}
 }

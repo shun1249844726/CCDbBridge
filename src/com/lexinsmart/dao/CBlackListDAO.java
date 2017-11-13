@@ -79,7 +79,20 @@ public class CBlackListDAO {
 			// TODO: handle exception
 		}
 	}
-
+	/**
+	 * 根据carno删除一列数据
+	 * @param carno
+	 */
+	public void delete(String carno){
+		try {
+			String sql = "delete from blacklist_c where carno=?";
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, carno);
+			ptmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	public void edit(BlacklistC blacklistC){
 		try {
 			String sql = " update blacklist_c set "+

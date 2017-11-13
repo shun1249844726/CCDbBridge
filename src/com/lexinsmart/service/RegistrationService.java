@@ -82,11 +82,9 @@ public class RegistrationService {
 
 			plantime.setChanger(registration.getGuestname());
 			plantime.setTelephone(null);
-			String intime = registration.getVisitingdate() + " "
-					+ registration.getVisitingtime();
+			String intime = registration.getVisitingdate() + " " + registration.getVisitingtime();
 			// 确认日期和时间的格式
-			String outtime = registration.getLeavedate() + " "
-					+ registration.getLeavetime();
+			String outtime = registration.getLeavedate() + " " + registration.getLeavetime();
 			outtimetemp = DateUtils.StringToTimestamp(outtime);
 			plantime.setPlanintime(DateUtils.StringToTimestamp(intime));
 			plantime.setPlanouttime(outtimetemp);
@@ -161,13 +159,13 @@ public class RegistrationService {
 
 			staff.setRequestid(oaFkjcsub.getRequestid());
 			staff.setName(oaFkjcsub.getFkname());
-//			String sex = DropDownTools.stringToSex(oaFkjcsub.getGender());
+			// String sex = DropDownTools.stringToSex(oaFkjcsub.getGender());
 			staff.setSex(oaFkjcsub.getGender());
 			staff.setAge(TypeChange.stringToInt(oaFkjcsub.getAge()));
 			staff.setLocation(oaFkjcsub.getBirthplace());
 			staff.setHomeaddr(oaFkjcsub.getHomeaddr());
 			staff.setTelephone(oaFkjcsub.getTelephone());
-						
+
 			staff.setCompany(lfunit);// 访客的单位用来访单位。
 			staff.setRemarks("访客");
 			staff.setRelative(oaFkjcsub.getRelative());
@@ -177,26 +175,25 @@ public class RegistrationService {
 			staff.setPrivilege(false);
 			staff.setCtype(2);
 
-
 			int sid = staffDao.getid(iden);
 			if (sid > 0) {
-				//用来判断是否是承包商，或者劳务工的访客。
+				// 用来判断是否是承包商，或者劳务工的访客。
 				String companyOld = staffDao.getCompany(iden);
-				System.out.println("old:"+companyOld);
+				System.out.println("old:" + companyOld);
 				int oldcid = companyDao.getId(companyOld);
 				List<Timestamp> times_c = plantimeDao.getPlantimeByCid(oldcid);
-				if (times_c.size()>0) {
-					System.out.println("size: "+times_c.size() +" "+Collections.max(times_c));
+				if (times_c.size() > 0) {
+					System.out.println("size: " + times_c.size() + " " + Collections.max(times_c));
 					if (Collections.max(times_c).getTime() > outtimetemp.getTime()) {
 						System.out.println("劳务单位计划时间更长");
 						staff.setCompany(staffDao.getCompany(iden));
 						staff.setCtype(staffDao.getctype(iden));
 						staff.setRemarks("原单位的时间还没到");
 					}
-				}	
+				}
 				List<Timestamp> times = plantimeDao.getPlantimeBySid(sid);
-				if (times.size()>0) {
-					System.out.println("size: "+times.size() +" "+Collections.max(times) );
+				if (times.size() > 0) {
+					System.out.println("size: " + times.size() + " " + Collections.max(times));
 					if (Collections.max(times).getTime() > outtimetemp.getTime()) {
 						System.out.println("劳务单位中人员的计划时间更长");
 						staff.setCompany(staffDao.getCompany(iden));
@@ -204,10 +201,9 @@ public class RegistrationService {
 						staff.setRemarks("承包商或劳务工的在厂时间还没到的中途访客");
 					}
 				}
-				System.out.println("最终使用："+staff.getCompany()  + "  ctype:"+staff.getCtype());	
-				//到这里
-				
-				
+				System.out.println("最终使用：" + staff.getCompany() + "  ctype:" + staff.getCtype());
+				// 到这里
+
 				staffDao.edit(staff);
 				System.out.println("edit staff！");
 			} else {

@@ -125,4 +125,19 @@ public class PBlacklistDao {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 根据idcard 删除一列
+	 * @param id
+	 */
+	public void delete(String idcard){
+		try {
+			String sql ="delete from blacklist_p where idcard=?";
+			ptmt=connection.prepareStatement(sql);
+			ptmt.setString(1, idcard);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -56,8 +56,7 @@ public class LwgStructionService {
 	 * @param lwgstruction
 	 * @throws SQLException
 	 */
-	public void setLwgstruction(SELwgstruction lwgstruction)
-			throws SQLException {
+	public void setLwgstruction(SELwgstruction lwgstruction) throws SQLException {
 		try {
 			// 1.添加劳务工单位
 			staticCompany = lwgstruction.getContractorn();
@@ -75,7 +74,7 @@ public class LwgStructionService {
 			int cid = companyDao.getId(lwgstruction.getContractorn());// 查询单位外键的表ID
 			// 3 添加单位权限
 			entranceGuardDao = new EntranceGuardDao(connection);
-//			List<Integer> ids = entranceGuardDao.getId(0, false);
+			// List<Integer> ids = entranceGuardDao.getId(0, false);
 			List<Integer> ids = entranceGuardDao.getIdsByType(0);
 
 			Companyprivilege companyprivilege = new Companyprivilege();
@@ -115,8 +114,7 @@ public class LwgStructionService {
 	 * @param constructionp
 	 * @throws SQLException
 	 */
-	public void setConstructionp(SEConstructionp constructionp)
-			throws SQLException {
+	public void setConstructionp(SEConstructionp constructionp) throws SQLException {
 
 		try {
 			// 1. 添加员工表
@@ -139,8 +137,7 @@ public class LwgStructionService {
 			staff.setCtype(1);
 
 			staffDao = new StaffDao(connection);
-			if (constructionp.getIden() != null
-					&& !staffDao.checkIsExist(constructionp.getIden())) {
+			if (constructionp.getIden() != null && !staffDao.checkIsExist(constructionp.getIden())) {
 				staffDao.addStaff(staff);
 				System.out.println("add staff");
 			} else {
@@ -159,12 +156,12 @@ public class LwgStructionService {
 			plantime.setTelephone(constructionp.getTelephone());
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
 			Timestamp outtime = null;
-			if (constructionp.getIndates() == null
-					|| constructionp.getIndates().equals("")) {
+			if (constructionp.getIndates() == null || constructionp.getIndates().equals("")) {
 				outtime = null;
 			} else {
-				outtime = new Timestamp(DateUtils.StringToDate(
-						constructionp.getIndates()).getTime());
+				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime() + 3600* 1000* 24-1);
+
+//				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime());
 			}
 			plantime.setPlanouttime(outtime);
 			plantimeDao = new PlantimeDao(connection);
@@ -177,7 +174,6 @@ public class LwgStructionService {
 			connection.rollback();
 			e.printStackTrace();
 		} finally {
-
 
 		}
 	}

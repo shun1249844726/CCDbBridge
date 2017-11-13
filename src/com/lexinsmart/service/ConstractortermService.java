@@ -55,8 +55,7 @@ public class ConstractortermService {
 	 * @param contractortem
 	 * @throws SQLException
 	 */
-	public void setContractorterm(OAContractortem contractortem)
-			throws SQLException {
+	public void setContractorterm(OAContractortem contractortem) throws SQLException {
 		staticCompany = contractortem.getContractorn();
 
 		try {
@@ -74,7 +73,7 @@ public class ConstractortermService {
 
 			// 3 添加单位权限
 			entranceGuardDao = new EntranceGuardDao(connection);
-//			List<Integer> ids = entranceGuardDao.getId(0, false); // 获取门禁的ID
+			// List<Integer> ids = entranceGuardDao.getId(0, false); // 获取门禁的ID
 			List<Integer> ids = entranceGuardDao.getIdsByType(0);
 
 			int cid = companyDao.getId(contractortem.getContractorn());// 查询单位外键的表ID
@@ -114,15 +113,13 @@ public class ConstractortermService {
 	 * @param constructionp
 	 * @throws SQLException
 	 */
-	public void setConstructionp(OAConstructionp constructionp)
-			throws SQLException {
+	public void setConstructionp(OAConstructionp constructionp) throws SQLException {
 
 		try {
 			// 1. 添加员工表
 			Staff staff = new Staff();
 			CompanyDao companyDao = new CompanyDao(connection);
-			String requestid = companyDao.getrequestId(constructionp
-					.getDepart());
+			String requestid = companyDao.getrequestId(constructionp.getDepart());
 			staff.setRequestid(requestid);
 			staff.setName(constructionp.getName());
 			staff.setSex(constructionp.getSexs());
@@ -161,12 +158,10 @@ public class ConstractortermService {
 			plantime.setTelephone(constructionp.getTelephone());
 			plantime.setPlanintime(new Timestamp(System.currentTimeMillis()));
 			Timestamp outtime = null;
-			if (constructionp.getIndates() == null
-					|| constructionp.getIndates().equals("")) {
+			if (constructionp.getIndates() == null || constructionp.getIndates().equals("")) {
 				outtime = null;
 			} else {
-				outtime = new Timestamp(DateUtils.StringToDate(
-						constructionp.getIndates()).getTime());
+				outtime = new Timestamp(DateUtils.StringToDate(constructionp.getIndates()).getTime() + 3600* 1000* 24-1);
 			}
 			plantime.setPlanouttime(outtime);
 			plantimeDao = new PlantimeDao(connection);
