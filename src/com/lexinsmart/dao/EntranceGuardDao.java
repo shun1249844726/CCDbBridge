@@ -43,7 +43,7 @@ public class EntranceGuardDao {
 		
 	}
 	public static void main(String[] args) throws SQLException {
-		addddd();
+	//	addddd();
 	}
 	public List<Integer> getId(int type) {
 		List<Integer> ids = new ArrayList<Integer>();

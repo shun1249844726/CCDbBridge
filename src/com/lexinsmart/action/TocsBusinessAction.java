@@ -16,7 +16,7 @@ public class TocsBusinessAction {
 		  String ccentre= null;
 		  String factory= null;//厂区别 常熟厂
 		  String telphone= null;
-		  String tradepart= "出差人员单位";//出差人员单位
+		  String tradepart= "出差人员单位dadddd";//出差人员单位
 		  String sex= "男";//性别
 		  String age= "40";//年龄
 		  String loaction= "江苏苏州";//籍贯
@@ -33,11 +33,11 @@ public class TocsBusinessAction {
 		  String busday= "30";//出差天数
 		  String reason= "设备维护";//事由
 		  String shuttlebus= null;
-		  String cardnum= "13141516";//卡号，必填！不能为空！
+		  String cardnum= "13141516s";//卡号，必填！不能为空！
 		  String floor= null;
 		  String roomnum= null;
 		  String otherreason= null;
-		  String tranname= "出差人";//出差人员姓名
+		  String tranname= "出差人dddd";//出差人员姓名
 		  String tradep= "出差部门";//出差部门
 		  String tratype= "供应商";//出差人员类型
 		  //类型 ： 客户	供应商	政府官员	关联公司
