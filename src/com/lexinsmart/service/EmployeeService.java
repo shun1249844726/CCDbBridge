@@ -11,6 +11,7 @@ import com.lexinsmart.model.Employee;
 import com.lexinsmart.model.EmployeeString;
 import com.lexinsmart.utils.DBCP;
 import com.lexinsmart.utils.DateUtils;
+import com.lexinsmart.utils.TypeChange;
 
 public class EmployeeService {
 	Connection connection = null;// 数据库的连接
@@ -36,6 +37,7 @@ public class EmployeeService {
 			String name = employeesstring.get(i).getName();
 			String cardno = employeesstring.get(i).getCardno();
 			// "2011-05-09 11:49:45"
+			cardno = TypeChange.autoGenericCode(cardno,10);
 
 			Timestamp checkintime = null;
 			Timestamp checkouttime = null;
