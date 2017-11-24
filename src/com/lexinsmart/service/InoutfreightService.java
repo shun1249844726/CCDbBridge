@@ -193,6 +193,7 @@ public class InoutfreightService {
 			String singleno = inoutfreight.getSingleno();
 			String[] singlenos = TypeChange.convertStrToArray(singleno);
 			int singlenonum = singlenos.length;// 提入单号中包含的提入单号数量
+			String[] departs = TypeChange.convertStrToArray(inoutfreight.getDepotname());
 
 			for (int i = 0; i < singlenonum; i++) {
 				singlenumber.setCarno(inoutfreight.getCarno());
@@ -201,7 +202,7 @@ public class InoutfreightService {
 																	// cartype
 				singlenumber.setHandplanno(inoutfreight.getHandplanno());
 				singlenumber.setSingleno(singlenos[i].toLowerCase());// 提入单号 拆分。
-				singlenumber.setDepart(inoutfreight.getDepotname());// 装卸地点
+				singlenumber.setDepart(departs[i]);// 装卸地点
 																	// =
 																	// depotname
 				singlenumber.setRequestid(inoutfreight.getRequestid());

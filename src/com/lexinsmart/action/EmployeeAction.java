@@ -13,11 +13,11 @@ public class EmployeeAction {
 	public static void main(String[] args) {
 		List<EmployeeString> employeesstringList = new ArrayList<EmployeeString>();
 		EmployeeService employeeService = new EmployeeService();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 1; i++) {
 			EmployeeString employeestring = new EmployeeString();
 			
-			String name ="named"+i;
-			String cardno ="carnos"+i;
+			String name ="namedddd";
+			String cardno ="1333161395979";
 			String checkintime = "2017-09-01 07:27:57";
 			String checkouttime = null;
 			employeestring.setName(name);

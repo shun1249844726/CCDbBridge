@@ -26,7 +26,7 @@ public class InoutFreightAction {
 		String nodeid = null;
 		String rowindex = null;
 		String handplanno = "FZT201710002880";// 装卸计划号
-		String depotname = "eme";// 主仓库名称
+		String depotname = "eme,eme1,eme2,eme3";// 主仓库名称
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
 		String singleno = "1020T000274620,1020T000274621,1020T000274619,1020T000274618";// 提入单号

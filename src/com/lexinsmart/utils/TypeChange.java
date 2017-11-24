@@ -102,4 +102,21 @@ public class TypeChange {
 	        strArray = str.split(","); //拆分字符为"," ,然后把结果交给数组strArray 
 	        return strArray;
 	    }   
+		/**
+	     * 不够位数的在前面补0，保留num的长度位数字
+	     * @param code
+	     * @return
+	     */
+	    public static String autoGenericCode(String code, int num) {
+	    		if (code.length()>10) {
+					return code;
+				}
+	        String result = "";
+	        // 保留num的位数
+	        // 0 代表前面补充0     
+	        // num 代表长度为4     
+	        // d 代表参数为正数型 
+	        result = String.format("%0" + num + "d", Integer.parseInt(code) + 1);
+	        return result;
+	    }
 }
