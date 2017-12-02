@@ -36,7 +36,7 @@ public class InoutFreightAction {
 		String idcard3 = null;// 证件号(三)
 		String idcard4 = null;// 证件号(四)
 		String inregistime = null;//
-		String outregistime = null;//
+		String outregistime = null;//   
 		String registerman = null;//
 		String modifyman = null;//
 		String company = "EE7088";//公司
