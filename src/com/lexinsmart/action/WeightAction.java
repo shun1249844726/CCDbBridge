@@ -1,17 +1,18 @@
 package com.lexinsmart.action;
 
-import java.sql.Timestamp;
-
-import com.lexinsmart.model.WeightingModel;
+import com.lexinsmart.service.WeighService;
 
 public class WeightAction {
 
 	public static void main(String[] args) {
-		String carno = "";
-		String singleno = "";
-		Timestamp weightime =new Timestamp(System.currentTimeMillis());
-		WeightingModel weightingModel = new WeightingModel();
-		weightingModel.setCarno(carno);
+		String singleno = "1020t000274618";
+		
+		WeighService weighService = new WeighService();
+		weighService.inWeight(singleno);
+	//	weighService.outWeight(singleno);
+		weighService.refreshCurrentnum();
+		weighService.release();
+		
 		
 	}
 }

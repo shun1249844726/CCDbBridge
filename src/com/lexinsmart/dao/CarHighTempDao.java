@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.lexinsmart.utils.DBCP;
-
+/**
+ * 车高临时表。用来查询临时表中的车辆高度
+ * @author xushun
+ *
+ */
 public class CarHighTempDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;

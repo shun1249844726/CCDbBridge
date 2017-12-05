@@ -1,7 +1,11 @@
 package com.lexinsmart.model;
 
 import java.sql.Timestamp;
-
+/**
+ * 提入单号
+ * @author xushun
+ *
+ */
 public class SingleNumberOrder {
 	private String carno;
 	private float hight;

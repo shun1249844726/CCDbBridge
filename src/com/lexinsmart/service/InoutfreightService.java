@@ -20,6 +20,7 @@ import com.lexinsmart.dao.TruckPrivilegeDao;
 import com.lexinsmart.model.Company;
 import com.lexinsmart.model.Inoutfreight;
 import com.lexinsmart.model.Plantime;
+import com.lexinsmart.model.SingleNumberOrder;
 import com.lexinsmart.model.Singlenumber;
 import com.lexinsmart.model.Staff;
 import com.lexinsmart.model.SysLog;
@@ -213,6 +214,22 @@ public class InoutfreightService {
 					singleNumberDao.edit(singlenumber);
 					System.out.println("edit single_number");
 				}
+				
+				//以下为 插入提入单号的order表  做排车系统用到    
+				SingleNumberOrder order = new SingleNumberOrder();
+				order.setCarno(inoutfreight.getCarno()); //车牌
+				order.setHight(0);//车高   
+				order.setSingleno(singlenos[i].toLowerCase());//  提入单号
+				order.setWeightimes(0);
+				order.setOrderno(0);
+				order.setDepart(departs[i]);//装卸点
+				Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+				order.setCreatetime(nowtime);
+				order.setTtype(inoutfreight.getCarcate());
+				
+				SinglenumberOrderService orderService = new SinglenumberOrderService();
+				orderService.addOrder(order);
+				orderService.release();
 			}
 			// 2插入司机
 			staffDao = new StaffDao(connection);

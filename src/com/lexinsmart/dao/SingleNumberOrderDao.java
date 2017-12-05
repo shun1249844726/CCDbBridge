@@ -13,15 +13,14 @@ public class SingleNumberOrderDao {
 	PreparedStatement ptmt = null;
 	DBCP dbcp = DBCP.getInstance();
 	ResultSet rest = null;
-
-
+	
 	public SingleNumberOrderDao(Connection conn ) {
 		this.connection  = conn;
 	}
 	public void release() {
 		DBCP.releaseConnection(connection);
 		DBCP.closeStatement(ptmt, rest);
-		System.out.println("释放 SingleNumberDao 连接和语句");
+		System.out.println("释放 SingleNumberOrderDao 连接和语句");
 	}
 	public void addOrder(SingleNumberOrder order){
 		try {
@@ -49,11 +48,11 @@ public class SingleNumberOrderDao {
 	}
 	public int getOrderno(String depart,String ttype){
 		int orderno = 1;
-		String sql = " SELECT MAX(orderno) FROM single_number_order WHERE depart=? AND ttype=? ";
+		String sql = " SELECT MAX(orderno) FROM single_number_order ";
 		try {
 			ptmt = connection.prepareStatement(sql);
-			ptmt.setString(1, depart);
-			ptmt.setString(2, ttype);
+//			ptmt.setString(1, depart);
+//			ptmt.setString(2, ttype);
 			
 			rest = ptmt.executeQuery();
 			while (rest.next()) {
@@ -89,5 +88,37 @@ public class SingleNumberOrderDao {
 //			dbcp.releaseConnection(connection);
 		}
 		return isExist;
+	}
+	
+	public void weight(String singleno,java.sql.Timestamp nowtime, String sql){
+		try {
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setTimestamp(1, nowtime);
+			ptmt.setString(2, singleno);
+			ptmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public int getCurrentnumByName(String name){
+		int currentnum=0;
+		String sql = "SELECT COUNT(depart) FROM single_number_order WHERE depart=? AND weigh_times=1 ";
+		
+		try {
+			ptmt = connection.prepareStatement(sql);
+			ptmt.setString(1, name);
+			rest = ptmt.executeQuery();
+			while(rest.next()){
+				currentnum = rest.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return currentnum;
+		
 	}
 }

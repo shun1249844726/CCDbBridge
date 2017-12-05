@@ -7,7 +7,11 @@ import com.lexinsmart.dao.CarHighTempDao;
 import com.lexinsmart.dao.SingleNumberOrderDao;
 import com.lexinsmart.model.SingleNumberOrder;
 import com.lexinsmart.utils.DBCP;
-
+/**
+ * 提入单号牌号表的操作。
+ * @author xushun
+ *
+ */
 public class SinglenumberOrderService {
 	Connection connection = null;// 数据库的连接
 	SingleNumberOrderDao orderDao = null;
@@ -22,7 +26,6 @@ public class SinglenumberOrderService {
 			e.printStackTrace();
 		}
 	}
-
 	public void addOrder(SingleNumberOrder order) {
 		try {
 			orderDao = new SingleNumberOrderDao(connection);
@@ -52,13 +55,12 @@ public class SinglenumberOrderService {
 
 	}
 
+
 	public void release() {
 		orderDao.release();
 		carHighDao.release();
 
 		DBCP.releaseConnection(connection);
-	
-		System.out.println("释放连接");
-
+		System.out.println("释放singlenumberorderservice 连接");
 	}
 }

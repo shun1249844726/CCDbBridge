@@ -9,19 +9,18 @@ public class SingleNumberOrderAction {
 
 	public static void main(String[] args) {
 		SingleNumberOrder order = new SingleNumberOrder();
-		order.setCarno("苏EE0001");
-		order.setHight(0);
-		order.setSingleno("1030t11111");
+		order.setCarno("苏EE0001"); //车牌
+		order.setHight(0);//车高   
+		order.setSingleno("1030t11111");//  提入单号
 		order.setWeightimes(1);
 		order.setOrderno(0);
-		order.setDepart("Depart1");
+		order.setDepart("long");//装卸点
 		Timestamp nowtime = new Timestamp(System.currentTimeMillis());
 		order.setCreatetime(nowtime);
-		order.setTtype("工程车辆");
+		order.setTtype("平板货车");
 		
 		SinglenumberOrderService orderService = new SinglenumberOrderService();
 		orderService.addOrder(order);
-		
 		orderService.release();
 		
 	}
