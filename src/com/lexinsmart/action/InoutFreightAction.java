@@ -42,6 +42,7 @@ public class InoutFreightAction {
 //				+ "xu,shun,yuan,han,"
 //				+ "yang,le,yong,zhou,"
 				 "jie,jia,heihei,zu,";// 主仓库名称
+
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
 		String singleno = 

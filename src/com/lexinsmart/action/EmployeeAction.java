@@ -19,6 +19,7 @@ public class EmployeeAction {
 			String name ="namedddd";
 			String cardno ="61395979";
 			String checkintime = "2017-09-01 07:27:59";
+
 			String checkouttime = null;
 			employeestring.setName(name);
 			employeestring.setCardno(cardno);
