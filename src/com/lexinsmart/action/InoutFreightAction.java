@@ -2,17 +2,8 @@ package com.lexinsmart.action;
 
 import java.sql.SQLException;
 
-import com.lexinsmart.dao.CompanyDao;
-import com.lexinsmart.dao.PlantimeDao;
-import com.lexinsmart.dao.SingleNumberDao;
-import com.lexinsmart.dao.StaffDao;
-import com.lexinsmart.model.Company;
 import com.lexinsmart.model.Inoutfreight;
-import com.lexinsmart.model.Plantime;
-import com.lexinsmart.model.Singlenumber;
-import com.lexinsmart.model.Staff;
 import com.lexinsmart.service.InoutfreightService;
-import com.lexinsmart.utils.TypeChange;
 
 /**
  * 货运司机测试类
@@ -60,7 +51,7 @@ public class InoutFreightAction {
 //				+ "1025ew2ag7462a0,1020562xcw746a21,1020The0r5a19,1020T0ghjs027a618,"
 //				+ "1020T0567ew27xxf462a0,1020T002w746a21,1020T0rherg002t67,1020T0ere0s0k,"
 //				+ "1020T000ew2x2a0,1020T00236a21,1020T0rg3419,1020T054e0u,"
-				 "1020T00ka0,1020T000s21,1020T0rg00j,1020T0e0k8,";// 提入单号
+				 "1020T00ka0,1020T000s21,1020T0rg00j,1020T0e0k8,";// 提入单号，与主仓库数量一一对应
 		String carno = "苏EE7088";// 车牌号码
 		String idcard1 = "EE7088EE7088";// 证件号(一)
 		String idcard2 = null;// 证件号(二)

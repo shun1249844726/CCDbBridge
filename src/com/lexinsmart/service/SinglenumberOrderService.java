@@ -8,7 +8,7 @@ import com.lexinsmart.dao.SingleNumberOrderDao;
 import com.lexinsmart.model.SingleNumberOrder;
 import com.lexinsmart.utils.DBCP;
 /**
- * 提入单号牌号表的操作。
+ * 提入单号牌号表的操作管理。
  * @author xushun
  *
  */

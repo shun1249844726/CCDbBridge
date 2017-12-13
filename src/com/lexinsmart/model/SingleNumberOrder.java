@@ -2,7 +2,7 @@ package com.lexinsmart.model;
 
 import java.sql.Timestamp;
 /**
- * 提入单号
+ * 提入单号排号数据模型
  * @author xushun
  *
  */

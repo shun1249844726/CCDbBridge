@@ -4,9 +4,14 @@ import java.sql.Timestamp;
 
 import com.lexinsmart.model.SingleNumberOrder;
 import com.lexinsmart.service.SinglenumberOrderService;
-
+/**
+ * 排号的实例，在货运管理里面已经调用了。这里只是测试使用。
+ * @author xushun
+ *
+ */
 public class SingleNumberOrderAction {
 
+	
 	public static void main(String[] args) {
 		SingleNumberOrder order = new SingleNumberOrder();
 		order.setCarno("苏EE0001"); //车牌

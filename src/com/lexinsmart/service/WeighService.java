@@ -5,20 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import com.lexinsmart.dao.CompanyDao;
-import com.lexinsmart.dao.CompanyPrivilegeDao;
 import com.lexinsmart.dao.DepartDao;
-import com.lexinsmart.dao.EntranceGuardDao;
-import com.lexinsmart.dao.PlantimeDao;
 import com.lexinsmart.dao.SingleNumberOrderDao;
-import com.lexinsmart.dao.StaffDao;
 import com.lexinsmart.utils.DBCP;
-import com.lexinsmart.utils.DateUtils;
 
+/**
+ * 称重service 
+ * @author xushun
+ *
+ */
 public class WeighService {
 	Connection connection = null;// 数据库的连接
 	PreparedStatement ptmt = null;
@@ -36,7 +33,7 @@ public class WeighService {
 	}
 
 	public void inWeight(String singleno){
-
+		singleno = singleno.toLowerCase();
 		String sql = "UPDATE single_number_order SET weigh_times=1, in_factory_time=?,is_in_factory=1 "
 				+ "  WHERE singleno=?";
 		Timestamp nowtime = new Timestamp(System.currentTimeMillis());
@@ -59,6 +56,7 @@ public class WeighService {
 		}
 	}
 	public void outWeight(String singleno){
+		singleno = singleno.toLowerCase();
 		Timestamp nowtime = new Timestamp(System.currentTimeMillis());
 
 		String sql = "UPDATE single_number_order SET weigh_times=2, out_factory_time=?,is_in_factory=2 "

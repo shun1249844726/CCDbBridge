@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import com.lexinsmart.utils.DBCP;
 
 /**
- * departdao 用来操作仓库表。主要是修改当前人数
+ * departdao 用来操作仓库表。
+ * 主要是修改当前人数，给排号软件看。
  * @author xushun
  *
  */

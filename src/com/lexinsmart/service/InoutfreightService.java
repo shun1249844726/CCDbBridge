@@ -5,21 +5,14 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.lexinsmart.dao.CompanyDao;
-import com.lexinsmart.dao.EntranceGuardDao;
-import com.lexinsmart.dao.PlantimeDao;
 import com.lexinsmart.dao.SingleNumberDao;
 import com.lexinsmart.dao.StaffDao;
 import com.lexinsmart.dao.SysLogDao;
 import com.lexinsmart.dao.TruckDao;
-import com.lexinsmart.dao.TruckPrivilegeDao;
 import com.lexinsmart.model.Company;
 import com.lexinsmart.model.Inoutfreight;
-import com.lexinsmart.model.Plantime;
 import com.lexinsmart.model.SingleNumberOrder;
 import com.lexinsmart.model.Singlenumber;
 import com.lexinsmart.model.Staff;
@@ -27,7 +20,6 @@ import com.lexinsmart.model.SysLog;
 import com.lexinsmart.model.Truck;
 import com.lexinsmart.model.TruckPrivilege;
 import com.lexinsmart.utils.DBCP;
-import com.lexinsmart.utils.DateUtils;
 import com.lexinsmart.utils.DropDownTools;
 import com.lexinsmart.utils.TypeChange;
 
@@ -215,17 +207,17 @@ public class InoutfreightService {
 					System.out.println("edit single_number");
 				}
 				
-				//以下为 插入提入单号的order表  做排车系统用到    
+				//以下为 插入提入单号的order表  做排车系统用到 ，
 				SingleNumberOrder order = new SingleNumberOrder();
 				order.setCarno(inoutfreight.getCarno()); //车牌
 				order.setHight(0);//车高   
 				order.setSingleno(singlenos[i].toLowerCase());//  提入单号
-				order.setWeightimes(0);
-				order.setOrderno(0);
+				order.setWeightimes(0);//称重次数
+				order.setOrderno(0);//排号顺序
 				order.setDepart(departs[i]);//装卸点
 				Timestamp nowtime = new Timestamp(System.currentTimeMillis());
 				order.setCreatetime(nowtime);
-				order.setTtype(inoutfreight.getCarcate());
+				order.setTtype(inoutfreight.getCarcate());//归类车型
 				
 				SinglenumberOrderService orderService = new SinglenumberOrderService();
 				orderService.addOrder(order);

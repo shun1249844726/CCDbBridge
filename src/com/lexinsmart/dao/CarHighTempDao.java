@@ -7,7 +7,8 @@ import java.sql.SQLException;
 
 import com.lexinsmart.utils.DBCP;
 /**
- * 车高临时表。用来查询临时表中的车辆高度
+ * 车高临时表。
+ * 主要用来查询临时表中的车辆高度
  * @author xushun
  *
  */

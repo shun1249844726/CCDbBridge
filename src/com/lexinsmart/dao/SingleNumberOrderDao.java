@@ -7,7 +7,11 @@ import java.sql.SQLException;
 
 import com.lexinsmart.model.SingleNumberOrder;
 import com.lexinsmart.utils.DBCP;
-
+/**
+ * 提入单号表操作
+ * @author xushun
+ *
+ */
 public class SingleNumberOrderDao {
 	Connection connection = null;
 	PreparedStatement ptmt = null;
