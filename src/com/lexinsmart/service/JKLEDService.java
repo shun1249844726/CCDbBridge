@@ -29,7 +29,7 @@ public class JKLEDService {
 
 	public void sendToLed() {
 //		 String url = "http://localhost:8080/JKLEDserver/jkl";
-		String url = "http://192.168.3.59:8038/server/ledscreen_weather";
+		String url = "http://192.168.3.59:8038/server/ledscreen_weather";//ip地址
 
 		// =========定义HttpClient=========
 		HttpClient client = new HttpClient();
@@ -61,3 +61,5 @@ public class JKLEDService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+}
