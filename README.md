@@ -72,11 +72,6 @@
 ## 12.27
 * 监控中心，大屏的接口。
 
-<<<<<<< HEAD
-
-=======
-监控中心，大屏的接口。
->>>>>>> branch 'master' of https://github.com/shun1249844726/CCDbBridge.git
 ## TODO
 
 
