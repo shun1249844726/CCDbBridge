@@ -26,7 +26,8 @@ public class JKLEDAction {
 		//显示内容
 		String arg1 = "距" + ccpLastAccidentDate + "\n" 
 								+ "长春化工安全" + "\n" 
-								+ "生产无事故" + ccpLastAccidentDays + "天";
+								+ "生产无事故" + "\n" 
+								+ ccpLastAccidentDays + "天";
 		String arg2 = "距承包商安全"+"\n"
 								+ "无事故" + cbsLastAccidentDays+"天";
 		String arg3 = weatherType +"\n"
