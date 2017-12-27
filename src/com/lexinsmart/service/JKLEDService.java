@@ -61,3 +61,5 @@ public class JKLEDService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+}
