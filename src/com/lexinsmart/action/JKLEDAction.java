@@ -1,7 +1,11 @@
 package com.lexinsmart.action;
 
 import com.lexinsmart.service.JKLEDService;
-
+/**
+ * 大屏天气接口
+ * @author xushun
+ *
+ */
 public class JKLEDAction {
 	public static void main(String args[]) {
 		/** 只用填写下面内容 从这里开始 **/
@@ -15,7 +19,7 @@ public class JKLEDAction {
 		/**
 		 * 将参数 拼接成 显示内容，控制显示内容的格式 
 		 * 大屏显示内容
-		 * 天气信息ss
+		 * 天气信息
 		 */
 		String weather = weatherType + "\n" + fengxiang + "\n" + temperature + "\n" + humidity;
 
