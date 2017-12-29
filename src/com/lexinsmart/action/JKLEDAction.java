@@ -15,7 +15,7 @@ public class JKLEDAction {
 		/**
 		 * 将参数 拼接成 显示内容，控制显示内容的格式 
 		 * 大屏显示内容
-		 * 天气信息few我
+		 * 天气信息ss
 		 */
 		String weather = weatherType + "\n" + fengxiang + "\n" + temperature + "\n" + humidity;
 
