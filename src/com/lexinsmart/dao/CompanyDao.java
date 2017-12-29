@@ -9,7 +9,6 @@ import java.util.Map;
 
 import com.lexinsmart.model.Company;
 import com.lexinsmart.utils.DBCP;
-import com.lexinsmart.utils.TypeChange;
 
 /**
  * 公司数据表的操作
