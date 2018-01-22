@@ -144,6 +144,10 @@ public class InoutFreightAction {
 		String outtime = null;// 车辆实际出厂时间
 		String cartype = "40Fire";// 车辆类型 必填
 		String carcate = "平板货车";// 车型归类
+		String depotcate = "仓库归类点";//TODO 1 
+		
+		
+		
 		inoutfreight.setRequestid(requestid);
 		inoutfreight.setNodeid(nodeid);
 		inoutfreight.setRowindex(rowindex);
@@ -245,6 +249,7 @@ public class InoutFreightAction {
 		inoutfreight.setOuttime(outtime);
 		inoutfreight.setCartype(cartype);
 		inoutfreight.setCarcate(carcate);
+		inoutfreight.setDepotcate(depotcate);//TODO 2
 
 		InoutfreightService inoutfreightService = new InoutfreightService(inoutfreight);
 		try {

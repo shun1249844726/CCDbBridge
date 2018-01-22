@@ -101,7 +101,14 @@ public class Inoutfreight {
 	private String outtime;
 	private String cartype;//车辆类型
 	private String carcate;//车型归类
+	private String depotcate;
 
+	public String getDepotcate() {
+		return depotcate;
+	}
+	public void setDepotcate(String depotcate) {
+		this.depotcate = depotcate;
+	}
 	public String getRequestid() {
 		return requestid;
 	}

@@ -186,8 +186,8 @@ public class InoutfreightService {
 			String singleno = inoutfreight.getSingleno();
 			String[] singlenos = TypeChange.convertStrToArray(singleno);
 			int singlenonum = singlenos.length;// 提入单号中包含的提入单号数量
-			String[] departs = TypeChange.convertStrToArray(inoutfreight.getDepotname());
-
+			//String[] departs = TypeChange.convertStrToArray(inoutfreight.getDepotname());
+			String depotcate = inoutfreight.getDepotcate();
 			for (int i = 0; i < singlenonum; i++) {
 				singlenumber.setCarno(inoutfreight.getCarno());
 				singlenumber.setCarheight(TypeChange.stringToFloat(inoutfreight.getCarheight()));
@@ -195,7 +195,8 @@ public class InoutfreightService {
 																	// cartype
 				singlenumber.setHandplanno(inoutfreight.getHandplanno());
 				singlenumber.setSingleno(singlenos[i].toLowerCase());// 提入单号 拆分。
-				singlenumber.setDepart(departs[i]);// 装卸地点
+			//	singlenumber.setDepart(departs[i]);// 装卸地点
+				singlenumber.setDepart(depotcate);
 																	// =
 																	// depotname
 				singlenumber.setRequestid(inoutfreight.getRequestid());
@@ -214,7 +215,7 @@ public class InoutfreightService {
 				order.setSingleno(singlenos[i].toLowerCase());//  提入单号
 				order.setWeightimes(0);//称重次数
 				order.setOrderno(0);//排号顺序
-				order.setDepart(departs[i]);//装卸点
+				order.setDepart(depotcate);//装卸点
 				Timestamp nowtime = new Timestamp(System.currentTimeMillis());
 				order.setCreatetime(nowtime);
 				order.setTtype(inoutfreight.getCarcate());//归类车型
