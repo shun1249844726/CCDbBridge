@@ -15,6 +15,15 @@ public class SingleNumberOrder {
 	private String depart;
 	private Timestamp createtime;
 	private String ttype;
+	private int hide;
+
+	public int getHide() {
+		return hide;
+	}
+
+	public void setHide(int hide) {
+		this.hide = hide;
+	}
 
 	public String getCarno() {
 		return carno;

@@ -30,7 +30,7 @@ public class SingleNumberOrderDao {
 		try {
 	//		connection = dbcp.getConnection();
 			String sql = " insert into single_number_order "
-					+ "  (carno,high,singleno,weigh_times,orderno,depart,create_time,ttype) " + " values(?,?,?,?,?,?,?,?) ";
+					+ "  (carno,high,singleno,weigh_times,orderno,depart,create_time,ttype,hide) " + " values(?,?,?,?,?,?,?,?,?) ";
 			ptmt = connection.prepareStatement(sql);
 			ptmt.setString(1, order.getCarno());
 			ptmt.setFloat(2, order.getHight());
@@ -40,6 +40,7 @@ public class SingleNumberOrderDao {
 			ptmt.setString(6, order.getDepart());
 			ptmt.setTimestamp(7, order.getCreatetime());
 			ptmt.setString(8, order.getTtype());
+			ptmt.setInt(9, order.getHide());
 
 			ptmt.execute();
 		} catch (SQLException e) {

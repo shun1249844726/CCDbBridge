@@ -16,8 +16,8 @@ public class InoutFreightAction {
 		String requestid = "10320";
 		String nodeid = null;
 		String rowindex = null;
-		String handplanno = "FZT201710002880";// 装卸计划号
-		String depotname =
+		String handplanno = "FZT2017100028800";// 装卸计划号
+		String depotname ="";
 //				"PBT原材料保税库,qin,yao,long,"
 //				+ "PBT原材料保税库,qin,yao,long,"
 //				+ "PBT原材料保税库,qin,yao,long,"
@@ -32,11 +32,11 @@ public class InoutFreightAction {
 //				+ "jie,jia,heihei,zu,"
 //				+ "xu,shun,yuan,han,"
 //				+ "yang,le,yong,zhou,"
-				 "jie,jia,heihei,zu,";// 主仓库名称
+//				 "jie,jia,heihei,zu,";// 主仓库名称
 
 		String printime = null;
 		String factype = "4028804d2083a7ed012083ebb988005b"; // 厂区别 常熟厂
-		String singleno = 
+		String singleno = "1030T108,1030T109";
 //				"1020T00260274620,1020T000274h621,1020T000we274619,1020T0jx00274618,"
 //				+ "1020T000274hg62a0,1020T0xfh002746a21,1020Tgf0002746a19,1020Tdg00027a618,"
 //				+ "1020T0002746442ea0,1020T00027466ea21,1020T000n2746ea19,1020sT00027ea618,"
@@ -51,8 +51,8 @@ public class InoutFreightAction {
 //				+ "1025ew2ag7462a0,1020562xcw746a21,1020The0r5a19,1020T0ghjs027a618,"
 //				+ "1020T0567ew27xxf462a0,1020T002w746a21,1020T0rherg002t67,1020T0ere0s0k,"
 //				+ "1020T000ew2x2a0,1020T00236a21,1020T0rg3419,1020T054e0u,"
-				 "1020T00ka0,1020T000s21,1020T0rg00j,1020T0e0k8,";// 提入单号，与主仓库数量一一对应
-		String carno = "苏EE7088";// 车牌号码
+//				 "1020T00ka0,1020T000s21,1020T0rg00j,1020T0e0k8,";// 提入单号，与主仓库数量一一对应
+		String carno = "苏EE10002";// 车牌号码
 		String idcard1 = "EE7088EE7088";// 证件号(一)
 		String idcard2 = null;// 证件号(二)
 		String idcard3 = null;// 证件号(三)
@@ -144,7 +144,7 @@ public class InoutFreightAction {
 		String outtime = null;// 车辆实际出厂时间
 		String cartype = "40Fire";// 车辆类型 必填
 		String carcate = "平板货车";// 车型归类
-		String depotcate = "仓库归类点";//TODO 1 
+		String depotcate = "PBT集装箱出货平台";//TODO 1 
 		
 		
 		

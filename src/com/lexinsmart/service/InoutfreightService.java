@@ -209,20 +209,25 @@ public class InoutfreightService {
 				}
 				
 				//以下为 插入提入单号的order表  做排车系统用到 ，
-				SingleNumberOrder order = new SingleNumberOrder();
-				order.setCarno(inoutfreight.getCarno()); //车牌
-				order.setHight(0);//车高   
-				order.setSingleno(singlenos[i].toLowerCase());//  提入单号
-				order.setWeightimes(0);//称重次数
-				order.setOrderno(0);//排号顺序
-				order.setDepart(depotcate);//装卸点
-				Timestamp nowtime = new Timestamp(System.currentTimeMillis());
-				order.setCreatetime(nowtime);
-				order.setTtype(inoutfreight.getCarcate());//归类车型
+				if(singlenos[i].toLowerCase().contains("t")) {
+					SingleNumberOrder order = new SingleNumberOrder();
+					order.setCarno(inoutfreight.getCarno()); //车牌
+					order.setHight(0);//车高   
+					order.setSingleno(singlenos[i].toLowerCase());//  提入单号
+					order.setWeightimes(0);//称重次数
+					order.setOrderno(0);//排号顺序
+					order.setDepart(depotcate);//装卸点
+					Timestamp nowtime = new Timestamp(System.currentTimeMillis());
+					order.setCreatetime(nowtime);
+					order.setTtype(inoutfreight.getCarcate());//归类车型
+					if (singlenonum > 1 && i < (singlenonum-1)) {
+						order.setHide(1);
+					}
+					SinglenumberOrderService orderService = new SinglenumberOrderService();
+					orderService.addOrder(order);
+					orderService.release();
+				}
 				
-				SinglenumberOrderService orderService = new SinglenumberOrderService();
-				orderService.addOrder(order);
-				orderService.release();
 			}
 			// 2插入司机
 			staffDao = new StaffDao(connection);

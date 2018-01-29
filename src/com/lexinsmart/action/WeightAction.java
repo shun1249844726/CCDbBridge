@@ -9,7 +9,7 @@ import com.lexinsmart.service.WeighService;
 public class WeightAction {
 
 	public static void main(String[] args) {
-		String singleno = "1020t000274618"; //提入单号，
+		String singleno = "10020t333"; //提入单号，
 		
 		WeighService weighService = new WeighService();
 		weighService.inWeight(singleno);//  入厂称重调用这个方法，
